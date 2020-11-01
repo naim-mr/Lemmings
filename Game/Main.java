@@ -16,10 +16,5 @@ public class Main
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setVisible(true);
         view.play();
-        
-        
     }
-    
-    
-    
 }
