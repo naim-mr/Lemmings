@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import Entity.LemmingBehaviour.LemmingBehaviour;
 import Entity.LemmingBehaviour.Normal;
-import game.*;
+import Game.*;
 public class Lemming extends Entity
 {
     public LemmingBehaviour behaviour;

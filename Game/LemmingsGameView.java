@@ -1,4 +1,4 @@
-package game;
+package Game;
 
 import Entity.Block;
 import Entity.BlockType.*;
@@ -132,7 +132,7 @@ public class LemmingsGameView extends JComponent
         
         
     // Pas besoin de faire gameTileSize*(LeemingsGame.Map_dimension-y-1) 
-    // On a juste considéré l'origine du repère comme le sommmet en haut à gauche 
+    // On a juste considï¿½rï¿½ l'origine du repï¿½re comme le sommmet en haut ï¿½ gauche 
     // Je te laisse faire le test
     
     
@@ -182,7 +182,7 @@ public class LemmingsGameView extends JComponent
         }
     
     
-    // Fonciton utilisé pour FACTORISABLE
+    // Fonciton utilisï¿½ pour FACTORISABLE
     private void whiteBackground(Graphics g ) 
     {
     	int entityDimension =  WINDOW_DIMENSION / LemmingsGame.MAP_DIMENSION;
@@ -204,7 +204,7 @@ public class LemmingsGameView extends JComponent
         int [] windowCoords = mapToWindowCoords(e.getX(), e.getY());
        //        e.draw(g,windowCoords[0] ,windowCoords[1]);
         e.draw(g,e.getY() ,e.getX());
-      //g.drawRect(windowCoords[0],windowCoords[1], entityDimension, entityDimension); UTILE OU NON ?la même que fill? 
+      //g.drawRect(windowCoords[0],windowCoords[1], entityDimension, entityDimension); UTILE OU NON ?la mï¿½me que fill? 
         
     }
 
