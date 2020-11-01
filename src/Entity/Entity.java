@@ -1,6 +1,4 @@
-package game;
-
-import java.awt.*;
+package Entity;
 
 public abstract class Entity implements Drawable
 {
@@ -9,9 +7,9 @@ public abstract class Entity implements Drawable
     protected int width;
     protected int height;
     
-    /* Chaque entité va avoir une largeur et une hauteur 
+    /* Chaque entitï¿½ va avoir une largeur et une hauteur 
      * Car cela nous permettra de checker si un leemings et bien sur un block ou non
-     * En fait le problème c'est que si on test juste si Lemmings.get().Y .. blablabla
+     * En fait le problï¿½me c'est que si on test juste si Lemmings.get().Y .. blablabla
      */
     
     public int getWidth() {

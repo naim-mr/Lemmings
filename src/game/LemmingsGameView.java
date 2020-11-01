@@ -1,11 +1,14 @@
 package game;
 
+import Entity.Block;
 import Entity.BlockType.*;
+import Entity.Entity;
+import Entity.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -133,7 +136,7 @@ public class LemmingsGameView extends JComponent
     // Je te laisse faire le test
     
     
-    protected static int [] mapToWindowCoords (int x, int y)
+    public static int [] mapToWindowCoords(int x, int y)
     {
         int gameTileSize = GAME_DIMENSION / LemmingsGame.MAP_DIMENSION;
         return new int [] {x*gameTileSize, gameTileSize* y};
@@ -184,7 +187,7 @@ public class LemmingsGameView extends JComponent
     {
     	int entityDimension =  WINDOW_DIMENSION / LemmingsGame.MAP_DIMENSION;
     	g.setColor(Color.WHITE);
-    	int [] windowCoords = {0,0};
+    	int [] windowCoords;
     	for(int i=0;i<=GAME_DIMENSION;i++) {
     		for(int j=0;j<=GAME_DIMENSION;j++){
     			  windowCoords = mapToWindowCoords(i, j);

@@ -1,5 +1,4 @@
-package game;
-import Entity.BlockType.*;
+package Entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -38,7 +37,7 @@ public class Lemming extends Entity
     	if(blockBelow!=null) {
     		
     		this.y ++ ; 
-    		if(life[0]==true || life[1]==true) {
+    		if(life[0] || life[1]) {
     			life[0]=true;
     			life[1]=true;
     			life[2]=true;
@@ -47,9 +46,9 @@ public class Lemming extends Entity
     		return true;
     	}
     	else {
-    		if (life[0]==true )life[0]=false;
-    		else if (life[0]==false && life[1]==true ) life[1]=false;
-    		else if (life[0]==false && life[1]==false )life[2]=false;
+    		if (life[0]) life[0]=false;
+    		else if (life[1]) life[1]=false;
+    		else life[2]=false;
     		this.x++;
     		return true;
     	} 

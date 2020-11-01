@@ -1,7 +1,8 @@
 package Entity.BlockType;
 
 import java.awt.Graphics;
-import game.*;
+
+import Entity.Block;
 
 
 public class Teleporter extends Block

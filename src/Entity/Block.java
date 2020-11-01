@@ -1,13 +1,8 @@
-package game;
-
-
-
-
-import java.awt.*;
+package Entity;
 
 public abstract class Block extends Entity
 {
-    //Pas besoin ->>> Color c , on l'a déjà de Entity
+    //Pas besoin ->>> Color c , on l'a dï¿½jï¿½ de Entity
     
         
     // TODO : Factory method.

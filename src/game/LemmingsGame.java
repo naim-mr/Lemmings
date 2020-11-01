@@ -3,6 +3,9 @@ package game;
 
 
 
+import Entity.Block;
+import Entity.Lemming;
+
 import java.util.ArrayList;
 
 public class LemmingsGame
@@ -16,12 +19,12 @@ public class LemmingsGame
 
     public LemmingsGame()
     {
-        blocks = new ArrayList<Block>();
-        lemmings = new ArrayList<Lemming>();
+        blocks = new ArrayList<>();
+        lemmings = new ArrayList<>();
     }
 
     // TEST
-    /* Séparation des block et leemmings */
+    /* Sï¿½paration des block et leemmings */
     
     public ArrayList<Block> getBlocks()
     {

@@ -1,6 +1,6 @@
 package Entity.LemmingBehaviour;
 
-import game.*;
+import Entity.Drawable;
 
 public abstract class LemmingBehaviour implements Drawable
 {

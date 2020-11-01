@@ -2,7 +2,8 @@ package Entity.BlockType;
 
 
 
-import game.*;
+import Entity.Block;
+
 import java.awt.*;
 
 public class Destructible extends Block

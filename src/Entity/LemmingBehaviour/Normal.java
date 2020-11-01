@@ -1,7 +1,8 @@
 package Entity.LemmingBehaviour;
 
 import java.awt.Graphics;
-import game.*;
+
+import Entity.Lemming;
 
 public class Normal extends LemmingBehaviour
 {

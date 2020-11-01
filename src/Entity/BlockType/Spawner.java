@@ -1,16 +1,12 @@
 package Entity.BlockType;
 
 import java.awt.Color;
-import game.*;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import Entity.Block;
+import Entity.Lemming;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class Spawner extends Block
 {
