@@ -19,9 +19,10 @@ public class Spawner implements BlockType
     }
 
     @Override
-    public void draw(Graphics g, int x, int y)
+    public void draw(Graphics graphics, int windowX, int windowY)
     {
-        g.setColor(Color.RED);
+        graphics.setColor(Color.YELLOW);
+        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
     @Override

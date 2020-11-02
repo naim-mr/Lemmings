@@ -22,8 +22,8 @@ public class LemmingsGameView extends JComponent
      */
     private static final long serialVersionUID = 1L;
     private final LemmingsGame game;
-    private final Block spawner;
-    private final Block exit;
+    private final Block spawner; // TODO : dans le modèle
+    private final Block exit; // TODO : dans le modèle
 
     public LemmingsGameView(LemmingsGame game)
     {
@@ -31,8 +31,9 @@ public class LemmingsGameView extends JComponent
         this.game = game;
         CreateTestMap(this.game.getBlocks());
 
-        this.spawner = new Block(BlockTypeEnum.SPAWNER_BLOCK, 0, 1, 50, 50);
-        this.exit = new Block(BlockTypeEnum.EXIT_BLOCK, 10, 20, 50, 50);
+        // TODO ; virer tout ce bazar dans le modèle
+        this.spawner = new Block(BlockTypeEnum.SPAWNER_BLOCK, mapToWindowCoords(0, 1)[0], mapToWindowCoords(0, 1)[1]);
+        this.exit = new Block(BlockTypeEnum.EXIT_BLOCK, mapToWindowCoords(10, 20)[0], mapToWindowCoords(10, 19)[1]);
 
         setOpaque(true);
         setSize(WINDOW_DIMENSION, WINDOW_DIMENSION);
@@ -102,8 +103,8 @@ public class LemmingsGameView extends JComponent
     {
 
         //    blocks.add(new Indestructible(10,0));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 0, TILE_SIZE, TILE_SIZE));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 10, 10, TILE_SIZE, TILE_SIZE));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 0));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 10, 10));
 
      /*   blocks.add(new Indestructible(10, 11));
         blocks.add(new Indestructible(10, 12));
@@ -135,7 +136,6 @@ public class LemmingsGameView extends JComponent
         }
     }
 
-
     // TODO : Dans le modèle
     /*FONCTION QUI VA GERER La boucle de jeu*/
     public void play()
@@ -157,7 +157,6 @@ public class LemmingsGameView extends JComponent
             }
             catch (InterruptedException e1)
             {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             lemmingsMove();
