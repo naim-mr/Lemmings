@@ -1,7 +1,10 @@
 package Entity;
 
+import java.awt.*;
+
 public abstract class Entity
 {
+    protected Color color;
     protected int x;
     protected int y;
     protected int width;
@@ -39,7 +42,6 @@ public abstract class Entity
     	this.y=y;
     }
 
-    
-     
-    
+    public abstract void draw(Graphics graphics, int windowX, int windowY);
+
 }

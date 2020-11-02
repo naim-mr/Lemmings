@@ -5,19 +5,11 @@ import java.awt.Graphics;
 
 import Entity.Block;
 
-public class Lava extends Block
+public class Lava implements BlockType
 {
-
-	public Lava(int x, int y,int width, int height) {
-		super(x, y,width,height);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
-	public void draw(Graphics g,int x, int y) {
-		// TODO Auto-generated method stub
-		g.setColor(Color.red);
-		g.fillRect(x, y, width, height);
-		
+	public void draw(Graphics graphics, int windowX, int windowY)
+	{
+		graphics.setColor(Color.RED);
 	}
 }

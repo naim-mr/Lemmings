@@ -16,13 +16,14 @@ public class LemmingsGameView extends JComponent
 {
     public static final int WINDOW_DIMENSION = 600;
     public static final int GAME_DIMENSION = 500;
+    public static final int TILE_SIZE = GAME_DIMENSION / LemmingsGame.MAP_DIMENSION;
     /**
      *
      */
     private static final long serialVersionUID = 1L;
     private final LemmingsGame game;
-    private final Spawner spawner;
-    private final Exit exit;
+    private final Block spawner;
+    private final Block exit;
 
     public LemmingsGameView(LemmingsGame game)
     {
@@ -30,9 +31,8 @@ public class LemmingsGameView extends JComponent
         this.game = game;
         CreateTestMap(this.game.getBlocks());
 
-        this.spawner = new Spawner(0, 1);
-        this.exit = new Exit(10, 20);
-
+        this.spawner = new Block(new Spawner(), 0, 1, 50, 50);
+        this.exit = new Block(new Exit(), 10, 20, 50, 50);
 
         setOpaque(true);
         setSize(WINDOW_DIMENSION, WINDOW_DIMENSION);
@@ -53,9 +53,7 @@ public class LemmingsGameView extends JComponent
 
     public static int[] mapToWindowCoords(int x, int y)
     {
-        int gameTileSize = GAME_DIMENSION / LemmingsGame.MAP_DIMENSION;
-        return new int[]{x * gameTileSize, gameTileSize * y};
-
+        return new int[]{x * TILE_SIZE, TILE_SIZE * y};
     }
 
     protected static int[] windowToMapCoords(int winX, int winY)
@@ -103,8 +101,8 @@ public class LemmingsGameView extends JComponent
     {
 
         //    blocks.add(new Indestructible(10,0));
-        blocks.add(new Indestructible(100, 25));
-        blocks.add(new Lava(400, 0, 600, 100));
+        blocks.add(new Block(new Indestructible(), 100, 25, 50, 50));
+        blocks.add(new Block(new Lava(), 400, 0, 50, 50));
 
      /*   blocks.add(new Indestructible(10, 11));
         blocks.add(new Indestructible(10, 12));
