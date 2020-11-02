@@ -4,6 +4,7 @@ package Game;
 import Entity.Block;
 import Entity.BlockType.BlockTypeEnum;
 import Entity.Lemming;
+import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.util.ArrayList;
 
@@ -75,12 +76,12 @@ public class LemmingsGame
     {
         boolean gameOver = false;
         int k = 0;
-        spawnLemming(spawner);
+        spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
         while (!gameOver)
         {
             if (k == 5)
             {
-                spawnLemming(spawner);
+                spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
                 k = 0;
             }
 
@@ -98,9 +99,9 @@ public class LemmingsGame
         }
     }
 
-    private void spawnLemming (Block atBlock)
+    private void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
-        lemmings.add(new Lemming(atBlock.getX(), atBlock.getY()));
+        lemmings.add(new Lemming(lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
 
     public void setLemmingsGameView (LemmingsGameView lemmingsGameView)

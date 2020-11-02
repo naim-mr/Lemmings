@@ -4,23 +4,22 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import Entity.LemmingBehaviour.LemmingBehaviour;
-import Entity.LemmingBehaviour.Normal;
+import Entity.LemmingBehaviour.*;
 import Game.*;
 
 public class Lemming extends Entity
 {
     public LemmingBehaviour behaviour;
 
-    public static boolean[] life = {true, true, true};
+    public static boolean[] life = {true, true, true}; // ??
 
-    public Lemming(int x, int y)
+    public Lemming(LemmingBehaviourEnum lemmingBehaviour, int x, int y)
     {
+        changeBehaviourTo(lemmingBehaviour);
         this.x = x;
         this.y = y;
         this.width = 25;
         this.height = 35;
-        behaviour = new Normal(this);
     }
 
     // Cette méthode ne sert actuellement plus, certains lemmings ont un comportement différent qu'il faudra adapter. Le lambda calcul nous servira là certainement.
@@ -73,5 +72,33 @@ public class Lemming extends Entity
     public void update()
     {
         behaviour.update();
+    }
+
+    private void changeBehaviourTo (LemmingBehaviourEnum lemmingBehaviour)
+    {
+        switch (lemmingBehaviour)
+        {
+            case BASHER:
+                behaviour = new Basher(this);
+                break;
+            case BLOCKER:
+                behaviour = new Blocker(this);
+                break;
+            case BOMBER:
+                behaviour = new Bomber(this);
+                break;
+            case CLIMBER:
+                behaviour = new Climber(this);
+                break;
+            case DIGGER:
+                behaviour = new Digger(this);
+                break;
+            case FLOATER:
+                behaviour = new Floater(this);
+                break;
+            case NORMAL:
+                behaviour = new Normal(this);
+                break;
+        }
     }
 }
