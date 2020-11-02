@@ -7,7 +7,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        LemmingsGameView view = new LemmingsGameView(new LemmingsGame());
+        LemmingsGame game = new LemmingsGame();
+        LemmingsGameView view = new LemmingsGameView(game);
         JFrame jframe = new JFrame("Lemmings");
         jframe.add(view);
         jframe.setBackground(Color.WHITE);
@@ -15,6 +16,6 @@ public class Main
         jframe.setResizable(false);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setVisible(true);
-        view.play();
+        game.gameLoop();
     }
 }

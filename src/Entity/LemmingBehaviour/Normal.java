@@ -22,9 +22,7 @@ public class Normal implements LemmingBehaviour
     @Override
     public void update()
     {
-    	System.out.println("ok tick");
     	lemming.setX(lemming.getX()+1);
-        // NYI
     }
 
 }
