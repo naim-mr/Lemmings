@@ -1,12 +1,14 @@
 package Entity.LemmingBehaviour;
 
-import java.awt.Graphics;
+import Entity.Lemming;
 
-public class Floater extends LemmingBehaviour
+public class Floater implements LemmingBehaviour
 {
-    public Floater()
+    private final Lemming lemming;
+
+    public Floater(Lemming lemming)
     {
-        super(lemming);
+        this.lemming = lemming;
     }
 
     @Override

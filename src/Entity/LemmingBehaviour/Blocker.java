@@ -1,12 +1,14 @@
 package Entity.LemmingBehaviour;
 
-import java.awt.Graphics;
+import Entity.Lemming;
 
-public class Blocker extends LemmingBehaviour
+public class Blocker implements LemmingBehaviour
 {
-    public Blocker()
+    private final Lemming lemming;
+
+    public Blocker(Lemming lemming)
     {
-        super(lemming);
+        this.lemming = lemming;
     }
 
     @Override

@@ -1,12 +1,14 @@
 package Entity.LemmingBehaviour;
 
-import java.awt.Graphics;
+import Entity.Lemming;
 
-public class Digger extends LemmingBehaviour
+public class Digger implements LemmingBehaviour
 {
-    public Digger()
+    private final Lemming lemming;
+
+    public Digger(Lemming lemming)
     {
-        super(lemming);
+        this.lemming = lemming;
     }
 
     @Override

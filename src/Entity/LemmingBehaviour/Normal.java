@@ -4,13 +4,12 @@ import java.awt.Graphics;
 
 import Entity.Lemming;
 
-public class Normal extends LemmingBehaviour
+public class Normal implements LemmingBehaviour
 {
     private final Lemming lemming;
 
     public Normal(Lemming lemming)
     {
-        super(lemming);
         this.lemming = lemming;
     }
 
