@@ -198,6 +198,8 @@ public class LemmingsGameView extends JComponent
         }
     }
 
+
+    // TODO : Changer la fonction pour qu'elle convertisse les coords de la map à la window.
     private void drawEntity(Graphics g, Entity e)
     {
         int entityDimension = WINDOW_DIMENSION / LemmingsGame.MAP_DIMENSION;

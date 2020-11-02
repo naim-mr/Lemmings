@@ -11,8 +11,6 @@ public class Indestructible extends Block
 
 	public Indestructible(int x, int y) {
 		super(x, y,50,50);
-		
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

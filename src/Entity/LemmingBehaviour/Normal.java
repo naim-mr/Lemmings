@@ -6,10 +6,11 @@ import Entity.Lemming;
 
 public class Normal extends LemmingBehaviour
 {
-    private Lemming lemming;
+    private final Lemming lemming;
 
     public Normal(Lemming lemming)
     {
+        super(lemming);
         this.lemming = lemming;
     }
 
@@ -21,9 +22,4 @@ public class Normal extends LemmingBehaviour
         // NYI
     }
 
-	@Override
-	public void draw (Graphics g,int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
 }

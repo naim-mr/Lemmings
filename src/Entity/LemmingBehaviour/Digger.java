@@ -4,15 +4,14 @@ import java.awt.Graphics;
 
 public class Digger extends LemmingBehaviour
 {
+    public Digger()
+    {
+        super(lemming);
+    }
+
     @Override
     public void tick()
     {
         // NYI
     }
-
-	@Override
-	public void draw(Graphics g,int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
 }

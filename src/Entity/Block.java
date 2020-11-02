@@ -12,7 +12,5 @@ public abstract class Block extends Entity
         this.y = y;
         this.width=width;
         this.height=height;
-        
-        
     }
 }
