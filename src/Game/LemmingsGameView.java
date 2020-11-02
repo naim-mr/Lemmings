@@ -120,7 +120,7 @@ public class LemmingsGameView extends JComponent
     private void drawEntity(Graphics g, Entity e)
     {
         int[] windowCoords = mapToWindowCoords(e.getX(), e.getY());
-        e.draw(g,windowCoords[0] ,windowCoords[1]);
+        e.draw(g, windowCoords[0], windowCoords[1]);
     }
 
     private void drawEntities(Graphics g)

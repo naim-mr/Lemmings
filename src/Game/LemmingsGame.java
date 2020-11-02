@@ -11,10 +11,10 @@ public class LemmingsGame
 {
     private final ArrayList<Block> blocks;
     private final ArrayList<Lemming> lemmings;
+    private LemmingsGameView lemmingsGameView; // TODO : est-ce qu'il n'y a pas mieux comme implémentation ?
     private Block spawner;
     private Block exit;
     public static final int MAP_DIMENSION = 20;
-
 
 
     public LemmingsGame()
@@ -24,9 +24,6 @@ public class LemmingsGame
 
         CreateTestMap(); // TEMP
     }
-
-    // TEST
-    /* S�paration des block et leemmings */
 
     public ArrayList<Block> getBlocks()
     {
@@ -38,7 +35,6 @@ public class LemmingsGame
         return lemmings;
     }
 
-    // TODO : Dans le modèle
     public void CreateTestMap()
     {
         spawner = new Block(BlockTypeEnum.SPAWNER_BLOCK, 0, 1);
@@ -82,7 +78,7 @@ public class LemmingsGame
         spawnLemming(spawner);
         while (!gameOver)
         {
-            if (k == 200)
+            if (k == 5)
             {
                 spawnLemming(spawner);
                 k = 0;
@@ -90,20 +86,25 @@ public class LemmingsGame
 
             try
             {
-                Thread.sleep((10));
+                Thread.sleep(1500);
             }
             catch (InterruptedException e1)
             {
                 e1.printStackTrace();
             }
             update();
-            // TODO : notifiy obs repaint();
+            lemmingsGameView.repaint();
             k++;
         }
     }
 
-    public void spawnLemming (Block atBlock)
+    private void spawnLemming (Block atBlock)
     {
         lemmings.add(new Lemming(atBlock.getX(), atBlock.getY()));
+    }
+
+    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
+    {
+        this.lemmingsGameView = lemmingsGameView;
     }
 }

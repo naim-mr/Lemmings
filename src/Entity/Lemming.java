@@ -23,6 +23,7 @@ public class Lemming extends Entity
         behaviour = new Normal(this);
     }
 
+    // Cette méthode ne sert actuellement plus, certains lemmings ont un comportement différent qu'il faudra adapter. Le lambda calcul nous servira là certainement.
     public boolean update(ArrayList<Block> blocks)
     {
         Block blockBelow = null;
@@ -61,16 +62,11 @@ public class Lemming extends Entity
         }
     }
 
-
     @Override
     public void draw(Graphics g, int x, int y)
     {
-
-        // TODO Auto-generated method stub
         g.setColor(Color.black);
-
-        g.fillRect(x, y, width, height);
-
+        g.fillRect(x, y, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE); // Chaque Lemming sera dessiné de manière différente, donc il faudrait faire un draw délégué, à la manière du update();
     }
 
     @Override

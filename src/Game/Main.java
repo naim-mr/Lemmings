@@ -9,6 +9,7 @@ public class Main
     {
         LemmingsGame game = new LemmingsGame();
         LemmingsGameView view = new LemmingsGameView(game);
+        game.setLemmingsGameView(view);
         JFrame jframe = new JFrame("Lemmings");
         jframe.add(view);
         jframe.setBackground(Color.WHITE);
