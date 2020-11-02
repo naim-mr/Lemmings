@@ -7,8 +7,8 @@ public abstract class Entity
     protected Color color;
     protected int x;
     protected int y;
-    protected int width;
-    protected int height;
+    protected int width; // normalement inutile
+    protected int height; // normalement inutile
     
     /* Chaque entit� va avoir une largeur et une hauteur 
      * Car cela nous permettra de checker si un leemings et bien sur un block ou non

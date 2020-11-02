@@ -18,6 +18,7 @@ public class Lava implements BlockType
 	public void draw(Graphics graphics, int windowX, int windowY)
 	{
 		graphics.setColor(Color.RED);
+		graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
 	}
 
 	@Override

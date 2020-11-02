@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Spawner implements BlockType
 {
     private final Block block;
+    private int lemmingsNb;
 
     public Spawner(Block block)
     {

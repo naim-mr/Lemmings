@@ -102,8 +102,8 @@ public class LemmingsGameView extends JComponent
     {
 
         //    blocks.add(new Indestructible(10,0));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 100, 25, 50, 50));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 400, 0, 50, 50));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 0, TILE_SIZE, TILE_SIZE));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 10, 10, TILE_SIZE, TILE_SIZE));
 
      /*   blocks.add(new Indestructible(10, 11));
         blocks.add(new Indestructible(10, 12));
@@ -194,16 +194,10 @@ public class LemmingsGameView extends JComponent
         }
     }
 
-
-    // TODO : Changer la fonction pour qu'elle convertisse les coords de la map à la window.
     private void drawEntity(Graphics g, Entity e)
     {
-        int entityDimension = WINDOW_DIMENSION / LemmingsGame.MAP_DIMENSION;
         int[] windowCoords = mapToWindowCoords(e.getX(), e.getY());
-
-        //        e.draw(g,windowCoords[0] ,windowCoords[1]);
-        e.draw(g, e.getY(), e.getX());
-        //g.drawRect(windowCoords[0],windowCoords[1], entityDimension, entityDimension); UTILE OU NON ?la m�me que fill?
+        e.draw(g,windowCoords[0] ,windowCoords[1]);
     }
 
     private void drawEntities(Graphics g)
