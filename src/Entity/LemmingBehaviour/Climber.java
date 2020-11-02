@@ -2,6 +2,8 @@ package Entity.LemmingBehaviour;
 
 import Entity.Lemming;
 
+import java.awt.*;
+
 public class Climber implements LemmingBehaviour
 {
     private final Lemming lemming;
@@ -12,7 +14,13 @@ public class Climber implements LemmingBehaviour
     }
 
     @Override
-    public void tick()
+    public void draw(Graphics graphics, int windowX, int windowY)
+    {
+
+    }
+
+    @Override
+    public void update()
     {
         // NYI
     }

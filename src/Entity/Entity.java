@@ -43,5 +43,5 @@ public abstract class Entity
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
-
+    public abstract void update();
 }

@@ -1,7 +1,7 @@
 package Game;
 
 import Entity.Block;
-import Entity.BlockType.*;
+import Entity.BlockType.BlockTypeEnum;
 import Entity.Entity;
 import Entity.*;
 
@@ -31,8 +31,8 @@ public class LemmingsGameView extends JComponent
         this.game = game;
         CreateTestMap(this.game.getBlocks());
 
-        this.spawner = new Block(new Spawner(), 0, 1, 50, 50);
-        this.exit = new Block(new Exit(), 10, 20, 50, 50);
+        this.spawner = new Block(BlockTypeEnum.SPAWNER_BLOCK, 0, 1, 50, 50);
+        this.exit = new Block(BlockTypeEnum.EXIT_BLOCK, 10, 20, 50, 50);
 
         setOpaque(true);
         setSize(WINDOW_DIMENSION, WINDOW_DIMENSION);
@@ -97,12 +97,13 @@ public class LemmingsGameView extends JComponent
 
     }
 
+    // TODO : Dans le modèle
     public void CreateTestMap(ArrayList<Block> blocks)
     {
 
         //    blocks.add(new Indestructible(10,0));
-        blocks.add(new Block(new Indestructible(), 100, 25, 50, 50));
-        blocks.add(new Block(new Lava(), 400, 0, 50, 50));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 100, 25, 50, 50));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 400, 0, 50, 50));
 
      /*   blocks.add(new Indestructible(10, 11));
         blocks.add(new Indestructible(10, 12));
@@ -114,14 +115,14 @@ public class LemmingsGameView extends JComponent
         blocks.add(new Indestructible(19, 9));*/
 
     }
-
+    // TODO : Dans le modèle
     private void lemmingsMove()
     {
         ArrayList<Integer> index = new ArrayList<>();
         ArrayList<Lemming> lemmings = game.getLemmings();
         for (Lemming l : lemmings)
         {
-            boolean alive = l.tick(game.getBlocks());
+            boolean alive = l.update(game.getBlocks());
             if (!alive)
             {
                 index.add(lemmings.indexOf(l));
@@ -135,21 +136,18 @@ public class LemmingsGameView extends JComponent
     }
 
 
-    // Pas besoin de faire gameTileSize*(LeemingsGame.Map_dimension-y-1) 
-    // On a juste consid�r� l'origine du rep�re comme le sommmet en haut � gauche 
-    // Je te laisse faire le test
-
+    // TODO : Dans le modèle
     /*FONCTION QUI VA GERER La boucle de jeu*/
     public void play()
     {
         boolean gameOver = false;
         int k = 0;
-        spawner.spawn(game.getLemmings());
+     //   spawner.spawn(game.getLemmings());
         while (!gameOver)
         {
             if (k == 200)
             {
-                spawner.spawn(game.getLemmings());
+          //      spawner.spawn(game.getLemmings());
                 k = 0;
             }
             //A modifier: sans sleep

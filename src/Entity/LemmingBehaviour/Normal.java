@@ -14,7 +14,13 @@ public class Normal implements LemmingBehaviour
     }
 
     @Override
-    public void tick()
+    public void draw(Graphics graphics, int windowX, int windowY)
+    {
+
+    }
+
+    @Override
+    public void update()
     {
     	System.out.println("ok tick");
     	lemming.setX(lemming.getX()+1);
