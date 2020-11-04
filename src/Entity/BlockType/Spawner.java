@@ -31,8 +31,5 @@ public class Spawner implements BlockType
 
     }
 
-    public void update (ArrayList<Lemming> lemmings)
-    {
-        // lemmings.add(new Lemming(this.x + 50, this.y + 50));
-    }
+    
 }

@@ -23,7 +23,7 @@ public class Lemming extends Entity
     }
 
     // Cette méthode ne sert actuellement plus, certains lemmings ont un comportement différent qu'il faudra adapter. Le lambda calcul nous servira là certainement.
-    public boolean update(ArrayList<Block> blocks)
+ /*   public boolean update(ArrayList<Block> blocks)
     {
         Block blockBelow = null;
         for (Block b : blocks)
@@ -59,7 +59,7 @@ public class Lemming extends Entity
             this.x++;
             return true;
         }
-    }
+    }*/
 
     @Override
     public void draw(Graphics g, int x, int y)

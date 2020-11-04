@@ -16,7 +16,7 @@ public class Block extends Entity
         this.x = x;
         this.y = y;
         this.width=width;
-        this.height=height;
+        this.height=height; 
     }
     // TODO : ... j'ai donc crée un constructeur plus simple, il faudrait même supprimer les attributs width&height des blocs je pense.
     public Block(BlockTypeEnum blockType, int x, int y)

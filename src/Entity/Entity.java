@@ -10,10 +10,7 @@ public abstract class Entity
     protected int width; // normalement inutile
     protected int height; // normalement inutile
     
-    /* Chaque entit� va avoir une largeur et une hauteur 
-     * Car cela nous permettra de checker si un leemings et bien sur un block ou non
-     * En fait le probl�me c'est que si on test juste si Lemmings.get().Y .. blablabla
-     */
+    
     
     public int getWidth() {
     	return width;
