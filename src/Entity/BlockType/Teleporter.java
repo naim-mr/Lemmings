@@ -1,8 +1,10 @@
 package Entity.BlockType;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import Entity.Block;
+import Entity.Lemming;
 
 public class Teleporter implements BlockType
 {
@@ -20,8 +22,8 @@ public class Teleporter implements BlockType
     }
 
     @Override
-    public void update()
+    public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings)
     {
-
+    	return true;
     }
 }

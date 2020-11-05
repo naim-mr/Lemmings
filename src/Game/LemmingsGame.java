@@ -2,6 +2,7 @@ package Game;
 
 
 import Entity.Block;
+import Entity.DirectionEnum;
 import Entity.BlockType.BlockTypeEnum;
 import Entity.Lemming;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
@@ -27,7 +28,7 @@ public class LemmingsGame
         CreateTestMap(); // TEMP
     }
 
-    public ArrayList<Block> getBlocks()
+   public ArrayList<Block> getBlocks()
     {
         return blocks;
     }
@@ -48,27 +49,24 @@ public class LemmingsGame
         exit = new Block(BlockTypeEnum.EXIT_BLOCK, 10, 19);
 
         //    blocks.add(new Indestructible(10,0));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 0));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 2));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 4));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 6));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 8));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 10));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 12));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 14));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 16));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 18));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 2, 0));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 6, 6));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 8));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 10, 10));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 12, 12));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 14, 14));
-        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 16));
-        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 18, 18));
-        blocks.add(spawner);
-        blocks.add(exit);
+
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 2));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 2));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 2));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 2));
+
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 1, 3));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 3));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 3));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 0, 5));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 1, 5));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 5));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 5));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 5));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 10, 2));
+        
+        //blocks.add(spawner);
+        //blocks.add(exit);
 
      /*   blocks.add(new Indestructible(10, 11));
         blocks.add(new Indestructible(10, 12));
@@ -82,15 +80,25 @@ public class LemmingsGame
     }
 
     private void update()
-    {
-        for (Block b : getBlocks())
-        {
-            b.update();
-        }
+    { 
+        ArrayList<Block> blocksDeleted = new ArrayList<>();
+        ArrayList<Lemming> lemmingsDeleted = new ArrayList<>();
         for (Lemming l : getLemmings())
-        {
-            l.update();
+        {	
+        	
+            l.update(blocks,lemmings);   
         }
+        for(Lemming l : lemmings) if(l!=null && l.toDelete()) lemmingsDeleted.add(l);
+        // TODO gerer les prob de null
+        for(Block b : blocks) {
+        	
+        	if (b!=null && b.toDelete())blocksDeleted.add(b);
+        	//TODO GERER LE PB DE NULL
+        	
+        }
+        blocks.removeAll(blocksDeleted);
+        lemmings.removeAll(lemmingsDeleted);
+        
     }
 
     // Main loop
@@ -99,18 +107,15 @@ public class LemmingsGame
     {
         boolean gameOver = false;
         int k = 0;
-        spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
+        spawnLemming(spawner, LemmingBehaviourEnum.BASHER);
         while (!gameOver)
-        {
-            if (k == 5)
+        { 	
+        	System.out.println(k);
+        	if(k==4) lemmings.get(0).changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+        	if(k==6) lemmings.get(0).changeBehaviourTo(LemmingBehaviourEnum.BASHER);
+        	try
             {
-                spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
-                k = 0;
-            }
-
-            try
-            {
-                Thread.sleep(1500);
+                Thread.sleep(1000);
             }
             catch (InterruptedException e1)
             {
@@ -125,6 +130,7 @@ public class LemmingsGame
     private void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
         lemmings.add(new Lemming(lemmingBehaviour, atBlock.getX(), atBlock.getY()));
+        
     }
 
     public void changeLemming (int mapX, int mapY)

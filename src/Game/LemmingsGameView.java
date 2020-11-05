@@ -36,6 +36,7 @@ public class LemmingsGameView extends JComponent
                 int[] tab = windowToMapCoords(click.getX(), click.getY());
                 controller.onClick(tab[0], tab[1]);
             }
+            
         };
         addMouseListener(clickListener);
 
@@ -124,8 +125,8 @@ public class LemmingsGameView extends JComponent
         entities.addAll(game.getLemmings());
 
         for (Entity e : entities)
-        {
-            drawEntity(g, e);
+        {	
+        	if(e!=null)         drawEntity(g, e); // TODO GERER LES PB DE NULL 
         }
     }
 

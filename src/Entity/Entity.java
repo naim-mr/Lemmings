@@ -1,22 +1,30 @@
 package Entity;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Entity
 {
     protected Color color;
+    protected boolean toDelete;
     protected int x;
     protected int y;
     protected int width; // normalement inutile
     protected int height; // normalement inutile
     
-    /* Chaque entit� va avoir une largeur et une hauteur 
-     * Car cela nous permettra de checker si un leemings et bien sur un block ou non
-     * En fait le probl�me c'est que si on test juste si Lemmings.get().Y .. blablabla
-     */
+    
     
     public int getWidth() {
     	return width;
+    }
+    
+    
+    public void delete() {
+    	toDelete=true;
+    }
+    
+    public boolean toDelete() {
+    	return this.toDelete;
     }
     
     public int getHeight(){
@@ -43,5 +51,5 @@ public abstract class Entity
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
-    public abstract void update();
+    public abstract boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings);
 }

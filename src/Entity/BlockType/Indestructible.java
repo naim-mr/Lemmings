@@ -1,8 +1,10 @@
 package Entity.BlockType;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import Entity.Block;
+import Entity.Lemming;
 
 public class Indestructible implements BlockType
 {
@@ -21,8 +23,8 @@ public class Indestructible implements BlockType
 	}
 
 	@Override
-	public void update()
-	{
-
+	public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
