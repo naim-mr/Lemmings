@@ -1,10 +1,12 @@
 package Entity;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Entity
 {
     protected Color color;
+    protected boolean toDelete;
     protected int x;
     protected int y;
     protected int width; // normalement inutile
@@ -14,6 +16,15 @@ public abstract class Entity
     
     public int getWidth() {
     	return width;
+    }
+    
+    
+    public void delete() {
+    	toDelete=true;
+    }
+    
+    public boolean toDelete() {
+    	return this.toDelete;
     }
     
     public int getHeight(){
@@ -40,5 +51,5 @@ public abstract class Entity
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
-    public abstract void update();
+    public abstract boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings);
 }

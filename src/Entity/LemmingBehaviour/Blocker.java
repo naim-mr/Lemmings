@@ -1,8 +1,10 @@
 package Entity.LemmingBehaviour;
 
+import Entity.Block;
 import Entity.Lemming;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Blocker implements LemmingBehaviour
 {
@@ -19,9 +21,10 @@ public class Blocker implements LemmingBehaviour
 
     }
 
-    @Override
-    public void update()
-    {
-        // NYI
-    }
+ 
+	@Override
+	public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

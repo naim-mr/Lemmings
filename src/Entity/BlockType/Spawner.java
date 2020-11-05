@@ -26,8 +26,9 @@ public class Spawner implements BlockType
     }
 
     @Override
-    public void update()
+    public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings)
     {
+    	return true;
 
     }
 

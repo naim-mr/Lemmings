@@ -2,7 +2,9 @@ package Entity.BlockType;
 
 public enum BlockTypeEnum
 {
-    DESTRUCTIBLE_BLOCK,
+    DESTRUCTIBLE_BLOCK_GROUND,
+    DESTRUCTIBLE_BLOCK_LANDMINE,
+    DESTRUCTIBLE_BLOCK_HIDDENBLOCK,
     EMPTY_BLOCK,
     EXIT_BLOCK,
     INDESTRUCTIBLE_BLOCK,
@@ -10,3 +12,4 @@ public enum BlockTypeEnum
     SPAWNER_BLOCK,
     TELEPORTER_BLOCK
 }
+
