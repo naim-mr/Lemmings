@@ -8,8 +8,10 @@ public class Main
     public static void main(String[] args)
     {
         LemmingsGame game = new LemmingsGame();
-        LemmingsGameView view = new LemmingsGameView(game);
+        LemmingsController controller = new LemmingsController(game);
+        LemmingsGameView view = new LemmingsGameView(game, controller);
         game.setLemmingsGameView(view);
+        controller.setLemmingsGameView(view);
         JFrame jframe = new JFrame("Lemmings");
         jframe.add(view);
         jframe.setBackground(Color.WHITE);

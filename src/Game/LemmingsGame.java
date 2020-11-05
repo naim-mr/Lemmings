@@ -16,6 +16,7 @@ public class LemmingsGame
     private LemmingsGameView lemmingsGameView; // TODO : est-ce qu'il n'y a pas mieux comme implémentation ?
     private Block spawner;
     private Block exit;
+    private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
     public static final int MAP_DIMENSION = 20;
 
 
@@ -37,12 +38,18 @@ public class LemmingsGame
         return lemmings;
     }
 
+    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
+    {
+        this.lemmingsGameView = lemmingsGameView;
+    }
+
     public void CreateTestMap()
     {
         spawner = new Block(BlockTypeEnum.SPAWNER_BLOCK, 0, 1);
         exit = new Block(BlockTypeEnum.EXIT_BLOCK, 10, 19);
 
         //    blocks.add(new Indestructible(10,0));
+
         blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 2));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 2));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 2));
@@ -71,7 +78,7 @@ public class LemmingsGame
         blocks.add(new Indestructible(19, 9));*/
 
     }
-    // update all
+
     private void update()
     { 
         ArrayList<Block> blocksDeleted = new ArrayList<>();
@@ -126,8 +133,22 @@ public class LemmingsGame
         
     }
 
-    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
+    public void changeLemming (int mapX, int mapY)
     {
-        this.lemmingsGameView = lemmingsGameView;
+        for (Lemming l : getLemmings())
+        {
+            if (l.getX() == mapX && l.getY() == mapY) l.changeBehaviourTo(selectedBehaviour);
+        }
+    }
+
+    // Pour le moment, ca change le comportement sans se poser de questions, à voir comment ca doit être réellement fait.
+    public void changeSelectedBehaviour (LemmingBehaviourEnum blockTypeEnum)
+    {
+        selectedBehaviour = blockTypeEnum;
+    }
+
+    public LemmingBehaviourEnum getSelectedBehaviour()
+    {
+        return selectedBehaviour;
     }
 }

@@ -1,9 +1,6 @@
 package Game;
 
-import Entity.Block;
-import Entity.BlockType.BlockTypeEnum;
 import Entity.Entity;
-import Entity.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,22 +11,21 @@ import java.util.ArrayList;
 
 public class LemmingsGameView extends JComponent
 {
+    private final LemmingsGame game;
+    private final LemmingsController controller;
+    private static final long serialVersionUID = 1L;
     public static final int WINDOW_DIMENSION = 600;
     public static final int GAME_DIMENSION = 500;
     public static final int TILE_SIZE = GAME_DIMENSION / LemmingsGame.MAP_DIMENSION;
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    private final LemmingsGame game;
 
-    public LemmingsGameView(LemmingsGame game)
+    public LemmingsGameView(LemmingsGame game, LemmingsController controller)
     {
         super();
         this.game = game;
+        this.controller = controller;
 
         setOpaque(true);
-        setSize(WINDOW_DIMENSION, WINDOW_DIMENSION);
+        setSize(GAME_DIMENSION, WINDOW_DIMENSION);
 
         MouseAdapter clickListener = new MouseAdapter()
         {
@@ -38,7 +34,7 @@ public class LemmingsGameView extends JComponent
             {
                 super.mouseClicked(click);
                 int[] tab = windowToMapCoords(click.getX(), click.getY());
-
+                controller.onClick(tab[0], tab[1]);
             }
             
         };
@@ -59,7 +55,7 @@ public class LemmingsGameView extends JComponent
         boolean condX = true;
         int k = 0;
         int j = 0;
-        int DIM = LemmingsGame.MAP_DIMENSION;
+        int DIM = LemmingsGame.MAP_DIMENSION + (WINDOW_DIMENSION - GAME_DIMENSION) / TILE_SIZE;
         int quotient = WINDOW_DIMENSION / DIM;
 
         while ((condX || condY) && (k < DIM && j < DIM))
@@ -87,9 +83,7 @@ public class LemmingsGameView extends JComponent
             mapY = j;
             condY = false;
         }
-
-        return new int[]{mapX, mapY};
-
+        return new int[]{mapX - 1, mapY - 1};
     }
 
     @Override
@@ -136,12 +130,72 @@ public class LemmingsGameView extends JComponent
         }
     }
 
-    // On fait une fonction qui dessine le menu du bas ou non ? autre solution mettre dans l'Array
-    //Faire un objet Array ? 
+    // TODO :  C'est vraiment nul. trouver une meilleure implémentation, refactoriser..............
+    // après, c'est de l'affichage, on ne peut pas faire vraiment mieux...
     private void drawFooterMenu(Graphics g)
     {
-        g.setColor(Color.GRAY);
-        g.fillRect(0, 500, 600, 100);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, GAME_DIMENSION, WINDOW_DIMENSION, WINDOW_DIMENSION - GAME_DIMENSION);
+        g.setColor(Color.RED);
+        g.drawRect(0, GAME_DIMENSION, WINDOW_DIMENSION - 18, WINDOW_DIMENSION - GAME_DIMENSION - 1);
+
+        // Blocs
+        g.setColor(Color.RED);
+        g.drawString("Basher", (TILE_SIZE * 1) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 1, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Color.CYAN);
+        g.drawString("Blocker", (TILE_SIZE * 3) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 3, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Color.GREEN);
+        g.drawString("Bomber", (TILE_SIZE * 5) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 5, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Color.YELLOW);
+        g.drawString("Climber", (TILE_SIZE * 7) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 7, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Color.MAGENTA);
+        g.drawString("Digger", (TILE_SIZE * 9) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 9, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Color.PINK);
+        g.drawString("Floater", (TILE_SIZE * 11) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 11, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        // Selection actuelle
+
+        g.setColor(Color.WHITE);
+        g.drawString("Selection actuelle", (TILE_SIZE * 15), GAME_DIMENSION + (TILE_SIZE - 5));
+
+        // TODO : trouver mieux que ca, mettre les couleurs dans les comportements
+        switch (game.getSelectedBehaviour())
+        {
+            case BASHER:
+                g.setColor(Color.RED);
+                break;
+            case BLOCKER:
+                g.setColor(Color.CYAN);
+                break;
+            case BOMBER:
+                g.setColor(Color.GREEN);
+                break;
+            case CLIMBER:
+                g.setColor(Color.YELLOW);
+                break;
+            case DIGGER:
+                g.setColor(Color.MAGENTA);
+                break;
+            case FLOATER:
+                g.setColor(Color.PINK);
+                break;
+            case NORMAL:
+                g.setColor(Color.BLACK);
+                break;
+        }
+
+        g.fillRect(TILE_SIZE * 17, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
 
 }
