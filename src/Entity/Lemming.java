@@ -74,7 +74,7 @@ public class Lemming extends Entity
         behaviour.update();
     }
 
-    private void changeBehaviourTo (LemmingBehaviourEnum lemmingBehaviour)
+    public void changeBehaviourTo (LemmingBehaviourEnum lemmingBehaviour)
     {
         switch (lemmingBehaviour)
         {

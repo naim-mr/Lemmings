@@ -15,6 +15,7 @@ public class LemmingsGame
     private LemmingsGameView lemmingsGameView; // TODO : est-ce qu'il n'y a pas mieux comme implémentation ?
     private Block spawner;
     private Block exit;
+    private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
     public static final int MAP_DIMENSION = 20;
 
 
@@ -36,6 +37,11 @@ public class LemmingsGame
         return lemmings;
     }
 
+    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
+    {
+        this.lemmingsGameView = lemmingsGameView;
+    }
+
     public void CreateTestMap()
     {
         spawner = new Block(BlockTypeEnum.SPAWNER_BLOCK, 0, 1);
@@ -43,7 +49,24 @@ public class LemmingsGame
 
         //    blocks.add(new Indestructible(10,0));
         blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 0));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 2));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 4));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 6));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 8));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 10));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 12));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 14));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 16));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 18));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 2, 0));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 6, 6));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 8));
         blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 10, 10));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 12, 12));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 14, 14));
+        blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 16));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 18, 18));
         blocks.add(spawner);
         blocks.add(exit);
 
@@ -57,7 +80,7 @@ public class LemmingsGame
         blocks.add(new Indestructible(19, 9));*/
 
     }
-    // update all
+
     private void update()
     {
         for (Block b : getBlocks())
@@ -104,8 +127,22 @@ public class LemmingsGame
         lemmings.add(new Lemming(lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
 
-    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
+    public void changeLemming (int mapX, int mapY)
     {
-        this.lemmingsGameView = lemmingsGameView;
+        for (Lemming l : getLemmings())
+        {
+            if (l.getX() == mapX && l.getY() == mapY) l.changeBehaviourTo(selectedBehaviour);
+        }
+    }
+
+    // Pour le moment, ca change le comportement sans se poser de questions, à voir comment ca doit être réellement fait.
+    public void changeSelectedBehaviour (LemmingBehaviourEnum blockTypeEnum)
+    {
+        selectedBehaviour = blockTypeEnum;
+    }
+
+    public LemmingBehaviourEnum getSelectedBehaviour()
+    {
+        return selectedBehaviour;
     }
 }
