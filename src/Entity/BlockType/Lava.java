@@ -2,8 +2,10 @@ package Entity.BlockType;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import Entity.Block;
+import Entity.Lemming;
 
 public class Lava implements BlockType
 {
@@ -22,8 +24,8 @@ public class Lava implements BlockType
 	}
 
 	@Override
-	public void update()
+	public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings)
 	{
-
+		return true;
 	}
 }

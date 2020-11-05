@@ -26,13 +26,11 @@ public class Spawner implements BlockType
     }
 
     @Override
-    public void update()
+    public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings)
     {
+    	return true;
 
     }
 
-    public void update (ArrayList<Lemming> lemmings)
-    {
-        // lemmings.add(new Lemming(this.x + 50, this.y + 50));
-    }
+    
 }
