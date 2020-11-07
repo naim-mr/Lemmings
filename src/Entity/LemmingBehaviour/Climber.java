@@ -26,11 +26,11 @@ public class Climber implements LemmingBehaviour
         g.fillRect(windowX,windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
-   
 
+	// TODO refactor
 	@Override
 	public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings){
-		// TODO Auto-generated method stub
+
 		boolean blockBelow =false;
 	    boolean wall= false; 
 	    
@@ -45,7 +45,7 @@ public class Climber implements LemmingBehaviour
 	    	  	wall=true; // Si le lemming va vers la droite et qu'il y a un block ou le bord de la map
       	  
      	  }else if(lemming.getDirection()==DirectionEnum.LEFT &&(( b.getX()+1 == lemming.getX() && b.getY()==lemming.getY()) ||lemming.getX()==0 )){
-		      	wall=true; // la même vers la gauche 
+		      	wall=true; // la mï¿½me vers la gauche 
       	  }
 	      
 	    }
@@ -66,7 +66,7 @@ public class Climber implements LemmingBehaviour
 	    		lemming.setX(lemming.getX()-1);
 	    		
 	    	}
-	   		lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL); // Gestion des changements à sommet 
+	   		lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL); // Gestion des changements ï¿½ sommet 
 	   	}else {
 	   		//S'il y a aucun cas mouvement classique
 	   			if(lemming.getDirection()==DirectionEnum.LEFT)lemming.setX(lemming.getX()-1);

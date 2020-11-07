@@ -13,7 +13,7 @@ public class LemmingsGame
 {
     private final ArrayList<Block> blocks;
     private final ArrayList<Lemming> lemmings;
-    private LemmingsGameView lemmingsGameView; // TODO : est-ce qu'il n'y a pas mieux comme implémentation ?
+    private LemmingsGameView lemmingsGameView;
     private Block spawner;
     private Block exit;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
@@ -51,7 +51,10 @@ public class LemmingsGame
         //    blocks.add(new Indestructible(10,0));
 
         blocks.add(new Block(BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, 2));
+        blocks.add(new Block(BlockTypeEnum.LAVA_BLOCK, 0, 0));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_LANDMINE, 1, 1));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 2));
+        blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 1, 2));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 2));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 2));
 

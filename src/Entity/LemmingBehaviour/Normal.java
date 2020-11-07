@@ -25,7 +25,7 @@ public class Normal implements LemmingBehaviour
         g.fillRect(windowX,windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE); 
     }
    
-    
+    // TODO REFACTOR
     @Override
     public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings){
            	          	

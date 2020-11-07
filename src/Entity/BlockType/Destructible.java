@@ -10,7 +10,7 @@ public class Destructible implements BlockType
 {
 	private Block block;
 	private DestructibleTypeEnum type ;
-	private Block hiddenBlock;// à gérer mieux que ça surement via héritage
+	private Block hiddenBlock;// ï¿½ gï¿½rer mieux que ï¿½a surement via hï¿½ritage
 	
 	
 	public Destructible(Block block,DestructibleTypeEnum type,Block hiddenBlock )
@@ -39,11 +39,10 @@ public class Destructible implements BlockType
 	
 
 	@Override
-	public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings) {
-		// En passe à delete. NB§§ : si update est appelé c'est uniquement lorsque qu'il faut le détruire pas besoin sinon
+	public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings) {
+		// En passe ï¿½ delete. NBï¿½ï¿½ : si update est appelï¿½ c'est uniquement lorsque qu'il faut le dï¿½truire pas besoin sinon
 		switch(type) {
 			case GROUND:
-					
 					block.delete();
 					break;
 			case LANDMINE:
@@ -51,7 +50,7 @@ public class Destructible implements BlockType
 					block.delete();
 					blast(blocks,lemmings);
 					break;
-			case HIDDEN_BLOCK : 
+			case HIDDEN_BLOCK:
 					block.delete();
 					blocks.add(this.hiddenBlock);
 					break;
@@ -59,7 +58,7 @@ public class Destructible implements BlockType
 		return true ; 
 	}
 	
-	private void blast(ArrayList<Block> blocks,ArrayList<Lemming> lemmings) {
+	private void blast(ArrayList<Block> blocks, ArrayList<Lemming> lemmings) {
 			// Explosion en croix des blocks en lemmings ( y'a pas d'explosion encore lol juste une disparition
 			for(Block b: blocks) {
 				System.out.println(b.getX()+" "+b.getY()+" "+ b.toDelete());	

@@ -7,7 +7,7 @@ public class LemmingsController
     private LemmingsGame game;
     private LemmingsGameView view;
 
-    public LemmingsController(LemmingsGame game)
+    public LemmingsController (LemmingsGame game)
     {
         this.game = game;
     }
@@ -21,9 +21,9 @@ public class LemmingsController
     {
         if (mapY < LemmingsGame.MAP_DIMENSION)
         {
-            onGameClick (mapX, mapY);
+            onGameClick(mapX, mapY);
         }
-        onMenuClick (mapX, mapY);
+        onMenuClick(mapX, mapY);
         view.repaint();
     }
 

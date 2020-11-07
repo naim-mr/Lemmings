@@ -24,8 +24,6 @@ public class Floater implements LemmingBehaviour
 
 	@Override
 	public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings){
-		// TODO Auto-generated method stub
-		
 		return true;
 	}
 }

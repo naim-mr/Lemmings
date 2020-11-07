@@ -12,12 +12,9 @@ public abstract class Entity
     protected int width; // normalement inutile
     protected int height; // normalement inutile
     
-    
-    
     public int getWidth() {
     	return width;
     }
-    
     
     public void delete() {
     	toDelete=true;
@@ -31,13 +28,11 @@ public abstract class Entity
     	return height;
     }
 
-    // TODO : Doit retourner la position horizontale de l'entité dans la map (et non dans la fenêtre).
     public int getX()
     {
         return x;
     }
 
-    // TODO : Doit retourner la position verticale dans la map
     public int getY()
     {
         return y;

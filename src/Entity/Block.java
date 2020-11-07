@@ -80,7 +80,6 @@ public class Block extends Entity
     }
 	@Override
 	public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings) {
-		// TODO Auto-generated method stub
 		return blockType.update(blocks,lemmings);
 	}
 	
