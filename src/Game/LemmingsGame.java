@@ -2,8 +2,8 @@ package Game;
 
 
 import Entity.Block;
-import Entity.DirectionEnum;
 import Entity.BlockType.BlockTypeEnum;
+import Entity.BlockTest;
 import Entity.Lemming;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
@@ -28,9 +28,19 @@ public class LemmingsGame
         CreateTestMap(); // TEMP
     }
 
-   public ArrayList<Block> getBlocks()
+    public ArrayList<Block> getBlocks()
     {
         return blocks;
+    }
+
+    public ArrayList<Block> getBlocks (BlockTest condition)
+    {
+        ArrayList<Block> outBlock = new ArrayList<>();
+        for (Block b : blocks)
+        {
+            if (condition.test(b)) outBlock.add(b);
+        }
+        return outBlock;
     }
 
     public ArrayList<Lemming> getLemmings()
@@ -38,7 +48,7 @@ public class LemmingsGame
         return lemmings;
     }
 
-    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
+    public void setLemmingsGameView(LemmingsGameView lemmingsGameView)
     {
         this.lemmingsGameView = lemmingsGameView;
     }
@@ -67,7 +77,7 @@ public class LemmingsGame
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 5));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 5));
         blocks.add(new Block(BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 10, 2));
-        
+
         //blocks.add(spawner);
         //blocks.add(exit);
 
@@ -83,25 +93,25 @@ public class LemmingsGame
     }
 
     private void update()
-    { 
+    {
         ArrayList<Block> blocksDeleted = new ArrayList<>();
         ArrayList<Lemming> lemmingsDeleted = new ArrayList<>();
         for (Lemming l : getLemmings())
-        {	
-        	
-            l.update(blocks,lemmings);   
+        {
+            l.update(blocks, lemmings);
         }
-        for(Lemming l : lemmings) if(l!=null && l.toDelete()) lemmingsDeleted.add(l);
+        for (Lemming l : lemmings)
+        {
+            if (l != null && l.toDelete()) lemmingsDeleted.add(l);
+        }
         // TODO gerer les prob de null
-        for(Block b : blocks) {
-        	
-        	if (b!=null && b.toDelete())blocksDeleted.add(b);
-        	//TODO GERER LE PB DE NULL
-        	
+        for (Block b : blocks)
+        {
+            if (b != null && b.toDelete()) blocksDeleted.add(b);
+            //TODO GERER LE PB DE NULL
         }
         blocks.removeAll(blocksDeleted);
         lemmings.removeAll(lemmingsDeleted);
-        
     }
 
     // Main loop
@@ -112,11 +122,11 @@ public class LemmingsGame
         int k = 0;
         spawnLemming(spawner, LemmingBehaviourEnum.BASHER);
         while (!gameOver)
-        { 	
-        	System.out.println(k);
-        	if(k==4) lemmings.get(0).changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
-        	if(k==6) lemmings.get(0).changeBehaviourTo(LemmingBehaviourEnum.BASHER);
-        	try
+        {
+            System.out.println(k);
+            if (k == 4) lemmings.get(0).changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+            if (k == 6) lemmings.get(0).changeBehaviourTo(LemmingBehaviourEnum.BASHER);
+            try
             {
                 Thread.sleep(1000);
             }
@@ -130,13 +140,13 @@ public class LemmingsGame
         }
     }
 
-    private void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
+    private void spawnLemming(Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
-        lemmings.add(new Lemming(lemmingBehaviour, atBlock.getX(), atBlock.getY()));
-        
+        lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
+
     }
 
-    public void changeLemming (int mapX, int mapY)
+    public void changeLemming(int mapX, int mapY)
     {
         for (Lemming l : getLemmings())
         {
@@ -144,8 +154,7 @@ public class LemmingsGame
         }
     }
 
-    // Pour le moment, ca change le comportement sans se poser de questions, à voir comment ca doit être réellement fait.
-    public void changeSelectedBehaviour (LemmingBehaviourEnum blockTypeEnum)
+    public void changeSelectedBehaviour(LemmingBehaviourEnum blockTypeEnum)
     {
         selectedBehaviour = blockTypeEnum;
     }
@@ -153,5 +162,10 @@ public class LemmingsGame
     public LemmingBehaviourEnum getSelectedBehaviour()
     {
         return selectedBehaviour;
+    }
+
+    public boolean deleteBlock (Block b)
+    {
+        return blocks.remove(b);
     }
 }

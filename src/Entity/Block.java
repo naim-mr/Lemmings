@@ -1,6 +1,7 @@
 package Entity;
 
 import Entity.BlockType.*;
+import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
@@ -9,13 +10,11 @@ import java.util.ArrayList;
 public class Block extends Entity
 {
     private BlockType blockType;
-    
-    
-    
 
     // TODO : Les blocs ne sont pas censés connaître leur taille à l'écran...
-    public Block(BlockTypeEnum blockType, int x, int y, int width, int height)
+    public Block(LemmingsGame game, BlockTypeEnum blockType, int x, int y, int width, int height)
     {
+        this.game = game;
         changeTypeTo(blockType);
         this.x = x;
         this.y = y;

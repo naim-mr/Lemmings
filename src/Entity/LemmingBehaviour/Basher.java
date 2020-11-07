@@ -30,81 +30,55 @@ public class Basher implements LemmingBehaviour
     @Override
     public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings)
     {
-        // TODO REFACTOR
         boolean blockUpdated = false;
-        boolean blockBelow = false;
-        Block blockForward = null;
+        boolean blockBelow;
+        Block blockForward;
 
-        int i = 0;
-        // On cherche les block en dessous et les blocks � 1 case plus loin selon la direction
-        while (i < blocks.size())
-        {
-            if (blocks.get(i).getY() == lemming.getY() + 1 && blocks.get(i).getX() == lemming.getX())
-            {
-                blockBelow = true;
-                //TODO gerer les pb de null
-            }
-            if (blocks.get(i).getX() == lemming.getX() + 1 && blocks.get(i).getY() == lemming.getY() && lemming.getDirection() == DirectionEnum.RIGHT)
-            {
-                blockForward = blocks.get(i);
-            }
-            if (blocks.get(i).getX() == lemming.getX() - 1 && blocks.get(i).getY() == lemming.getY() && lemming.getDirection() == DirectionEnum.LEFT)
-            {
-                blockForward = blocks.get(i);
-            }
-            i++;
-        }
-        // Comme pour les digger dans l'id�e
-        if (blockBelow && blockForward != null)
-        {
-            blockUpdated = blockForward.update(blocks, lemmings);
+        blockBelow = lemming.findInferiorBlock();
+        blockForward = lemming.getFrontBlock();
+        blockUpdated = destroyBlock(blocks, lemmings, blockBelow, blockForward);
+        updateLocation(blockUpdated, blockBelow, blockForward);
 
-        }
-        if (!blockBelow)
-        {
-            lemming.setY(lemming.getY() + 1);
-        }
+        return true;
+    }
+
+    private void updateLocation(boolean blockUpdated, boolean blockBelow, Block blockForward)
+    {
+        if (!blockBelow) lemming.setY(lemming.getY() + 1);
         else if (blockUpdated)
         {
             blockDrill++;
-            if (lemming.getDirection() == DirectionEnum.LEFT && lemming.getX() == 0)
-            {
-                lemming.setX(lemming.getX() + 1);
-                lemming.changeDirectionTo(DirectionEnum.RIGHT);
-            }
-            else if (lemming.getDirection() == DirectionEnum.RIGHT && lemming.getX() == LemmingsGame.MAP_DIMENSION)
-            {
-                lemming.setX(lemming.getX() - 1);
-                lemming.changeDirectionTo(DirectionEnum.LEFT);
-            }
-            else if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
-            else if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
-
+            updateHorizontalLocation();
         }
-        else if (blockBelow && blockForward != null)
+        else if (blockForward != null) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+        else updateHorizontalLocation();
+    }
+
+    private void updateHorizontalLocation()
+    {
+        if (lemming.getDirection() == DirectionEnum.LEFT && lemming.getX() == 0)
         {
-
-            lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
-
+            lemming.setX(lemming.getX() + 1);
+            lemming.changeDirectionTo(DirectionEnum.RIGHT);
         }
-        else
+        else if (lemming.getDirection() == DirectionEnum.RIGHT && lemming.getX() == LemmingsGame.MAP_DIMENSION)
         {
-
-            if (lemming.getDirection() == DirectionEnum.LEFT && lemming.getX() == 0)
-            {
-                lemming.setX(lemming.getX() + 1);
-                lemming.changeDirectionTo(DirectionEnum.RIGHT);
-            }
-            else if (lemming.getDirection() == DirectionEnum.RIGHT && lemming.getX() == LemmingsGame.MAP_DIMENSION)
-            {
-                lemming.setX(lemming.getX() - 1);
-                lemming.changeDirectionTo(DirectionEnum.LEFT);
-            }
-            else if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
-            else if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
+            lemming.setX(lemming.getX() - 1);
+            lemming.changeDirectionTo(DirectionEnum.LEFT);
         }
-        return true;
+        else if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
+        else if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
+    }
 
+    // TODO problème de conception objet, on dirait qu'on est en C là, faire en sorte que cela utilise le deleteblock du modèle
+    public boolean destroyBlock(ArrayList<Block> blocks, ArrayList<Lemming> lemmings, boolean blockBelow, Block blockForward)
+    {
+        boolean b = false;
+        if (blockBelow && blockForward != null)
+        {
+            b = blockForward.update(blocks, lemmings);
+        }
+        return b;
     }
 
 }
