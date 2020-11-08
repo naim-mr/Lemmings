@@ -2,10 +2,8 @@ package Entity.LemmingBehaviour;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import Game.*;
-import Entity.Block;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 
@@ -29,8 +27,6 @@ public class Normal implements LemmingBehaviour
     @Override
     public boolean update()
     {
-		ArrayList<Block> blocks = lemming.getGame().getBlocks();
-
         boolean blockBelow = lemming.findInferiorBlock();
         boolean wall = lemming.findFrontBlock();
 

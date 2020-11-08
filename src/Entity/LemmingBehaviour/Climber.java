@@ -1,13 +1,10 @@
 package Entity.LemmingBehaviour;
 
-import Entity.Block;
 import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Climber implements LemmingBehaviour
 {
@@ -28,37 +25,18 @@ public class Climber implements LemmingBehaviour
     }
 
 
-    // TODO refactor
     @Override
     public boolean update ()
     {
-        ArrayList<Block> blocks = lemming.getGame().getBlocks();
-        ArrayList<Lemming> lemmings = lemming.getGame().getLemmings();
-
         boolean blockBelow = lemming.findInferiorBlock();
-        boolean wall = false;
+        boolean wall = lemming.findFrontBlock();
 
-        for (Block b : blocks)
-        {
-            int[] blockCoord = LemmingsGameView.mapToWindowCoords(b.getX(), b.getY()); // ?????????
-            int[] lemmingCoord = LemmingsGameView.mapToWindowCoords(lemming.getX(), lemming.getY()); // ???????????????????????????????????????????????
-            if (blockCoord[1] <= lemmingCoord[1] + LemmingsGameView.TILE_SIZE && blockCoord[0] == lemmingCoord[0])
-            {
-                blockBelow = true; // Block en dessous ?
-            }
+        updateLocation(blockBelow, wall);
+        return true;
+    }
 
-            if (lemming.getDirection() == DirectionEnum.RIGHT && (b.getX() <= lemming.getX() + 1 && b.getY() == lemming.getY() || lemming.getX() + 1 == LemmingsGame.MAP_DIMENSION))
-            {
-                wall = true; // Si le lemming va vers la droite et qu'il y a un block ou le bord de la map
-
-            }
-            else if (lemming.getDirection() == DirectionEnum.LEFT && ((b.getX() + 1 == lemming.getX() && b.getY() == lemming.getY()) || lemming.getX() == 0))
-            {
-                wall = true; // la m�me vers la gauche
-            }
-        }
-
-
+    private void updateLocation(boolean blockBelow, boolean wall)
+    {
         if (!blockBelow && !climbing)
         {
             lemming.setY(lemming.getY() + 1);
@@ -69,7 +47,6 @@ public class Climber implements LemmingBehaviour
             // s'il y a un mur on grimpe
             climbing = true;
             lemming.setY(lemming.getY() - 1);
-            wall = false;
         }
         else if (!wall && climbing)
         {
@@ -92,8 +69,5 @@ public class Climber implements LemmingBehaviour
             if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
             if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
         }
-        return true;
     }
-
-
 }
