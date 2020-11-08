@@ -28,15 +28,12 @@ public class Basher implements LemmingBehaviour
     }
 
     @Override
-    public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings)
+    public boolean update ()
     {
+        boolean blockBelow = lemming.findInferiorBlock();
+        Block blockForward = lemming.getFrontBlock();
         boolean blockUpdated = false;
-        boolean blockBelow;
-        Block blockForward;
-
-        blockBelow = lemming.findInferiorBlock();
-        blockForward = lemming.getFrontBlock();
-        blockUpdated = destroyBlock(blocks, lemmings, blockBelow, blockForward);
+        if (blockBelow) { blockUpdated = lemming.getGame().deleteBlock(blockForward); }
         updateLocation(blockUpdated, blockBelow, blockForward);
 
         return true;
@@ -50,7 +47,7 @@ public class Basher implements LemmingBehaviour
             blockDrill++;
             updateHorizontalLocation();
         }
-        else if (blockForward != null) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+        // else if (blockForward != null) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         else updateHorizontalLocation();
     }
 
@@ -68,17 +65,6 @@ public class Basher implements LemmingBehaviour
         }
         else if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
         else if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
-    }
-
-    // TODO problème de conception objet, on dirait qu'on est en C là, faire en sorte que cela utilise le deleteblock du modèle
-    public boolean destroyBlock(ArrayList<Block> blocks, ArrayList<Lemming> lemmings, boolean blockBelow, Block blockForward)
-    {
-        boolean b = false;
-        if (blockBelow && blockForward != null)
-        {
-            b = blockForward.update(blocks, lemmings);
-        }
-        return b;
     }
 
 }

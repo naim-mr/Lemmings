@@ -49,5 +49,10 @@ public abstract class Entity
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
-    public abstract boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings);
+    public abstract boolean update();
+    public LemmingsGame getGame()
+    {
+        return game;
+    }
+
 }

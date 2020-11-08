@@ -30,31 +30,14 @@ public class Digger implements LemmingBehaviour
 
     // todo refactor
     @Override
-    public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings)
+    public boolean update ()
     {
         boolean blockUpdated = false;
-        Block blockBelow = null;
-        int i = 0;
+        Block blockBelow = lemming.getInferiorBlock();
+        if (blockBelow != null) blockUpdated = destroyBlock(blockBelow);
 
-        while (i < blocks.size() && blockBelow == null)
-        {
-            //On cherche s'il y a un block en dessous
-            if (blocks.get(i).getY() == lemming.getY() + 1 && blocks.get(i).getX() == lemming.getX())
-            {
-                blockBelow = blocks.get(i);
+        updateLocation(blockUpdated);
 
-            }
-            i++;
-        }
-
-        if (blockBelow != null)
-            blockUpdated = blockBelow.update(blocks, lemmings);// s'il oui , on update le block -> ON DIG DOUG DIGON
-        if (blockUpdated)
-        {
-            //Si le block c'est update donc s'il est destructible on incr�mente et descend
-            blockDigged++;
-            lemming.setY(lemming.getY() + 1);
-        }
         if (blockDigged == 4 || !blockUpdated)
         {
             // on s'arrete au bout de 5 ou s'il y a rien
@@ -66,5 +49,22 @@ public class Digger implements LemmingBehaviour
 
 
         return true;
+    }
+
+    public void updateLocation(boolean blockUpdated)
+    {
+        if (blockUpdated)
+        {
+            //Si le block c'est update donc s'il est destructible on incr�mente et descend
+            blockDigged++;
+            lemming.setY(lemming.getY() + 1);
+        }
+    }
+
+    // TODO
+    public boolean destroyBlock (Block blockBelow)
+    {
+        if (blockBelow != null) return blockBelow.update();
+        else return false;
     }
 }

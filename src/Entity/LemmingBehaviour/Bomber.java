@@ -22,8 +22,8 @@ public class Bomber implements LemmingBehaviour
     }
 
 	@Override
-	public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings) {
-		return true ;
-		
+	public boolean update ()
+    {
+		return true;
 	}
 }

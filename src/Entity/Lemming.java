@@ -26,7 +26,6 @@ public class Lemming extends Entity
         this.toDelete = false;
     }
 
-
     @Override
     public void draw(Graphics g, int x, int y)
     {
@@ -34,11 +33,10 @@ public class Lemming extends Entity
     }
 
     @Override
-    public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings)
+    public boolean update ()
     {
         //System.out.println("lemming"+direction);
-        return behaviour.update(blocks, lemmings);
-
+        return behaviour.update();
     }
 
     public void changeBehaviourTo(LemmingBehaviourEnum lemmingBehaviour)
@@ -80,23 +78,24 @@ public class Lemming extends Entity
         return this.direction;
     }
 
-    public LemmingsGame getGame()
-    {
-        return game;
-    }
-
     public boolean findInferiorBlock()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX()).size() >= 1;
     }
 
-    public Block getFrontBlock ()
+    public Block getInferiorBlock()
     {
-        if (getDirection() == DirectionEnum.RIGHT)
-        {
-            return getGame().getBlocks((Block b) -> b.getX() == getX() + 1 && b.getY() == getY()).get(0);
-        }
-        else return getGame().getBlocks((Block b) -> b.getX() == getX() - 1 && b.getY() == getY()).get(0);
+        ArrayList<Block> list = getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX());
+
+        return list.size() >= 1 ? list.get(0) : null;
     }
 
+    public Block getFrontBlock ()
+    {
+        ArrayList<Block> list;
+        if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> b.getX() == getX() + 1 && b.getY() == getY());
+        else list = getGame().getBlocks((Block b) -> b.getX() == getX() - 1 && b.getY() == getY());
+
+        return list.size() >= 1 ? list.get(0) : null;
+    }
 }

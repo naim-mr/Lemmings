@@ -4,5 +4,4 @@ public enum DestructibleTypeEnum {
 	GROUND,
 	LANDMINE,
 	HIDDEN_BLOCK,
-	
 }

@@ -22,8 +22,14 @@ public class Empty implements BlockType
     }
 
     @Override
-    public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings)
+    public boolean update ()
     {
     	return true;
+    }
+
+    @Override
+    public boolean destroy()
+    {
+        return false;
     }
 }

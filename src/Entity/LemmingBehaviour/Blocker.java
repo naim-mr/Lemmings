@@ -23,7 +23,7 @@ public class Blocker implements LemmingBehaviour
 
  
 	@Override
-	public boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings) {
+	public boolean update () {
 		return true;
 	}
 }
