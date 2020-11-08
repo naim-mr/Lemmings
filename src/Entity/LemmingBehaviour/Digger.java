@@ -28,7 +28,6 @@ public class Digger implements LemmingBehaviour
 
     }
 
-    // todo refactor
     @Override
     public boolean update ()
     {
@@ -37,7 +36,13 @@ public class Digger implements LemmingBehaviour
         if (blockBelow != null) blockUpdated = destroyBlock(blockBelow);
 
         updateLocation(blockUpdated);
+        updateBehaviour(blockUpdated, blockBelow);
 
+        return true;
+    }
+
+    private void updateBehaviour(boolean blockUpdated, Block blockBelow)
+    {
         if (blockDigged == 4 || !blockUpdated)
         {
             // on s'arrete au bout de 5 ou s'il y a rien
@@ -46,9 +51,6 @@ public class Digger implements LemmingBehaviour
         }
         if (blockBelow == null && blockDigged > 0)
             lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);// euh je dois revoir la n�cessit� de cette ligne
-
-
-        return true;
     }
 
     public void updateLocation(boolean blockUpdated)
@@ -61,10 +63,9 @@ public class Digger implements LemmingBehaviour
         }
     }
 
-    // TODO
     public boolean destroyBlock (Block blockBelow)
     {
-        if (blockBelow != null) return blockBelow.update();
+        if (blockBelow != null) return lemming.getGame().deleteBlock(blockBelow);
         else return false;
     }
 }
