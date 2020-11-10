@@ -23,8 +23,14 @@ public class Indestructible implements BlockType
 	}
 
 	@Override
-	public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings) {
-		// TODO Auto-generated method stub
+	public boolean update ()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean destroy()
+	{
 		return false;
 	}
 }

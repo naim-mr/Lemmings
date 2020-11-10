@@ -1,6 +1,7 @@
 package Entity;
 
 import Entity.BlockType.*;
+import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
@@ -9,22 +10,8 @@ import java.util.ArrayList;
 public class Block extends Entity
 {
     private BlockType blockType;
-    
-    
-    
 
-    // TODO : Les blocs ne sont pas censés connaître leur taille à l'écran...
-    public Block(BlockTypeEnum blockType, int x, int y, int width, int height)
-    {
-        changeTypeTo(blockType);
-        this.x = x;
-        this.y = y;
-        this.width=width;
-        this.height=height; 
-        this.toDelete=false;
-    }
-    // TODO : ... j'ai donc crée un constructeur plus simple, il faudrait même supprimer les attributs width&height des blocs je pense.
-    public Block(BlockTypeEnum blockType, int x, int y)
+    public Block(LemmingsGame game, BlockTypeEnum blockType, int x, int y)
     {
         changeTypeTo(blockType);
         this.x = x;
@@ -39,8 +26,6 @@ public class Block extends Entity
     {
         blockType.draw(graphics, windowX, windowY);
     }
-
-   
 
     private void changeTypeTo(BlockTypeEnum blockTypeEnum)
     {
@@ -78,12 +63,15 @@ public class Block extends Entity
                 break;
         }
     }
-	@Override
-	public boolean update(ArrayList<Block> blocks,ArrayList<Lemming> lemmings) {
-		// TODO Auto-generated method stub
-		return blockType.update(blocks,lemmings);
-	}
-	
-	
 
+    // TODO : update des blocs est utilisé pour supprimer les blocs, il va falloir changer ça.
+	@Override
+	public boolean update () {
+		return blockType.update();
+	}
+
+    public boolean destroy ()
+    {
+        return blockType.destroy();
+    }
 }

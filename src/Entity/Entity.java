@@ -1,10 +1,13 @@
 package Entity;
 
+import Game.LemmingsGame;
+
 import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Entity
 {
+    public LemmingsGame game;
     protected Color color;
     protected boolean toDelete;
     protected int x;
@@ -12,12 +15,9 @@ public abstract class Entity
     protected int width; // normalement inutile
     protected int height; // normalement inutile
     
-    
-    
     public int getWidth() {
     	return width;
     }
-    
     
     public void delete() {
     	toDelete=true;
@@ -31,13 +31,11 @@ public abstract class Entity
     	return height;
     }
 
-    // TODO : Doit retourner la position horizontale de l'entité dans la map (et non dans la fenêtre).
     public int getX()
     {
         return x;
     }
 
-    // TODO : Doit retourner la position verticale dans la map
     public int getY()
     {
         return y;
@@ -51,5 +49,10 @@ public abstract class Entity
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
-    public abstract boolean update(ArrayList<Block> blocks, ArrayList<Lemming> lemmings);
+    public abstract boolean update();
+    public LemmingsGame getGame()
+    {
+        return game;
+    }
+
 }
