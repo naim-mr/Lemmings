@@ -95,11 +95,11 @@ public class LemmingsGame
         }
         for (Lemming l : lemmings)
         {
-            if (l.toDelete()) lemmingsDeleted.add(l);
+            if (l.getToDelete()) lemmingsDeleted.add(l);
         }
         for (Block b : blocks)
         {
-            if (b.toDelete()) blocksDeleted.add(b);
+            if (b.getToDelete()) blocksDeleted.add(b);
         }
         blocks.removeAll(blocksDeleted);
         lemmings.removeAll(lemmingsDeleted);
@@ -132,7 +132,6 @@ public class LemmingsGame
     private void spawnLemming(Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
         lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
-
     }
 
     public void changeLemming(int mapX, int mapY)
@@ -161,7 +160,7 @@ public class LemmingsGame
 
     public void deleteLemming (Lemming l)
     {
-        if (l != null) l.delete();
+        if (l != null) l.setToDelete();
     }
 
     public void deleteBlock (ArrayList<Block> blockArrayList)

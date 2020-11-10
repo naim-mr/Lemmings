@@ -14,21 +14,25 @@ public abstract class Entity
     protected int y;
     protected int width; // normalement inutile
     protected int height; // normalement inutile
-    
-    public int getWidth() {
-    	return width;
+
+    public int getWidth()
+    {
+        return width;
     }
-    
-    public void delete() {
-    	toDelete=true;
+
+    public void setToDelete()
+    {
+        toDelete = true;
     }
-    
-    public boolean toDelete() {
-    	return this.toDelete;
+
+    public boolean getToDelete()
+    {
+        return this.toDelete;
     }
-    
-    public int getHeight(){
-    	return height;
+
+    public int getHeight()
+    {
+        return height;
     }
 
     public int getX()
@@ -40,16 +44,21 @@ public abstract class Entity
     {
         return y;
     }
-    
-    public void setX(int x) {
-    	this.x=x;
+
+    public void setX(int x)
+    {
+        this.x = x;
     }
-    public void setY(int y) {
-    	this.y=y;
+
+    public void setY(int y)
+    {
+        this.y = y;
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
+
     public abstract boolean update();
+
     public LemmingsGame getGame()
     {
         return game;

@@ -2,7 +2,6 @@ package Entity.BlockType;
 
 import Entity.Block;
 import Entity.Lemming;
-import Game.LemmingsGame;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -42,15 +41,15 @@ public class Destructible implements BlockType
         switch (type)
         {
             case GROUND:
-                block.delete();
+                block.setToDelete();
                 break;
             case LANDMINE:
                 System.out.println("deleted");
-                block.delete();
+                block.setToDelete();
                 blast();
                 break;
             case HIDDEN_BLOCK:
-                block.delete();
+                block.setToDelete();
                 // blocks.add(this.hiddenBlock);
                 break;
         }
@@ -63,7 +62,6 @@ public class Destructible implements BlockType
         return true;
     }
 
-    // TODO : refactor condition
     private void blast()
     {
         // Explosion en croix des blocks en lemmings ( y'a pas d'explosion encore lol juste une disparition
