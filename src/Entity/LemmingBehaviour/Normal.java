@@ -7,7 +7,7 @@ import Game.*;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 
-public class Normal implements LemmingBehaviour,BehaviourRefactor
+public class Normal implements LemmingBehaviour, BehaviourRefactor
 {
     private final Lemming lemming;
     public static Color color = Color.pink;
