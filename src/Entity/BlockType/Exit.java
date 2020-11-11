@@ -18,19 +18,14 @@ public class Exit implements BlockType
     @Override
     public void draw(Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(new Color(128, 128, 0));
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
     @Override
     public boolean update ()
     {
+        block.getGame().onLemmingEscape(block.getLemmingsOnBlock());
     	return true;
-    }
-
-    @Override
-    public boolean destroy()
-    {
-        return false;
     }
 }

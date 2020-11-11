@@ -17,19 +17,5 @@ public class Empty implements BlockType
 
     @Override
     public void draw(Graphics graphics, int windowX, int windowY)
-    {
-
-    }
-
-    @Override
-    public boolean update ()
-    {
-    	return true;
-    }
-
-    @Override
-    public boolean destroy()
-    {
-        return false;
-    }
+    {}
 }
