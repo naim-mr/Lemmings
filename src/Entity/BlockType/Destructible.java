@@ -10,6 +10,7 @@ public class Destructible implements BlockType
 {
     private Block block;
 
+    // TODO destruction spawner
     public Destructible (Block block)
     {
 
@@ -34,7 +35,7 @@ public class Destructible implements BlockType
     public boolean destroy ()
     {
         block.setToDelete();
-        return false;
+        return true;
     }
 
     @Override

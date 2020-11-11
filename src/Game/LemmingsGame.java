@@ -79,14 +79,7 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
-        Block teleporter = new Block(this, BlockTypeEnum.EXIT_BLOCK, 7, 5);
-        //teleporter.setOptionalArgs(0, 4);
-        blocks.add(teleporter);
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_LANDMINE, 7, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 4));
 
     }
 
@@ -121,10 +114,9 @@ public class LemmingsGame
     {
         boolean gameOver = false;
         int k = 0;
-        spawnLemming(spawner, LemmingBehaviourEnum.BASHER);
+        spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
         while (!gameOver)
         {
-            // System.out.println(k);
             try
             {
                 Thread.sleep(1000);
@@ -209,7 +201,6 @@ public class LemmingsGame
     public void onLemmingEscape (Lemming l)
     {
         ++escapedLemmings;
-        System.out.println(escapedLemmings);
         deleteLemming(l);
     }
 

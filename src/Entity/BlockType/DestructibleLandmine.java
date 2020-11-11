@@ -39,7 +39,7 @@ public class DestructibleLandmine implements BlockType
         System.out.println("deleted");
         block.setToDelete();
         blast();
-        return false;
+        return true;
     }
 
     private void blast()

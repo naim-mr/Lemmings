@@ -28,12 +28,14 @@ public class Spawner implements BlockType
     @Override
     public boolean setOptionalArgs (int[] args)
     {
-        return false;
+        lemmingsNb = args[0];
+        return true;
     }
 
     @Override
     public boolean update ()
     {
+        // block.getGame().
     	return true;
     }
 
