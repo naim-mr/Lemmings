@@ -124,9 +124,7 @@ public class Lemming extends Entity
         ArrayList<Block> list;
         if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() == getY()) || getX() + 1 == LemmingsGame.MAP_DIMENSION);
         else list = getGame().getBlocks((Block b) -> ((b.getX() + 1 == getX() && b.getY() == getY()) || getX() == 0));
-        
-        
-        
+
         return list.size()==1; 
     }
     public boolean findFrontWall()
