@@ -31,7 +31,6 @@ public class Normal implements LemmingBehaviour, BehaviourRefactor
     {
         boolean blockBelow = lemming.findInferiorBlock();
         boolean frontBlock= lemming.findFrontStep();
-        
         boolean step = frontBlock && !lemming.findSuperiorBlock();
         boolean wall =lemming.findFrontWall();
         updateLocation(blockBelow, wall,step,frontBlock);
