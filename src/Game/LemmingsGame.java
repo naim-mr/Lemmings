@@ -66,6 +66,7 @@ public class LemmingsGame
         Block spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
         spawner.setOptionalArgs(3);
         blocks.add(spawner);
+
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 0, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 1, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 2, 5));
@@ -83,7 +84,6 @@ public class LemmingsGame
         blockSpawner.setOptionalArgs(spawnerList);
 
         blocks.add(blockSpawner);
-
     }
 
     private void update ()
@@ -107,6 +107,7 @@ public class LemmingsGame
     public void gameLoop ()
     {
         boolean gameOver = false;
+
         while (!gameOver)
         {
             try
@@ -147,7 +148,9 @@ public class LemmingsGame
 
     public boolean deleteBlock (Block b)
     {
-        if (b != null) return b.destroy();
+        if (b != null) {
+        	      	return b.destroy();
+        }
         else return false;
     }
 

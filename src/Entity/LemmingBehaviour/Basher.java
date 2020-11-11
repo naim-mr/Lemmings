@@ -13,7 +13,6 @@ public class Basher implements LemmingBehaviour
 {
     private final Lemming lemming;
     private int blockDrill;
-
     public Basher(Lemming lemming)
     {
         this.blockDrill = 0;
@@ -34,21 +33,27 @@ public class Basher implements LemmingBehaviour
         Block blockForward = lemming.getFrontBlock();
         boolean blockUpdated = false;
         if (blockBelow) { blockUpdated = lemming.getGame().deleteBlock(blockForward); }
+        
         updateLocation(blockUpdated, blockBelow, blockForward);
-
         return true;
     }
 
     private void updateLocation(boolean blockUpdated, boolean blockBelow, Block blockForward)
-    {
+    {	
+    	  	
         if (!blockBelow) lemming.setY(lemming.getY() + 1);
         else if (blockUpdated)
-        {
+        {	
+        	
             blockDrill++;
             updateHorizontalLocation();
+            blockForward=null;;
         }
-        // else if (blockForward != null) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
-        else updateHorizontalLocation();
+        else if (blockForward == null) updateHorizontalLocation();
+        
+        if(!blockUpdated && blockForward!=null|| blockDrill==4) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+        	
+                
     }
 
     private void updateHorizontalLocation()
