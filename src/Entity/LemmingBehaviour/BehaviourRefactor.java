@@ -10,8 +10,6 @@ public interface BehaviourRefactor {
 	    {
 		 boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
 		 boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
-		
-		 
 		 if (((wall && frontBlock ) || (!step && frontBlock))|| edgeZero || edgeDim) manageFrontWall(lemming);
 	     else if(step && !wall ) manageStep(lemming);
 	     else manageNormalPace(lemming);  
