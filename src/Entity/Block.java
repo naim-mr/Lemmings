@@ -33,7 +33,6 @@ public class Block extends Entity
         switch (blockTypeEnum)
         {
             case DESTRUCTIBLE_BLOCK_GROUND:
-
                 blockType = new Destructible(this, DestructibleTypeEnum.GROUND);
                 break;
             case DESTRUCTIBLE_BLOCK_HIDDENBLOCK:
@@ -65,6 +64,7 @@ public class Block extends Entity
         }
     }
 
+
     // TODO : update des blocs est utilisé pour supprimer les blocs, il va falloir changer ça.
     @Override
     public boolean update ()
@@ -80,5 +80,10 @@ public class Block extends Entity
     public ArrayList<Lemming> getLemmingsOnBlock ()
     {
         return getGame().getLemmings((Lemming l) -> l.getX() == getX() && l.getY() == getY() - 1);
+    }
+
+    public boolean setOptionalArgs (int ... args)
+    {
+        return blockType.setOptionalArgs(args);
     }
 }

@@ -34,6 +34,12 @@ public class Destructible implements BlockType
 
     }
 
+    @Override
+    public boolean setOptionalArgs (int[] args)
+    {
+        return false;
+    }
+
     // TODO : ca c'est comme si on codait en impératif
     @Override
     public boolean destroy()

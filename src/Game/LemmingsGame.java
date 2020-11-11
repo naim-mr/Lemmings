@@ -9,6 +9,7 @@ import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 import Entity.LemmingCondition;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LemmingsGame
 {
@@ -21,20 +22,22 @@ public class LemmingsGame
     public static final int MAP_DIMENSION = 20;
 
 
-    public LemmingsGame()
+    public LemmingsGame ()
     {
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
 
         CreateTestMap(); // TEMP
     }
+
     // NE PAS MODIFIER
-    public ArrayList<Block> getBlocks()
+    public ArrayList<Block> getBlocks ()
     {
         return new ArrayList<Block>(blocks);
     }
+
     // NE PAS MODIFIER
-    public ArrayList<Lemming> getLemmings()
+    public ArrayList<Lemming> getLemmings ()
     {
         return new ArrayList<Lemming>(lemmings);
     }
@@ -59,12 +62,12 @@ public class LemmingsGame
         return outLemming;
     }
 
-    public void setLemmingsGameView(LemmingsGameView lemmingsGameView)
+    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
     {
         this.lemmingsGameView = lemmingsGameView;
     }
 
-    public void CreateTestMap()
+    public void CreateTestMap ()
     {
         spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
         blocks.add(spawner);
@@ -75,8 +78,9 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
-        blocks.add(new Block(this, BlockTypeEnum.LAVA_BLOCK, 7, 5));
-
+        Block teleporter = new Block(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 5);
+        teleporter.setOptionalArgs(0, 4);
+        blocks.add(teleporter);
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 4));
@@ -85,7 +89,7 @@ public class LemmingsGame
 
     }
 
-    private void update()
+    private void update ()
     {
         ArrayList<Block> blocksDeleted = new ArrayList<>();
         ArrayList<Lemming> lemmingsDeleted = new ArrayList<>();
@@ -94,7 +98,7 @@ public class LemmingsGame
             l.update();
         }
 
-        for (Block b: blocks)
+        for (Block b : blocks)
         {
             b.update();
         }
@@ -112,7 +116,7 @@ public class LemmingsGame
 
     // Main loop
     /*FONCTION QUI VA GERER La boucle de jeu*/
-    public void gameLoop()
+    public void gameLoop ()
     {
         boolean gameOver = false;
         int k = 0;
@@ -134,12 +138,12 @@ public class LemmingsGame
         }
     }
 
-    private void spawnLemming(Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
+    private void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
         lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
 
-    public void changeLemming(int mapX, int mapY)
+    public void changeLemming (int mapX, int mapY)
     {
         for (Lemming l : getLemmings())
         {
@@ -147,12 +151,12 @@ public class LemmingsGame
         }
     }
 
-    public void changeSelectedBehaviour(LemmingBehaviourEnum blockTypeEnum)
+    public void changeSelectedBehaviour (LemmingBehaviourEnum blockTypeEnum)
     {
         selectedBehaviour = blockTypeEnum;
     }
 
-    public LemmingBehaviourEnum getSelectedBehaviour()
+    public LemmingBehaviourEnum getSelectedBehaviour ()
     {
         return selectedBehaviour;
     }
@@ -176,11 +180,28 @@ public class LemmingsGame
         }
     }
 
-    public void deleteLemming(ArrayList<Lemming> lemmingsToDelete)
+    public void deleteLemming (ArrayList<Lemming> lemmingsToDelete)
     {
         for (Lemming l : lemmingsToDelete)
         {
             deleteLemming(l);
+        }
+    }
+
+    public void setLemmingLocation (Lemming l, int x, int y)
+    {
+        if (l != null)
+        {
+            l.setX(x);
+            l.setY(y);
+        }
+    }
+
+    public void setLemmingLocation (ArrayList<Lemming> lemmings, int x, int y)
+    {
+        for (Lemming l : lemmings)
+        {
+            setLemmingLocation(l, x, y);
         }
     }
 }

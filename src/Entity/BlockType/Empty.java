@@ -22,6 +22,12 @@ public class Empty implements BlockType
     }
 
     @Override
+    public boolean setOptionalArgs (int[] args)
+    {
+        return false;
+    }
+
+    @Override
     public boolean update ()
     {
     	return true;
