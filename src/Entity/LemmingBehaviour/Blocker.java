@@ -1,10 +1,12 @@
 package Entity.LemmingBehaviour;
 
-import Entity.Block;
+import Entity.DirectionEnum;
 import Entity.Lemming;
+import Game.LemmingsGameView;
 
 import java.awt.*;
 import java.util.ArrayList;
+
 
 public class Blocker implements LemmingBehaviour
 {
@@ -18,12 +20,23 @@ public class Blocker implements LemmingBehaviour
     @Override
     public void draw(Graphics graphics, int windowX, int windowY)
     {
-
+        graphics.setColor(Color.CYAN);
+        graphics.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
  
 	@Override
-	public boolean update () {
-		return true;
+	public boolean update ()
+    {
+        changeLemmingDirection(lemming.getSideLemmings());
+        return true;
 	}
+
+	private void changeLemmingDirection (ArrayList<Lemming> lemmings)
+    {
+        for (Lemming l : lemmings)
+        {
+            l.changeDirectionTo((l.getDirection() == DirectionEnum.LEFT) ? DirectionEnum.RIGHT : DirectionEnum.LEFT);
+        }
+    }
 }

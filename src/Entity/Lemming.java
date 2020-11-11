@@ -78,6 +78,7 @@ public class Lemming extends Entity
         return this.direction;
     }
 
+    // TODO : refactoriser, modifier toutes les méthodes & listes pour qu'elles ne renvoient jamais null
     public boolean findInferiorBlock()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX()).size() >= 1;
@@ -106,5 +107,10 @@ public class Lemming extends Entity
         else list = getGame().getBlocks((Block b) -> ((b.getX() + 1 == getX() && b.getY() == getY()) || getX() == 0));
 
         return list.size() >= 1;
+    }
+
+    public ArrayList<Lemming> getSideLemmings ()
+    {
+        return getGame().getLemmings((Lemming l) -> (l.getX() == getX() + 1 || l.getX() == getX() - 1) && l.getY() == getY());
     }
 }

@@ -1,40 +1,39 @@
 package Game;
 
 
-import Entity.Block;
+import Entity.*;
 import Entity.BlockType.BlockTypeEnum;
-import Entity.BlockCondition;
-import Entity.Lemming;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
-import Entity.LemmingCondition;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LemmingsGame
 {
     private final ArrayList<Block> blocks;
     private final ArrayList<Lemming> lemmings;
     private LemmingsGameView lemmingsGameView;
-    private Block spawner;
-    private Block exit;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
+
     public static final int MAP_DIMENSION = 20;
+    private int escapedLemmings = 0;
 
-
-    public LemmingsGame()
+    public LemmingsGame ()
     {
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
 
         CreateTestMap(); // TEMP
     }
+
     // NE PAS MODIFIER
-    public ArrayList<Block> getBlocks()
+    public ArrayList<Block> getBlocks ()
     {
         return new ArrayList<Block>(blocks);
     }
+
     // NE PAS MODIFIER
-    public ArrayList<Lemming> getLemmings()
+    public ArrayList<Lemming> getLemmings ()
     {
         return new ArrayList<Lemming>(lemmings);
     }
@@ -59,62 +58,50 @@ public class LemmingsGame
         return outLemming;
     }
 
-    public void setLemmingsGameView(LemmingsGameView lemmingsGameView)
+    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
     {
         this.lemmingsGameView = lemmingsGameView;
     }
 
-    public void CreateTestMap()
+    public void CreateTestMap ()
     {
-        spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
+        Block spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
+        spawner.setOptionalArgs(3);
         blocks.add(spawner);
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 0, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 1, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 7, 5));
-
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 7, 4));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 0, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 1, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 2, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 3, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 5, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 6, 5));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 4));
 
     }
 
-    private void update()
+    private void update ()
     {
-        ArrayList<Block> blocksDeleted = new ArrayList<>();
-        ArrayList<Lemming> lemmingsDeleted = new ArrayList<>();
         for (Lemming l : getLemmings())
         {
             l.update();
         }
-        for (Lemming l : lemmings)
-        {
-            if (l.getToDelete()) lemmingsDeleted.add(l);
-        }
+
         for (Block b : blocks)
         {
-            if (b.getToDelete()) blocksDeleted.add(b);
+            b.update();
         }
-        blocks.removeAll(blocksDeleted);
-        lemmings.removeAll(lemmingsDeleted);
+
+        lemmings.removeIf(Entity::getToDelete);
+        blocks.removeIf(Entity::getToDelete);
     }
 
     // Main loop
     /*FONCTION QUI VA GERER La boucle de jeu*/
-    public void gameLoop()
+    public void gameLoop ()
     {
         boolean gameOver = false;
-        int k = 0;
-        spawnLemming(spawner, LemmingBehaviourEnum.BASHER);
         while (!gameOver)
         {
-            System.out.println(k);
             try
             {
                 Thread.sleep(1000);
@@ -125,16 +112,15 @@ public class LemmingsGame
             }
             update();
             lemmingsGameView.repaint();
-            k++;
         }
     }
 
-    private void spawnLemming(Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
+    public void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
         lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
 
-    public void changeLemming(int mapX, int mapY)
+    public void changeLemming (int mapX, int mapY)
     {
         for (Lemming l : getLemmings())
         {
@@ -142,12 +128,12 @@ public class LemmingsGame
         }
     }
 
-    public void changeSelectedBehaviour(LemmingBehaviourEnum blockTypeEnum)
+    public void changeSelectedBehaviour (LemmingBehaviourEnum blockTypeEnum)
     {
         selectedBehaviour = blockTypeEnum;
     }
 
-    public LemmingBehaviourEnum getSelectedBehaviour()
+    public LemmingBehaviourEnum getSelectedBehaviour ()
     {
         return selectedBehaviour;
     }
@@ -171,11 +157,47 @@ public class LemmingsGame
         }
     }
 
-    public void deleteLemming(ArrayList<Lemming> lemmingsToDelete)
+    public void deleteLemming (ArrayList<Lemming> lemmingsToDelete)
     {
         for (Lemming l : lemmingsToDelete)
         {
             deleteLemming(l);
         }
+    }
+
+    public void setLemmingLocation (Lemming l, int x, int y)
+    {
+        if (l != null)
+        {
+            l.setX(x);
+            l.setY(y);
+        }
+    }
+
+    public void setLemmingLocation (ArrayList<Lemming> lemmings, int x, int y)
+    {
+        for (Lemming l : lemmings)
+        {
+            setLemmingLocation(l, x, y);
+        }
+    }
+
+    public void onLemmingEscape (Lemming l)
+    {
+        ++escapedLemmings;
+        deleteLemming(l);
+    }
+
+    public void onLemmingEscape (ArrayList<Lemming> lemmings)
+    {
+        for (Lemming l : lemmings)
+        {
+            onLemmingEscape(l);
+        }
+    }
+
+    public void createBlock (ArrayList<Block> blocks)
+    {
+        blocks.addAll(blocks);
     }
 }

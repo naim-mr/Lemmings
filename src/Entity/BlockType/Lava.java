@@ -2,10 +2,8 @@ package Entity.BlockType;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import Entity.Block;
-import Entity.Lemming;
 
 public class Lava implements BlockType
 {
@@ -26,12 +24,7 @@ public class Lava implements BlockType
 	@Override
 	public boolean update ()
 	{
+		block.getGame().deleteLemming(block.getLemmingsOnBlock());
 		return true;
-	}
-
-	@Override
-	public boolean destroy()
-	{
-		return false;
 	}
 }
