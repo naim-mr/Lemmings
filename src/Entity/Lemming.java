@@ -10,7 +10,7 @@ public class Lemming extends Entity
 {
     private LemmingBehaviour behaviour;
 
-    public static boolean[] life = {true, true, true}; // ??
+    private int fallHeight;
 
     private DirectionEnum direction;
 
@@ -21,8 +21,8 @@ public class Lemming extends Entity
         this.direction = DirectionEnum.RIGHT;
         this.x = x;
         this.y = y;
-        this.width = 25;
-        this.height = 35;
+        int fallHeight=0;
+          
         this.toDelete = false;
     }
 
@@ -39,6 +39,21 @@ public class Lemming extends Entity
         return behaviour.update();
     }
 
+    
+    
+    public int  getFallHeight() {
+    	return this.fallHeight;
+    }
+    
+    public void incrementFallHeight() {
+    	this.fallHeight++;
+    }
+    public void resetFallHeight() {
+    	this.fallHeight=0;
+    }
+    
+    
+    
     public void changeBehaviourTo(LemmingBehaviourEnum lemmingBehaviour)
     {
         DirectionEnum pastDirection = this.getDirection();
@@ -77,6 +92,10 @@ public class Lemming extends Entity
     {
         return this.direction;
     }
+    public boolean findSuperiorBlock()
+    {
+        return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
+    }
 
     public boolean findInferiorBlock()
     {
@@ -94,17 +113,35 @@ public class Lemming extends Entity
     {
         ArrayList<Block> list;
         if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> b.getX() == getX() + 1 && b.getY() == getY());
-        else list = getGame().getBlocks((Block b) -> b.getX() == getX() - 1 && b.getY() == getY());
+        else list = getGame().getBlocks((Block b) -> b.getX() == getX() - 1 && b.getY() == getY() );
 
         return list.size() >= 1 ? list.get(0) : null;
     }
-
-    public boolean findFrontBlock ()
+    
+    // pour différencier les murs et les marches je retroune la taille de la liste
+    public boolean findFrontStep()
     {
         ArrayList<Block> list;
         if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() == getY()) || getX() + 1 == LemmingsGame.MAP_DIMENSION);
         else list = getGame().getBlocks((Block b) -> ((b.getX() + 1 == getX() && b.getY() == getY()) || getX() == 0));
-
-        return list.size() >= 1;
+        
+        
+        
+        return list.size()==1; 
     }
+    public boolean findFrontWall()
+    {
+        ArrayList<Block> list;
+        if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() <= getY()) || getX() + 1 == LemmingsGame.MAP_DIMENSION);
+        else list = getGame().getBlocks((Block b) -> ((b.getX() + 1 == getX() && b.getY() <= getY()) || getX() == 0));
+        
+        
+        
+        return list.size()>=1; 
+    }
+    
+   
+    
+    
+    
 }

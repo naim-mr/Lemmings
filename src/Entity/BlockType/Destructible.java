@@ -44,7 +44,7 @@ public class Destructible implements BlockType
                 block.setToDelete();
                 break;
             case LANDMINE:
-                System.out.println("deleted");
+                
                 block.setToDelete();
                 blast();
                 break;
@@ -53,7 +53,7 @@ public class Destructible implements BlockType
                 // blocks.add(this.hiddenBlock);
                 break;
         }
-        return false;
+        return true;
     }
 
     @Override

@@ -2,6 +2,7 @@ package Entity.LemmingBehaviour;
 
 import Entity.DirectionEnum;
 import Entity.Lemming;
+import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
@@ -27,30 +28,74 @@ public class Climber implements LemmingBehaviour
 
     @Override
     public boolean update ()
-    {
+    {	
+    	
         boolean blockBelow = lemming.findInferiorBlock();
-        boolean wall = lemming.findFrontBlock();
-
-        updateLocation(blockBelow, wall);
+        
+        boolean frontBlock= lemming.findFrontStep();
+        
+        boolean wall=lemming.findFrontWall();
+        boolean step=lemming.findFrontStep() && !lemming.findSuperiorBlock();
+        
+        updateLocation(blockBelow, wall,step,frontBlock);
         return true;
     }
 
-    private void updateLocation(boolean blockBelow, boolean wall)
+    private void updateLocation(boolean blockBelow, boolean wall, boolean step,boolean frontBlock)
     {
+    	lemming.getGame();
+		boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
+		boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
+    	
+    	System.out.println(edgeZero);
+    	
         if (!blockBelow && !climbing)
         {
             lemming.setY(lemming.getY() + 1);
-            // si y'a pas de block en dessous et que le grimpeur ne grimpe pas
+
+        }else if(step && !wall) {
+        	
+        	if (lemming.getDirection() == DirectionEnum.RIGHT)
+             {
+        		 lemming.setY(lemming.getY() - 1);
+        		 lemming.setX(lemming.getX() + 1);
+             }
+             else if (lemming.getDirection() == DirectionEnum.LEFT)
+             {
+
+            	 lemming.setY(lemming.getY() - 1);
+        		 lemming.setX(lemming.getX() - 1);
+                 
+             }
         }
-        else if (wall)
+        else  if((wall && !step && frontBlock) || edgeZero || edgeDim ) {
+        	
+        	if (lemming.getDirection() == DirectionEnum.RIGHT )
+             {
+        		 lemming.changeDirectionTo(DirectionEnum.LEFT);
+        		 lemming.setX(lemming.getX() - 1);
+             }
+             else if (lemming.getDirection() == DirectionEnum.LEFT)
+             {
+
+            	 lemming.changeDirectionTo(DirectionEnum.RIGHT);
+        		 lemming.setX(lemming.getX() + 1);
+                 
+             }
+        	
+        }
+        else if (wall && !climbing && step)
         {
-            // s'il y a un mur on grimpe
+        	
             climbing = true;
             lemming.setY(lemming.getY() - 1);
         }
+        else if(wall && climbing && frontBlock ) {
+        	lemming.setY(lemming.getY() - 1);
+        }
         else if (!wall && climbing)
         {
-            // s'il n'y a pas de mur et qu'on grimpe c'est qu'on est au sommet
+
             climbing = false;
             if (lemming.getDirection() == DirectionEnum.RIGHT)
             {
@@ -61,11 +106,11 @@ public class Climber implements LemmingBehaviour
                 lemming.setX(lemming.getX() - 1);
 
             }
-            lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL); // Gestion des changements � sommet
+            climbing=false;
         }
         else
         {
-            //S'il y a aucun cas mouvement classique
+        	
             if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
             if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
         }

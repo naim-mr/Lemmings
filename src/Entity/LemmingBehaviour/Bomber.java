@@ -1,7 +1,10 @@
 package Entity.LemmingBehaviour;
 
 import Entity.Block;
+import Entity.DirectionEnum;
 import Entity.Lemming;
+import Game.LemmingsGame;
+import Game.LemmingsGameView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,21 +12,106 @@ import java.util.ArrayList;
 public class Bomber implements LemmingBehaviour
 {
     private final Lemming lemming;
+    private int countDown;
 
     public Bomber(Lemming lemming)
     {
         this.lemming = lemming;
+        countDown=3;
     }
-
+    
+    private void decrementCountDown() {
+    	this.countDown--;
+    }
     @Override
-    public void draw(Graphics graphics, int windowX, int windowY)
+    public void draw(Graphics g, int windowX, int windowY)
     {
+        g.setColor(Color.magenta);
+        g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
+    	
+    }
+    
+    
+    private void blast() {
+        ArrayList<Block> blocksToDelete = lemming.getGame().getBlocks((Block b) -> (b.getX() == lemming.getX() + 1 && b.getY() == lemming.getY()) || (b.getX() == lemming.getX() - 1 && b.getY() == lemming.getY()));
+        blocksToDelete.addAll(lemming.getGame().getBlocks((Block b) -> (b.getY() == lemming.getY() + 1 && b.getX() == lemming.getX()) || (b.getY() == lemming.getY() - 1 && b.getX() == lemming.getX())));
+        ArrayList<Lemming> lemmingsToDelete = lemming.getGame().getLemmings((Lemming l) -> (l.getX() ==lemming.getX() + 1 && l.getY() ==lemming.getY()) || (l.getX() == lemming.getX() - 1 && l.getY() == lemming.getY()));
+        lemmingsToDelete.addAll(lemming.getGame().getLemmings((Lemming l) -> (l.getY() == lemming.getY() + 1 && l.getX() == lemming.getX()) || (l.getY() == lemming.getY() - 1 && l.getY() == lemming.getX())));
+        lemmingsToDelete.add(this.lemming);
+        lemming.getGame().deleteLemming(lemmingsToDelete);
+        lemming.getGame().deleteBlock(blocksToDelete);
+    }
+    @Override
+    public boolean update()
+    {
+    	
+    	
+    	if(countDown==0) {
+    	
+    		blast();
+    		
+    	}
+    	else
+    	{
+	        boolean blockBelow = lemming.findInferiorBlock();
+	        boolean frontBlock= lemming.findFrontStep();
+	        boolean step = frontBlock && !lemming.findSuperiorBlock();
+	        boolean wall =lemming.findFrontWall();
+	        updateLocation(blockBelow, wall,step,frontBlock);
+	        decrementCountDown();
+    	}
+        return true;
 
     }
 
-	@Override
-	public boolean update ()
+    private void updateLocation(boolean blockBelow, boolean wall,boolean step,boolean frontBlock)
     {
-		return true;
-	}
+    	lemming.getGame();
+		boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
+		boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
+        
+		if (!blockBelow)
+        {
+            lemming.incrementFallHeight();
+        	lemming.setY(lemming.getY() + 1);
+        }
+        else if ((wall && frontBlock &&  !step )|| edgeZero || edgeDim)
+        {
+            if (lemming.getDirection() == DirectionEnum.RIGHT)
+            {
+
+                lemming.changeDirectionTo(DirectionEnum.LEFT);
+                lemming.setX(lemming.getX() - 1);
+            }
+            else if (lemming.getDirection() == DirectionEnum.LEFT)
+            {
+
+                lemming.setX(lemming.getX() + 1);
+                lemming.changeDirectionTo(DirectionEnum.RIGHT);
+            }
+        }
+        else if(step){
+        	 if (lemming.getDirection() == DirectionEnum.RIGHT)
+             {
+        		 lemming.setY(lemming.getY() - 1);
+        		 lemming.setX(lemming.getX() + 1);
+             }
+             else if (lemming.getDirection() == DirectionEnum.LEFT)
+             {
+
+            	 lemming.setY(lemming.getY() - 1);
+        		 lemming.setX(lemming.getX() - 1);
+                 
+             }
+        }
+        else
+        {
+            if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
+            if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
+        }
+    }
+
+
 }
+    
+

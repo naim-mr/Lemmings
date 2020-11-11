@@ -76,8 +76,11 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 7, 5));
-
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
+        
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 3));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 1));
+        //blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 4));
@@ -88,7 +91,8 @@ public class LemmingsGame
     private void update()
     {
         ArrayList<Block> blocksDeleted = new ArrayList<>();
-        ArrayList<Lemming> lemmingsDeleted = new ArrayList<>();
+        ArrayList<Lemming> lemmingsDeleted = new ArrayList<>(
+        		);
         for (Lemming l : getLemmings())
         {
             l.update();
@@ -111,10 +115,14 @@ public class LemmingsGame
     {
         boolean gameOver = false;
         int k = 0;
-        spawnLemming(spawner, LemmingBehaviourEnum.BASHER);
-        while (!gameOver)
-        {
-            System.out.println(k);
+        
+        
+        while (!gameOver) {
+        	
+        	if(k==2) {
+        		spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
+        		k=0;
+        	}
             try
             {
                 Thread.sleep(1000);
@@ -154,7 +162,9 @@ public class LemmingsGame
 
     public boolean deleteBlock (Block b)
     {
-        if (b != null) return b.destroy();
+        if (b != null) {
+        	      	return b.destroy();
+        }
         else return false;
     }
 
