@@ -56,7 +56,6 @@ public class Lemming extends Entity
     
     public void changeBehaviourTo(LemmingBehaviourEnum lemmingBehaviour)
     {
-        DirectionEnum pastDirection = this.getDirection();
         switch (lemmingBehaviour)
         {
             case BASHER:
@@ -67,6 +66,9 @@ public class Lemming extends Entity
                 break;
             case BOMBER:
                 behaviour = new Bomber(this);
+                break;
+            case CARPENTER:
+                behaviour = new Carpenter(this);
                 break;
             case CLIMBER:
                 behaviour = new Climber(this);
@@ -138,7 +140,7 @@ public class Lemming extends Entity
         
         
         
-        return list.size()>=1; 
+        return list.size()>1;
     }
 
     public ArrayList<Lemming> getSideLemmings ()

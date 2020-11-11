@@ -87,4 +87,9 @@ public class Block extends Entity
     {
         return blockType.setOptionalArgs(blocks);
     }
+
+    public boolean findSuperiorBlock()
+    {
+        return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
+    }
 }

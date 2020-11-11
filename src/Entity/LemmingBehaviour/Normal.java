@@ -9,8 +9,8 @@ import Entity.Lemming;
 
 public class Normal implements LemmingBehaviour
 {
+    public static final Color color = Color.pink;
     private final Lemming lemming;
-
 
     public Normal(Lemming lemming)
     {
@@ -20,12 +20,12 @@ public class Normal implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(Color.pink);
+        g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
     
-    //En fait les leemings grimpe les mur de taille 1 mais pas deux donc j'ai modifié ça  
+    //En fait les leemings grimpe les mur de taille 1 mais pas deux donc j'ai modifiï¿½ ï¿½a  
     @Override
     public boolean update()
     {

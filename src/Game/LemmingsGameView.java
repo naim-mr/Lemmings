@@ -1,6 +1,7 @@
 package Game;
 
 import Entity.Entity;
+import Entity.LemmingBehaviour.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -140,29 +141,33 @@ public class LemmingsGameView extends JComponent
         g.drawRect(0, GAME_DIMENSION, WINDOW_DIMENSION - 18, WINDOW_DIMENSION - GAME_DIMENSION - 1);
 
         // Blocs
-        g.setColor(Color.RED);
+        g.setColor(Basher.color);
         g.drawString("Basher", (TILE_SIZE * 1) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 1, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        g.setColor(Color.CYAN);
+        g.setColor(Blocker.color);
         g.drawString("Blocker", (TILE_SIZE * 3) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 3, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        g.setColor(Color.GREEN);
+        g.setColor(Bomber.color);
         g.drawString("Bomber", (TILE_SIZE * 5) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 5, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        g.setColor(Color.YELLOW);
+        g.setColor(Climber.color);
         g.drawString("Climber", (TILE_SIZE * 7) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 7, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        g.setColor(Color.MAGENTA);
+        g.setColor(Digger.color);
         g.drawString("Digger", (TILE_SIZE * 9) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 9, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        g.setColor(Color.PINK);
+        g.setColor(Floater.color);
         g.drawString("Floater", (TILE_SIZE * 11) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 11, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Floater.color);
+        g.drawString("Carpenter", (TILE_SIZE * 13) - 8, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE * 13, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         // Selection actuelle
 
@@ -173,25 +178,25 @@ public class LemmingsGameView extends JComponent
         switch (game.getSelectedBehaviour())
         {
             case BASHER:
-                g.setColor(Color.RED);
+                g.setColor(Basher.color);
                 break;
             case BLOCKER:
-                g.setColor(Color.CYAN);
+                g.setColor(Blocker.color);
                 break;
             case BOMBER:
-                g.setColor(Color.GREEN);
+                g.setColor(Bomber.color);
                 break;
             case CLIMBER:
-                g.setColor(Color.YELLOW);
+                g.setColor(Climber.color);
                 break;
             case DIGGER:
-                g.setColor(Color.MAGENTA);
+                g.setColor(Digger.color);
                 break;
             case FLOATER:
-                g.setColor(Color.PINK);
+                g.setColor(Floater.color);
                 break;
             case NORMAL:
-                g.setColor(Color.BLACK);
+                g.setColor(Normal.color);
                 break;
         }
 

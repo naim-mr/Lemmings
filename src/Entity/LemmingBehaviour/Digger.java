@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Digger implements LemmingBehaviour
 {
+    public static final Color color = Color.yellow;
     private final Lemming lemming;
     private int blockDigged;
 
@@ -22,7 +23,7 @@ public class Digger implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(Color.yellow);
+        g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE); // Chaque Lemming sera dessiné de manière différente, donc il faudrait faire un draw délégué, à la manière du update();
 
     }

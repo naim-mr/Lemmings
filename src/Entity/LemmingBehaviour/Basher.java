@@ -7,10 +7,10 @@ import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Basher implements LemmingBehaviour
 {
+    public static final Color color = Color.RED;
     private final Lemming lemming;
     private int blockDrill;
     public Basher(Lemming lemming)
@@ -22,7 +22,7 @@ public class Basher implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(Color.RED);
+        g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 

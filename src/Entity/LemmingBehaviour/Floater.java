@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Floater implements LemmingBehaviour
 {
+    public static final Color color = Color.gray;
     private final Lemming lemming;
     private int tick; 
     public Floater(Lemming lemming)
@@ -22,7 +23,7 @@ public class Floater implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-         g.setColor(Color.gray);
+         g.setColor(color);
          g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
      }
 

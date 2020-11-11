@@ -64,7 +64,7 @@ public class LemmingsGame
     public void CreateTestMap ()
     {
         Block spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
-        spawner.setOptionalArgs(3);
+        spawner.setOptionalArgs(1);
         blocks.add(spawner);
 
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 0, 5));
@@ -204,6 +204,11 @@ public class LemmingsGame
         {
             onLemmingEscape(l);
         }
+    }
+
+    public void createBlock (BlockTypeEnum blockTypeEnum, int x, int y)
+    {
+        blocks.add(new Block(this, blockTypeEnum, x, y));
     }
 
     public void createBlock (ArrayList<Block> b)

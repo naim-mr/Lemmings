@@ -58,6 +58,9 @@ public class LemmingsController
                 case 11 :
                     game.changeSelectedBehaviour(FLOATER);
                     break;
+                case 13 :
+                    game.changeSelectedBehaviour(CARPENTER);
+                    break;
             }
         }
     }

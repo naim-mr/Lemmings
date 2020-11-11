@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class Climber implements LemmingBehaviour
 {
+    public static final Color color = Color.lightGray;
     private final Lemming lemming;
     private boolean climbing;
 
@@ -21,7 +22,7 @@ public class Climber implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(Color.cyan);
+        g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
