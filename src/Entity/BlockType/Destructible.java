@@ -13,7 +13,6 @@ public class Destructible implements BlockType
     // TODO destruction spawner
     public Destructible (Block block)
     {
-
         this.block = block;
     }
 
@@ -25,23 +24,9 @@ public class Destructible implements BlockType
     }
 
     @Override
-    public boolean setOptionalArgs (int[] args)
-    {
-        return false;
-    }
-
-
-    @Override
     public boolean destroy ()
     {
         block.setToDelete();
         return true;
     }
-
-    @Override
-    public boolean update ()
-    {
-        return true;
-    }
-
 }

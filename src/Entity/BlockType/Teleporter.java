@@ -42,10 +42,4 @@ public class Teleporter implements BlockType
         block.getGame().setLemmingLocation(block.getLemmingsOnBlock(), teleportToX, teleportToY);
         return true;
     }
-
-    @Override
-    public boolean destroy ()
-    {
-        return false;
-    }
 }

@@ -1,12 +1,9 @@
 package Game;
 
 
-import Entity.Block;
+import Entity.*;
 import Entity.BlockType.BlockTypeEnum;
-import Entity.BlockCondition;
-import Entity.Lemming;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
-import Entity.LemmingCondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +13,6 @@ public class LemmingsGame
     private final ArrayList<Block> blocks;
     private final ArrayList<Lemming> lemmings;
     private LemmingsGameView lemmingsGameView;
-    private Block spawner;
-    private Block exit;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
 
     public static final int MAP_DIMENSION = 20;
@@ -70,23 +65,22 @@ public class LemmingsGame
 
     public void CreateTestMap ()
     {
-        spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
+        Block spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
+        spawner.setOptionalArgs(3);
         blocks.add(spawner);
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 0, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 1, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 2, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 0, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 1, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 2, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 3, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 5, 5));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 6, 5));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 4));
 
     }
 
     private void update ()
     {
-        ArrayList<Block> blocksDeleted = new ArrayList<>();
-        ArrayList<Lemming> lemmingsDeleted = new ArrayList<>();
         for (Lemming l : getLemmings())
         {
             l.update();
@@ -96,16 +90,9 @@ public class LemmingsGame
         {
             b.update();
         }
-        for (Lemming l : lemmings)
-        {
-            if (l.getToDelete()) lemmingsDeleted.add(l);
-        }
-        for (Block b : blocks)
-        {
-            if (b.getToDelete()) blocksDeleted.add(b);
-        }
-        blocks.removeAll(blocksDeleted);
-        lemmings.removeAll(lemmingsDeleted);
+
+        lemmings.removeIf(Entity::getToDelete);
+        blocks.removeIf(Entity::getToDelete);
     }
 
     // Main loop
@@ -113,8 +100,6 @@ public class LemmingsGame
     public void gameLoop ()
     {
         boolean gameOver = false;
-        int k = 0;
-        spawnLemming(spawner, LemmingBehaviourEnum.NORMAL);
         while (!gameOver)
         {
             try
@@ -127,11 +112,10 @@ public class LemmingsGame
             }
             update();
             lemmingsGameView.repaint();
-            k++;
         }
     }
 
-    private void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
+    public void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
         lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
@@ -210,5 +194,10 @@ public class LemmingsGame
         {
             onLemmingEscape(l);
         }
+    }
+
+    public void createBlock (ArrayList<Block> blocks)
+    {
+        blocks.addAll(blocks);
     }
 }

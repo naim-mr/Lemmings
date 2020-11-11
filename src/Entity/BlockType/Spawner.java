@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import Entity.Block;
 import Entity.Lemming;
+import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Spawner implements BlockType
 {
     private final Block block;
     private int lemmingsNb;
+    private int cooldown = 0;
 
     public Spawner(Block block)
     {
@@ -35,15 +37,21 @@ public class Spawner implements BlockType
     @Override
     public boolean update ()
     {
-        // block.getGame().
-    	return true;
+        if (cooldown == 2)
+        {
+            cooldown = 0;
+            spawnLemming();
+        }
+        cooldown++;
+        return true;
     }
 
-    @Override
-    public boolean destroy()
+    private void spawnLemming ()
     {
-        return false;
+        if (lemmingsNb > 0)
+        {
+            block.getGame().spawnLemming(block, LemmingBehaviourEnum.NORMAL);
+            --lemmingsNb;
+        }
     }
-
-
 }

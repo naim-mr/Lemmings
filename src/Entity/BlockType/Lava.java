@@ -22,21 +22,9 @@ public class Lava implements BlockType
 	}
 
 	@Override
-	public boolean setOptionalArgs (int[] args)
-	{
-		return false;
-	}
-
-	@Override
 	public boolean update ()
 	{
 		block.getGame().deleteLemming(block.getLemmingsOnBlock());
 		return true;
-	}
-
-	@Override
-	public boolean destroy()
-	{
-		return false;
 	}
 }

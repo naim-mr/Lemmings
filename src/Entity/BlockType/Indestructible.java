@@ -21,22 +21,4 @@ public class Indestructible implements BlockType
 		graphics.setColor(Color.BLACK);
 		graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
 	}
-
-	@Override
-	public boolean setOptionalArgs (int[] args)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean update ()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean destroy()
-	{
-		return false;
-	}
 }

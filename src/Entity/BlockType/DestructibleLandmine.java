@@ -12,7 +12,7 @@ public class DestructibleLandmine implements BlockType
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(new Color (120, 0, 70));
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
@@ -28,15 +28,8 @@ public class DestructibleLandmine implements BlockType
     }
 
     @Override
-    public boolean update ()
-    {
-        return false;
-    }
-
-    @Override
     public boolean destroy ()
     {
-        System.out.println("deleted");
         block.setToDelete();
         blast();
         return true;

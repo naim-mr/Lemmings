@@ -28,14 +28,15 @@ public class Block extends Entity
         blockType.draw(graphics, windowX, windowY);
     }
 
-    // TODO : a quoi sert la distinction HIDDENBLOCK
     private void changeTypeTo (BlockTypeEnum blockTypeEnum)
     {
         switch (blockTypeEnum)
         {
-            case DESTRUCTIBLE_BLOCK_GROUND:
-            case DESTRUCTIBLE_BLOCK_HIDDENBLOCK:
+            case DESTRUCTIBLE_BLOCK:
                 blockType = new Destructible(this);
+                break;
+            case DESTRUCTIBLE_BLOCK_SPAWNER:
+                blockType = new DestructibleSpawner(this);
                 break;
             case DESTRUCTIBLE_BLOCK_LANDMINE:
                 blockType = new DestructibleLandmine(this);
@@ -61,8 +62,6 @@ public class Block extends Entity
         }
     }
 
-
-    // TODO : update des blocs est utilisé pour supprimer les blocs, il va falloir changer ça.
     @Override
     public boolean update ()
     {
@@ -82,5 +81,10 @@ public class Block extends Entity
     public boolean setOptionalArgs (int ... args)
     {
         return blockType.setOptionalArgs(args);
+    }
+
+    public boolean setOptionalArgs (ArrayList<Block> blocks)
+    {
+        return blockType.setOptionalArgs(blocks);
     }
 }
