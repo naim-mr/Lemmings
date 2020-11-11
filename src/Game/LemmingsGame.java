@@ -95,10 +95,12 @@ public class LemmingsGame
         Block spawner1 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 4);
         spawner1.setOptionalArgs(1);
         blocks.add(spawner1);
+
         for (int j = 1; j < 6; j++)
         {
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, j, 5));
         }
+
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 4));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 3));
@@ -116,8 +118,10 @@ public class LemmingsGame
 
         // FONCTION 4 & 5 : en haut à droite
         Block spawner2 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
+
         spawner2.setOptionalArgs(1);
         blocks.add(spawner2);
+
 
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 18, 13));
