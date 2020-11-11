@@ -77,12 +77,10 @@ public class LemmingsGameView extends JComponent
         if (condX && winX <= k * quotient)
         {
             mapX = k;
-            condX = false;
         }
         if (condY && winY <= j * quotient)
         {
             mapY = j;
-            condY = false;
         }
         return new int[]{mapX - 1, mapY - 1};
     }

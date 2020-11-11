@@ -26,7 +26,6 @@ public class Blocker implements LemmingBehaviour
         graphics.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
-
     @Override
     public boolean update ()
     {
