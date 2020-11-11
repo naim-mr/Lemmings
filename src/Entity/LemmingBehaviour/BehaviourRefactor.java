@@ -18,18 +18,9 @@ public interface BehaviourRefactor {
 
 	 default void manageFrontWall(Lemming lemming) {
 	
-	    if (lemming.getDirection() == DirectionEnum.RIGHT)
-	    {
-	
-	        lemming.changeDirectionTo(DirectionEnum.LEFT);
-	        lemming.setX(lemming.getX() - 1);
-	    }
-	    else if (lemming.getDirection() == DirectionEnum.LEFT)
-	    {
-	
-	        lemming.setX(lemming.getX() + 1);
-	        lemming.changeDirectionTo(DirectionEnum.RIGHT);
-	    }
+	    if (lemming.getDirection() == DirectionEnum.RIGHT)  lemming.changeDirectionTo(DirectionEnum.LEFT);
+	    else if (lemming.getDirection() == DirectionEnum.LEFT)  lemming.changeDirectionTo(DirectionEnum.RIGHT);
+	    
 	}
 	 
 	default void manageStep(Lemming lemming) {
