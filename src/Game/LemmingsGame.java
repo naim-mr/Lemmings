@@ -19,8 +19,9 @@ public class LemmingsGame
     private Block spawner;
     private Block exit;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
-    public static final int MAP_DIMENSION = 20;
 
+    public static final int MAP_DIMENSION = 20;
+    private int escapedLemmings = 0;
 
     public LemmingsGame ()
     {
@@ -78,7 +79,7 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
-        Block teleporter = new Block(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 5);
+        Block teleporter = new Block(this, BlockTypeEnum.EXIT_BLOCK, 7, 5);
         teleporter.setOptionalArgs(0, 4);
         blocks.add(teleporter);
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
@@ -123,7 +124,7 @@ public class LemmingsGame
         spawnLemming(spawner, LemmingBehaviourEnum.BASHER);
         while (!gameOver)
         {
-            System.out.println(k);
+            // System.out.println(k);
             try
             {
                 Thread.sleep(1000);
@@ -202,6 +203,20 @@ public class LemmingsGame
         for (Lemming l : lemmings)
         {
             setLemmingLocation(l, x, y);
+        }
+    }
+
+    public void onLemmingEscape (Lemming l)
+    {
+        ++escapedLemmings;
+        deleteLemming(l);
+    }
+
+    public void onLemmingEscape (ArrayList<Lemming> lemmings)
+    {
+        for (Lemming l : lemmings)
+        {
+            onLemmingEscape(l);
         }
     }
 }

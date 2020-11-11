@@ -31,6 +31,7 @@ public class Exit implements BlockType
     @Override
     public boolean update ()
     {
+        block.getGame().onLemmingEscape(block.getLemmingsOnBlock());
     	return true;
     }
 
