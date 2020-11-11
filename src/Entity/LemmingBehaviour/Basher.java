@@ -40,8 +40,7 @@ public class Basher implements LemmingBehaviour
 
     private void updateLocation(boolean blockUpdated, boolean blockBelow, Block blockForward)
     {	
-    	  	
-        if (!blockBelow) lemming.setY(lemming.getY() + 1);
+    	if (!blockBelow) lemming.setY(lemming.getY() + 1);
         else if (blockUpdated)
         {	
         	
@@ -50,7 +49,6 @@ public class Basher implements LemmingBehaviour
             blockForward=null;;
         }
         else if (blockForward == null) updateHorizontalLocation();
-        
         if(!blockUpdated && blockForward!=null|| blockDrill==4) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         	
                 

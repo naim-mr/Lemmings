@@ -9,7 +9,7 @@ import Game.LemmingsGameView;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Bomber implements LemmingBehaviour
+public class Bomber implements LemmingBehaviour,BehaviourRefactor
 {
     private final Lemming lemming;
     private int countDown;
@@ -41,16 +41,14 @@ public class Bomber implements LemmingBehaviour
         lemming.getGame().deleteLemming(lemmingsToDelete);
         lemming.getGame().deleteBlock(blocksToDelete);
     }
+
     @Override
     public boolean update()
     {
     	
-    	
-    	if(countDown==0) {
-    	
-    		blast();
-    		
-    	}
+      	if(countDown==0) { 
+      		blast(); 
+      	}
     	else
     	{
 	        boolean blockBelow = lemming.findInferiorBlock();
@@ -75,40 +73,8 @@ public class Bomber implements LemmingBehaviour
             lemming.incrementFallHeight();
         	lemming.setY(lemming.getY() + 1);
         }
-        else if ((wall && frontBlock &&  !step )|| edgeZero || edgeDim)
-        {
-            if (lemming.getDirection() == DirectionEnum.RIGHT)
-            {
-
-                lemming.changeDirectionTo(DirectionEnum.LEFT);
-                lemming.setX(lemming.getX() - 1);
-            }
-            else if (lemming.getDirection() == DirectionEnum.LEFT)
-            {
-
-                lemming.setX(lemming.getX() + 1);
-                lemming.changeDirectionTo(DirectionEnum.RIGHT);
-            }
-        }
-        else if(step){
-        	 if (lemming.getDirection() == DirectionEnum.RIGHT)
-             {
-        		 lemming.setY(lemming.getY() - 1);
-        		 lemming.setX(lemming.getX() + 1);
-             }
-             else if (lemming.getDirection() == DirectionEnum.LEFT)
-             {
-
-            	 lemming.setY(lemming.getY() - 1);
-        		 lemming.setX(lemming.getX() - 1);
-                 
-             }
-        }
-        else
-        {
-            if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
-            if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
-        }
+		else normalUpdateLocation(lemming,blockBelow,wall,step,frontBlock);
+        
     }
 
 

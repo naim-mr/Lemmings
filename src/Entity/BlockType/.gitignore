@@ -1,0 +1,10 @@
+/BlockType.class
+/BlockTypeEnum.class
+/Destructible.class
+/DestructibleTypeEnum.class
+/Empty.class
+/Exit.class
+/Indestructible.class
+/Lava.class
+/Spawner.class
+/Teleporter.class
