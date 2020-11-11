@@ -1,6 +1,7 @@
 package Entity.LemmingBehaviour;
 
 import Entity.BlockType.BlockTypeEnum;
+import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGameView;
 
@@ -42,9 +43,10 @@ public class Carpenter implements LemmingBehaviour
 
     private void placeStaircase ()
     {
+        int direction = (lemming.getDirection() == DirectionEnum.LEFT) ? - 1 : 1;
         if (!lemming.findFrontStep() && leftStairs > 0)
         {
-            lemming.getGame().createBlock(BlockTypeEnum.DESTRUCTIBLE_BLOCK, lemming.getX() + 1, lemming.getY());
+            lemming.getGame().createBlock(BlockTypeEnum.DESTRUCTIBLE_BLOCK, lemming.getX() + direction, lemming.getY());
             --leftStairs;
             status = CarpenterStatus.CLIMBING;
         }
@@ -53,10 +55,11 @@ public class Carpenter implements LemmingBehaviour
 
     private void climbStaircase ()
     {
+        int direction = (lemming.getDirection() == DirectionEnum.LEFT) ? - 1 : 1;
         if (lemming.findFrontWall() || lemming.findSuperiorBlock()) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         else
         {
-            lemming.setX(lemming.getX() + 1);
+            lemming.setX(lemming.getX() + direction);
             lemming.setY(lemming.getY() - 1);
             status = CarpenterStatus.BUILDING;
         }

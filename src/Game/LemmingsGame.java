@@ -63,20 +63,20 @@ public class LemmingsGame
 
 
     /* Liste des fonctions à mettre sur la map :
-    1 : plusieurs entrées générants des lemmings.
+    1 : plusieurs entrées générants des lemmings.   done
     2 : plusieurs sorties retirant des lemmings.
-    3 : des lemmings marcheurs qui avancent, montent une case, et font demi-tour fasse à un obstacle de hauteur  2.
-    4 : des lemmings marcheurs qui tombent de faible hauteur et survivent.
-    5 : des lemmings marcheurs qui tombent de forte hauteur et meurent.
-    6 : un bloqueur face auquel les autres lemmings font demi-tour.
-    7 : un tunnelier qui creuse devant lui jusqu'à l'air libre.
-    8 : un foreur qui creuse sous ses pieds durant 5 pas.
+    3 : des lemmings marcheurs qui avancent, montent une case, et font demi-tour fasse à un obstacle de hauteur  2. DONE
+    4 : des lemmings marcheurs qui tombent de faible hauteur et survivent. DONE
+    5 : des lemmings marcheurs qui tombent de forte hauteur et meurent. DONE
+    6 : un bloqueur face auquel les autres lemmings font demi-tour. DONE
+    7 : un tunnelier qui creuse devant lui jusqu'à l'air libre. DONE
+    8 : un foreur qui creuse sous ses pieds durant 5 pas. DONE
     9 : un bombeur qui explose des obstacles sur un rayon de 2 cases.
     10 : un charpentier construisant un escalier de 5 marches.
-    11 : un grimpeur escalant un obstacle de taille au moins 2.
+    11 : un grimpeur escalant un obstacle de taille au moins 2. DONE
     12 : un parachutiste qui tombent de hauteur au moins 5 à vitesse 1/2 et survie à sa chute.
-    13 : des lemmings arrivant sur un teleporteur qui sont téléportés à un endroit spécifique.
-    14 : des lemmings arrivant sur de la lave qui meurent
+    13 : des lemmings arrivant sur un teleporteur qui sont téléportés à un endroit spécifique. DONE
+    14 : des lemmings arrivant sur de la lave qui meurent DONE
     15 : un obstacle spécial faisant apparaitre d'autres obstacle à sa destruction.
     16 : un obstacle spécial explosant les lemmings autour de lui à sa destruction.
 
@@ -91,29 +91,58 @@ public class LemmingsGame
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, i));
         }
 
-        // FONCTION 3
-        Block spawner1 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 3);
+        // FONCTION 3 & 11 & 13 & 14: en haut à gauche
+        Block spawner1 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 4);
         spawner1.setOptionalArgs(1);
         blocks.add(spawner1);
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 1, 4));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 2, 4));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 3, 4));
+        for (int j = 1; j < 6; j++)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, j, 5));
+        }
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 4));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 3));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 3));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 1));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 2));
+        Block teleporter = new Block(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 2);
+        teleporter.setOptionalArgs(9, 2);
+        blocks.add(teleporter);
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 1));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 9, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 10, 2));
+        blocks.add(new Block(this, BlockTypeEnum.LAVA_BLOCK, 11, 2));
 
-        // FONCTION 4
+
+        // FONCTION 4 & 5 : en haut à droite
         Block spawner2 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
         spawner2.setOptionalArgs(1);
-
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 17, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 15, 2));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
         blocks.add(spawner2);
+
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 18, 13));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 15, 2));
+        for (int i = 2; i < 7; ++i)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 17, i));
+        }
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 6));
+
+
+        // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
+        Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
+        spawner3.setOptionalArgs(3);
+        blocks.add(spawner3);
+
+        for (int i = 0; i < 11; i++)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6 + i, 4));
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 12 + i, 3));
+        }
     }
 
     private void update ()
