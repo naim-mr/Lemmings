@@ -83,9 +83,37 @@ public class LemmingsGame
      */
     public void CreateTestMap ()
     {
-        // FONCTION 1
-        // Block spawner1
+        for (int i = 0; i < 20; ++i)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 19));
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 0));
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 19, i));
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, i));
+        }
 
+        // FONCTION 3
+        Block spawner1 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 3);
+        spawner1.setOptionalArgs(1);
+        blocks.add(spawner1);
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 1, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 2, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 3, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 3));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 3));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 1));
+
+        // FONCTION 4
+        Block spawner2 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
+        spawner2.setOptionalArgs(1);
+
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 17, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 15, 2));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
+        blocks.add(spawner2);
     }
 
     private void update ()
