@@ -33,15 +33,24 @@ public class Basher implements LemmingBehaviour
         boolean blockBelow = lemming.findInferiorBlock();
         Block blockForward = lemming.getFrontBlock();
         boolean blockUpdated = false;
-        if (blockBelow) { blockUpdated = lemming.getGame().deleteBlock(blockForward); }
-        
+        if (blockBelow) { 
+        	blockUpdated = lemming.getGame().deleteBlock(blockForward);
+        	lemming.resetFallHeight();
+        }
         updateLocation(blockUpdated, blockBelow, blockForward);
+        if(blockBelow && lemming.getFallHeight()>=4) {
+        	lemming.setToDelete();
+        }
+        
         return true;
     }
 
     private void updateLocation(boolean blockUpdated, boolean blockBelow, Block blockForward)
     {	
-    	if (!blockBelow) lemming.setY(lemming.getY() + 1);
+    	if (!blockBelow) {
+    		lemming.setY(lemming.getY() + 1);
+    		lemming.incrementFallHeight();
+    	}
         else if (blockUpdated)
         {	
         	

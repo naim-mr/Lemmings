@@ -33,7 +33,14 @@ public class Normal implements LemmingBehaviour, BehaviourRefactor
         boolean frontBlock= lemming.findFrontStep();
         boolean step = frontBlock && !lemming.findSuperiorBlock();
         boolean wall =lemming.findFrontWall();
-        updateLocation(blockBelow, wall,step,frontBlock);
+        if(blockBelow && lemming.getFallHeight()>=4) {
+        	lemming.setToDelete();
+        }else {
+        	if(blockBelow)lemming.resetFallHeight();
+        	updateLocation(blockBelow, wall,step,frontBlock);
+        }
+        
+        
         return true;
 
     }
@@ -41,7 +48,7 @@ public class Normal implements LemmingBehaviour, BehaviourRefactor
     private void updateLocation(boolean blockBelow, boolean wall,boolean step,boolean frontBlock){
     	lemming.getGame();
     	if(!blockBelow ) {
-    		   lemming.incrementFallHeight();
+    		    lemming.incrementFallHeight();
 	        	lemming.setY(lemming.getY() + 1);
     	}
     	else {

@@ -132,8 +132,10 @@ public class LemmingsGame
         }
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 6));
-
-
+        //
+        Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
+        blocks.add(spawner10);
+        spawner10.setOptionalArgs(3);
         // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
         Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
         spawner3.setOptionalArgs(3);
@@ -160,8 +162,7 @@ public class LemmingsGame
 
     private void update ()
     {
-        lemmings.removeIf(Entity::getToDelete);
-        blocks.removeIf(Entity::getToDelete);
+     
 
         for (Lemming l : getLemmings())
         {
@@ -172,6 +173,8 @@ public class LemmingsGame
         {
             b.update();
         }
+        lemmings.removeIf(Entity::getToDelete);
+        blocks.removeIf(Entity::getToDelete);
     }
 
     // Main loop

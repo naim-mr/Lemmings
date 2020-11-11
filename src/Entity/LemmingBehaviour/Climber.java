@@ -32,17 +32,21 @@ public class Climber implements LemmingBehaviour,BehaviourRefactor
     {	
     	
         boolean blockBelow = lemming.findInferiorBlock();
-        
         boolean frontBlock= lemming.findFrontStep();
-        
         boolean wall=lemming.findFrontWall();
         boolean step=lemming.findFrontStep() && !lemming.findSuperiorBlock();
+        boolean superiorBlock= lemming.findSuperiorBlock();
         
-        updateLocation(blockBelow, wall,step,frontBlock);
+        if(blockBelow && lemming.getFallHeight()>=4) {
+        	lemming.setToDelete();
+        }else {
+        	  if(blockBelow)lemming.resetFallHeight();
+              updateLocation(blockBelow, wall,step,frontBlock,superiorBlock);
+        }
         return true;
     }
     
-    private void updateLocation(boolean blockBelow, boolean wall, boolean step,boolean frontBlock)
+    private void updateLocation(boolean blockBelow, boolean wall, boolean step,boolean frontBlock,boolean superiorBlock)
     {
     	lemming.getGame();
 		boolean edgeDim= lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
@@ -51,6 +55,7 @@ public class Climber implements LemmingBehaviour,BehaviourRefactor
         if (!blockBelow && !climbing)
         {
             lemming.setY(lemming.getY() + 1);
+            lemming.incrementFallHeight();
 
         }else if(step && !wall ) {
         	manageStep(lemming);
@@ -64,10 +69,10 @@ public class Climber implements LemmingBehaviour,BehaviourRefactor
         	lemming.setY(lemming.getY() - 1);
         }
         
-        else if (!wall && climbing )
-        {
+        else if (!wall && climbing  || (wall && superiorBlock))
+        {	
         	climbing = false;
-        	manageNormalPace(lemming);
+        	
         }
         else { manageNormalPace(lemming); }
     }
