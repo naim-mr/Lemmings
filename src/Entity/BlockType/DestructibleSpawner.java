@@ -18,13 +18,10 @@ public class DestructibleSpawner implements BlockType
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-
-    }
-
-    @Override
-    public boolean setOptionalArgs (int[] args)
-    {
-        return false;
+        graphics.setColor(Color.GREEN);
+        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+        graphics.setColor(Color.BLACK);
+        graphics.drawString("S", windowX, windowY);
     }
 
     @Override
