@@ -35,11 +35,9 @@ public class Lemming extends Entity
     @Override
     public boolean update ()
     {
-        //System.out.println("lemming"+direction);
         return behaviour.update();
     }
 
-    
     
     public int  getFallHeight() {
     	return this.fallHeight;
@@ -51,8 +49,7 @@ public class Lemming extends Entity
     public void resetFallHeight() {
     	this.fallHeight=0;
     }
-    
-    
+
     
     public void changeBehaviourTo(LemmingBehaviourEnum lemmingBehaviour)
     {

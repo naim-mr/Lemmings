@@ -21,7 +21,7 @@ public class DestructibleSpawner implements BlockType
         graphics.setColor(Color.GREEN);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
         graphics.setColor(Color.BLACK);
-        graphics.drawString("S", windowX, windowY);
+        graphics.drawString("S", windowX + 8, windowY + 13);
     }
 
     @Override

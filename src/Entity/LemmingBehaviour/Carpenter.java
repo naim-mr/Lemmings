@@ -1,6 +1,5 @@
 package Entity.LemmingBehaviour;
 
-import Entity.Block;
 import Entity.BlockType.BlockTypeEnum;
 import Entity.Lemming;
 import Game.LemmingsGameView;
@@ -29,17 +28,15 @@ public class Carpenter implements LemmingBehaviour
     @Override
     public boolean update ()
     {
-
         if (status == CarpenterStatus.BUILDING)
         {
-            placeStaircase();
+           if (lemming.findInferiorBlock()) placeStaircase();
+           else lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         }
         else
         {
             climbStaircase();
         }
-
-
         return false;
     }
 
@@ -51,6 +48,7 @@ public class Carpenter implements LemmingBehaviour
             --leftStairs;
             status = CarpenterStatus.CLIMBING;
         }
+        else lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
     }
 
     private void climbStaircase ()

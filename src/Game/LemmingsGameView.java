@@ -165,7 +165,7 @@ public class LemmingsGameView extends JComponent
         g.drawString("Floater", (TILE_SIZE * 11) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 11, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        g.setColor(Floater.color);
+        g.setColor(Carpenter.color);
         g.drawString("Carpenter", (TILE_SIZE * 13) - 8, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 13, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
@@ -185,6 +185,9 @@ public class LemmingsGameView extends JComponent
                 break;
             case BOMBER:
                 g.setColor(Bomber.color);
+                break;
+            case CARPENTER:
+                g.setColor(Carpenter.color);
                 break;
             case CLIMBER:
                 g.setColor(Climber.color);

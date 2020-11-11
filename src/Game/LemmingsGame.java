@@ -61,29 +61,31 @@ public class LemmingsGame
         this.lemmingsGameView = lemmingsGameView;
     }
 
+
+    /* Liste des fonctions à mettre sur la map :
+    1 : plusieurs entrées générants des lemmings.
+    2 : plusieurs sorties retirant des lemmings.
+    3 : des lemmings marcheurs qui avancent, montent une case, et font demi-tour fasse à un obstacle de hauteur  2.
+    4 : des lemmings marcheurs qui tombent de faible hauteur et survivent.
+    5 : des lemmings marcheurs qui tombent de forte hauteur et meurent.
+    6 : un bloqueur face auquel les autres lemmings font demi-tour.
+    7 : un tunnelier qui creuse devant lui jusqu'à l'air libre.
+    8 : un foreur qui creuse sous ses pieds durant 5 pas.
+    9 : un bombeur qui explose des obstacles sur un rayon de 2 cases.
+    10 : un charpentier construisant un escalier de 5 marches.
+    11 : un grimpeur escalant un obstacle de taille au moins 2.
+    12 : un parachutiste qui tombent de hauteur au moins 5 à vitesse 1/2 et survie à sa chute.
+    13 : des lemmings arrivant sur un teleporteur qui sont téléportés à un endroit spécifique.
+    14 : des lemmings arrivant sur de la lave qui meurent
+    15 : un obstacle spécial faisant apparaitre d'autres obstacle à sa destruction.
+    16 : un obstacle spécial explosant les lemmings autour de lui à sa destruction.
+
+     */
     public void CreateTestMap ()
     {
-        Block spawner = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 0, 4);
-        spawner.setOptionalArgs(1);
-        blocks.add(spawner);
+        // FONCTION 1
+        // Block spawner1
 
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 0, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 1, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 2, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 3, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 5, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 6, 5));
-
-        Block blockSpawner = new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 4);
-        ArrayList<Block> spawnerList = new ArrayList<>();
-        for (int i = 0; i < MAP_DIMENSION; ++i)
-        {
-            spawnerList.add(new Block(this, BlockTypeEnum.LAVA_BLOCK, i, 19));
-        }
-        blockSpawner.setOptionalArgs(spawnerList);
-
-        blocks.add(blockSpawner);
     }
 
     private void update ()
