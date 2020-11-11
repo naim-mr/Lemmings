@@ -1,12 +1,10 @@
 package Game;
 
-
 import Entity.*;
 import Entity.BlockType.BlockTypeEnum;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LemmingsGame
 {
@@ -75,12 +73,24 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 5, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 6, 5));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 4));
+
+        Block blockSpawner = new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 4);
+        ArrayList<Block> spawnerList = new ArrayList<>();
+        for (int i = 0; i < MAP_DIMENSION; ++i)
+        {
+            spawnerList.add(new Block(this, BlockTypeEnum.LAVA_BLOCK, i, 19));
+        }
+        blockSpawner.setOptionalArgs(spawnerList);
+
+        blocks.add(blockSpawner);
 
     }
 
     private void update ()
     {
+        lemmings.removeIf(Entity::getToDelete);
+        blocks.removeIf(Entity::getToDelete);
+
         for (Lemming l : getLemmings())
         {
             l.update();
@@ -90,9 +100,6 @@ public class LemmingsGame
         {
             b.update();
         }
-
-        lemmings.removeIf(Entity::getToDelete);
-        blocks.removeIf(Entity::getToDelete);
     }
 
     // Main loop
@@ -196,8 +203,8 @@ public class LemmingsGame
         }
     }
 
-    public void createBlock (ArrayList<Block> blocks)
+    public void createBlock (ArrayList<Block> b)
     {
-        blocks.addAll(blocks);
+        blocks.addAll(b);
     }
 }
