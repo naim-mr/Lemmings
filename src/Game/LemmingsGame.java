@@ -96,6 +96,7 @@ public class LemmingsGame
         spawner1.setOptionalArgs(1);
         blocks.add(spawner1);
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 1, 4));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 3, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 2, 4));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 3, 4));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
@@ -107,7 +108,7 @@ public class LemmingsGame
 
         // FONCTION 4
         Block spawner2 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
-        spawner2.setOptionalArgs(1);
+        spawner2.setOptionalArgs(0);
 
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 17, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));

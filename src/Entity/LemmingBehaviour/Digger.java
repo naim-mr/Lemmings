@@ -7,8 +7,8 @@ import Game.LemmingsGameView;
 import java.awt.*;
 
 public class Digger implements LemmingBehaviour
-{
-    public static final Color color = Color.yellow;
+{	
+	public static Color color = Color.yellow;
     private final Lemming lemming;
     private int blockDigged;
 
@@ -23,7 +23,7 @@ public class Digger implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(color);
+        g.setColor(Color.yellow);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE); // Chaque Lemming sera dessiné de manière différente, donc il faudrait faire un draw délégué, à la manière du update();
 
     }
@@ -34,30 +34,22 @@ public class Digger implements LemmingBehaviour
         boolean blockUpdated = false;
         Block blockBelow = lemming.getInferiorBlock();
         if (blockBelow != null) blockUpdated = destroyBlock(blockBelow);
-
         updateLocation(blockUpdated);
         updateBehaviour(blockUpdated, blockBelow);
-
         return true;
     }
 
     private void updateBehaviour(boolean blockUpdated, Block blockBelow)
     {
-        if (blockDigged == 4 || !blockUpdated)
-        {
-            // on s'arrete au bout de 5 ou s'il y a rien
-            lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
-
-        }
-        if (blockBelow == null && blockDigged > 0)
-            lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);// euh je dois revoir la n�cessit� de cette ligne
+        if (blockDigged == 4 || !blockUpdated) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+        if (blockBelow == null && blockDigged > 0) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+    
     }
 
     public void updateLocation(boolean blockUpdated)
     {
         if (blockUpdated)
         {
-            //Si le block c'est update donc s'il est destructible on incr�mente et descend
             blockDigged++;
             lemming.setY(lemming.getY() + 1);
         }

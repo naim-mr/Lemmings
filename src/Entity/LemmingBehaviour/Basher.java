@@ -7,10 +7,11 @@ import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Basher implements LemmingBehaviour
-{
-    public static final Color color = Color.RED;
+{	
+	public static final Color color = Color.red;
     private final Lemming lemming;
     private int blockDrill;
     public Basher(Lemming lemming)
@@ -22,7 +23,7 @@ public class Basher implements LemmingBehaviour
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(color);
+        g.setColor(Color.RED);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
@@ -40,8 +41,7 @@ public class Basher implements LemmingBehaviour
 
     private void updateLocation(boolean blockUpdated, boolean blockBelow, Block blockForward)
     {	
-    	  	
-        if (!blockBelow) lemming.setY(lemming.getY() + 1);
+    	if (!blockBelow) lemming.setY(lemming.getY() + 1);
         else if (blockUpdated)
         {	
         	
@@ -50,7 +50,6 @@ public class Basher implements LemmingBehaviour
             blockForward=null;;
         }
         else if (blockForward == null) updateHorizontalLocation();
-        
         if(!blockUpdated && blockForward!=null|| blockDrill==4) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         	
                 
