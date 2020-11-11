@@ -20,14 +20,11 @@ public interface BehaviourRefactor {
 	
 	    if (lemming.getDirection() == DirectionEnum.RIGHT)
 	    {
-	
 	        lemming.changeDirectionTo(DirectionEnum.LEFT);
-	        lemming.setX(lemming.getX() - 1);
 	    }
 	    else if (lemming.getDirection() == DirectionEnum.LEFT)
 	    {
 	
-	        lemming.setX(lemming.getX() + 1);
 	        lemming.changeDirectionTo(DirectionEnum.RIGHT);
 	    }
 	}

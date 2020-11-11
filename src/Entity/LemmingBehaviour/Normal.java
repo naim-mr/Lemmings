@@ -39,7 +39,7 @@ public class Normal implements LemmingBehaviour, BehaviourRefactor
 
     }
 
-    private void updateLocation(boolean blockBelow, boolean wall,boolean step,boolean frontBlock){
+    private void updateLocation(boolean blockBelow, boolean wall, boolean step, boolean frontBlock){
     	lemming.getGame();
     	if(!blockBelow ) {
     		   lemming.incrementFallHeight();
