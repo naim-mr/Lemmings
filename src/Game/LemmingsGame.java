@@ -78,7 +78,7 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 7, 5));
         
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 3));
+        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 3)); 
         
         //blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 4));
