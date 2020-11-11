@@ -22,7 +22,7 @@ public class Climber implements LemmingBehaviour,BehaviourRefactor
     @Override
     public void draw(Graphics g, int windowX, int windowY)
     {
-        g.setColor(Color.cyan);
+        g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 

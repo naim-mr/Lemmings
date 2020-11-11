@@ -107,7 +107,7 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 2));
         Block teleporter = new Block(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 2);
-        teleporter.setOptionalArgs(9, 2);
+        teleporter.setOptionalArgs(9, 1);
         blocks.add(teleporter);
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 1));
@@ -139,14 +139,23 @@ public class LemmingsGame
         spawner3.setOptionalArgs(3);
         blocks.add(spawner3);
 
-        for (int i = 0; i < 11; i++)
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 4));
+        for (int j = 4; j < 10; j++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6 + i, 4));
+            blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 7, j));
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, j));
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, j));
+        }
+        for (int i = 0; i < 9; i++)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8 + i, 4));
         }
         for (int i = 0; i < 4; i++)
         {
             blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 12 + i, 3));
         }
+
+        // FONCTION 15 : en dessous de 6, 7, 8
     }
 
     private void update ()
