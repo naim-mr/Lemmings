@@ -28,20 +28,17 @@ public class Block extends Entity
         blockType.draw(graphics, windowX, windowY);
     }
 
+    // TODO : a quoi sert la distinction HIDDENBLOCK
     private void changeTypeTo (BlockTypeEnum blockTypeEnum)
     {
         switch (blockTypeEnum)
         {
             case DESTRUCTIBLE_BLOCK_GROUND:
-                blockType = new Destructible(this, DestructibleTypeEnum.GROUND);
-                break;
             case DESTRUCTIBLE_BLOCK_HIDDENBLOCK:
-
-                blockType = new Destructible(this, DestructibleTypeEnum.HIDDEN_BLOCK);
+                blockType = new Destructible(this);
                 break;
             case DESTRUCTIBLE_BLOCK_LANDMINE:
-
-                blockType = new Destructible(this, DestructibleTypeEnum.LANDMINE);
+                blockType = new DestructibleLandmine(this);
                 break;
             case EMPTY_BLOCK:
                 blockType = new Empty(this);

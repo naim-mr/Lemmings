@@ -17,9 +17,7 @@ public class Empty implements BlockType
 
     @Override
     public void draw(Graphics graphics, int windowX, int windowY)
-    {
-
-    }
+    {}
 
     @Override
     public boolean setOptionalArgs (int[] args)
