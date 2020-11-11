@@ -75,7 +75,7 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 5, 5));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 6, 5));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 7, 5));
+        blocks.add(new Block(this, BlockTypeEnum.LAVA_BLOCK, 7, 5));
 
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 3, 4));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_GROUND, 4, 4));
@@ -92,6 +92,11 @@ public class LemmingsGame
         for (Lemming l : getLemmings())
         {
             l.update();
+        }
+
+        for (Block b: blocks)
+        {
+            b.update();
         }
         for (Lemming l : lemmings)
         {

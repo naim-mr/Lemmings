@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class Entity
 {
-    public LemmingsGame game;
+    protected LemmingsGame game;
     protected Color color;
     protected boolean toDelete;
     protected int x;
