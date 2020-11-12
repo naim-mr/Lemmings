@@ -8,6 +8,7 @@ import Entity.Block;
 public class Lava implements BlockType
 {
 	private final Block block;
+	public static Color color = Color.RED;
 
 	public Lava(Block block)
 	{

@@ -11,6 +11,7 @@ public class Teleporter implements BlockType
     private final Block block;
     private int teleportToX = 0;
     private int teleportToY = 0;
+    public static Color color = new Color(128, 0, 255);
 
     public Teleporter (Block block)
     {

@@ -9,6 +9,7 @@ import Entity.Lemming;
 public class Exit implements BlockType
 {
     private final Block block;
+    public static Color color = new Color(128, 128, 0);
 
     public Exit(Block block)
     {

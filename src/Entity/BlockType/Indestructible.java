@@ -9,6 +9,7 @@ import Entity.Lemming;
 public class Indestructible implements BlockType
 {
 	private final Block block;
+	public static Color color = Color.BLACK;
 
 	public Indestructible(Block block)
 	{

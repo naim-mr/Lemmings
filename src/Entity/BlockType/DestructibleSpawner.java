@@ -9,6 +9,7 @@ public class DestructibleSpawner implements BlockType
 {
     private Block block;
     private ArrayList<Block> blocksToSpawn;
+    public static Color color = Color.GREEN;
 
     public DestructibleSpawner (Block block)
     {

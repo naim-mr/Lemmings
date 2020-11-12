@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class DestructibleLandmine implements BlockType
 {
     private Block block;
+    public static Color color = new Color (120, 0, 70);
+
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {

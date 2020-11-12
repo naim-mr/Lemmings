@@ -14,6 +14,7 @@ public class Spawner implements BlockType
     private final Block block;
     private int lemmingsNb;
     private int cooldown = 0;
+    public static Color color = Color.YELLOW;
 
     public Spawner(Block block)
     {

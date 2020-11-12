@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Destructible implements BlockType
 {
     private Block block;
+    public static Color color = Color.GREEN;
 
-    // TODO destruction spawner
     public Destructible (Block block)
     {
         this.block = block;
@@ -19,7 +19,7 @@ public class Destructible implements BlockType
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(color);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
