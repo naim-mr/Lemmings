@@ -123,12 +123,11 @@ public class LemmingsGameView extends JComponent
 
         for (Entity e : entities)
         {	
-        	if(e!=null)         drawEntity(g, e); // TODO GERER LES PB DE NULL 
+        	if(e!=null)         drawEntity(g, e); // TODO G
         }
     }
 
-    // TODO :  C'est vraiment nul. trouver une meilleure implémentation, refactoriser..............
-    // après, c'est de l'affichage, on ne peut pas faire vraiment mieux...
+    // TODO
     private void drawFooterMenu(Graphics g)
     {
         g.setColor(Color.BLACK);
@@ -170,7 +169,7 @@ public class LemmingsGameView extends JComponent
         g.setColor(Color.WHITE);
         g.drawString("Selection actuelle", (TILE_SIZE * 15), GAME_DIMENSION + (TILE_SIZE - 5));
 
-        // TODO : trouver mieux que ca, mettre les couleurs dans les comportements
+        // TODO
         switch (game.getSelectedBehaviour())
         {
             case BASHER:

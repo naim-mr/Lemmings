@@ -101,7 +101,7 @@ public class Lemming extends Entity
         return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
     }
 
-    // TODO : refactoriser, modifier toutes les méthodes & listes pour qu'elles ne renvoient jamais null
+    // TODO
     public boolean findInferiorBlock ()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX()).size() >= 1;
