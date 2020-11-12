@@ -45,7 +45,7 @@ public class Blocker implements LemmingBehaviour
     {
         for (Lemming l : lemmings)
         {
-            l.changeDirectionTo((l.getDirection() == DirectionEnum.LEFT) ? DirectionEnum.RIGHT : DirectionEnum.LEFT);
+            l.changeDirectionTo((l.getX() == lemming.getX() + 1) ? DirectionEnum.RIGHT : DirectionEnum.LEFT);
         }
     }
 }
