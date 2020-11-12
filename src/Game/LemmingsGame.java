@@ -72,12 +72,12 @@ public class LemmingsGame
     7 : un tunnelier qui creuse devant lui jusqu'à l'air libre. DONE
     8 : un foreur qui creuse sous ses pieds durant 5 pas. DONE
     9 : un bombeur qui explose des obstacles sur un rayon de 2 cases.
-    10 : un charpentier construisant un escalier de 5 marches.
+    10 : un charpentier construisant un escalier de 5 marches. DONE
     11 : un grimpeur escalant un obstacle de taille au moins 2. DONE
     12 : un parachutiste qui tombent de hauteur au moins 5 à vitesse 1/2 et survie à sa chute.
     13 : des lemmings arrivant sur un teleporteur qui sont téléportés à un endroit spécifique. DONE
     14 : des lemmings arrivant sur de la lave qui meurent DONE
-    15 : un obstacle spécial faisant apparaitre d'autres obstacle à sa destruction.
+    15 : un obstacle spécial faisant apparaitre d'autres obstacle à sa destruction. DONE
     16 : un obstacle spécial explosant les lemmings autour de lui à sa destruction.
 
      */
@@ -158,6 +158,28 @@ public class LemmingsGame
         }
 
         // FONCTION 15 : en dessous de 6, 7, 8
+
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 10));
+
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 11));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 11));
+        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 11));
+
+        Block bridgeSpawner = new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_SPAWNER, 8, 10);
+        ArrayList<Block> bridge = new ArrayList<Block>();
+        for (int i = 9; i < 18; i++)
+        {
+            bridge.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
+        }
+        bridgeSpawner.setOptionalArgs(bridge);
+
+        blocks.add(bridgeSpawner);
+
+        // TEST
+
+        Block spawner4 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
+        spawner4.setOptionalArgs(1);
+        blocks.add(spawner4);
     }
 
     private void update ()
