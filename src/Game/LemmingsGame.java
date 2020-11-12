@@ -226,7 +226,11 @@ public class LemmingsGame
     {
         for (Lemming l : getLemmings())
         {
-            if (l.getX() == mapX && l.getY() == mapY) l.changeBehaviourTo(selectedBehaviour);
+            if (l.getX() == mapX && l.getY() == mapY)
+            {
+                l.changeBehaviourTo(selectedBehaviour);
+                break;
+            }
         }
     }
 
