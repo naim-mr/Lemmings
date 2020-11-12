@@ -14,20 +14,20 @@ public class Lemming extends Entity
 
     private DirectionEnum direction;
 
-    public Lemming(LemmingsGame game, LemmingBehaviourEnum lemmingBehaviour, int x, int y)
+    public Lemming (LemmingsGame game, LemmingBehaviourEnum lemmingBehaviour, int x, int y)
     {
         this.game = game;
         changeBehaviourTo(lemmingBehaviour);
         this.direction = DirectionEnum.RIGHT;
         this.x = x;
         this.y = y;
-        int fallHeight=0;
-          
+        int fallHeight = 0;
+
         this.toDelete = false;
     }
 
     @Override
-    public void draw(Graphics g, int x, int y)
+    public void draw (Graphics g, int x, int y)
     {
         behaviour.draw(g, x, y);
     }
@@ -38,20 +38,24 @@ public class Lemming extends Entity
         return behaviour.update();
     }
 
-    
-    public int  getFallHeight() {
-    	return this.fallHeight;
-    }
-    
-    public void incrementFallHeight() {
-    	this.fallHeight++;
-    }
-    public void resetFallHeight() {
-    	this.fallHeight=0;
+
+    public int getFallHeight ()
+    {
+        return this.fallHeight;
     }
 
-    
-    public void changeBehaviourTo(LemmingBehaviourEnum lemmingBehaviour)
+    public void incrementFallHeight ()
+    {
+        this.fallHeight++;
+    }
+
+    public void resetFallHeight ()
+    {
+        this.fallHeight = 0;
+    }
+
+
+    public void changeBehaviourTo (LemmingBehaviourEnum lemmingBehaviour)
     {
         switch (lemmingBehaviour)
         {
@@ -82,27 +86,28 @@ public class Lemming extends Entity
         }
     }
 
-    public void changeDirectionTo(DirectionEnum direction)
+    public void changeDirectionTo (DirectionEnum direction)
     {
         this.direction = direction;
     }
 
-    public DirectionEnum getDirection()
+    public DirectionEnum getDirection ()
     {
         return this.direction;
     }
-    public boolean findSuperiorBlock()
+
+    public boolean findSuperiorBlock ()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
     }
 
     // TODO : refactoriser, modifier toutes les méthodes & listes pour qu'elles ne renvoient jamais null
-    public boolean findInferiorBlock()
+    public boolean findInferiorBlock ()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX()).size() >= 1;
     }
 
-    public Block getInferiorBlock()
+    public Block getInferiorBlock ()
     {
         ArrayList<Block> list = getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX());
 
@@ -112,30 +117,34 @@ public class Lemming extends Entity
     public Block getFrontBlock ()
     {
         ArrayList<Block> list;
-        if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> b.getX() == getX() + 1 && b.getY() == getY());
-        else list = getGame().getBlocks((Block b) -> b.getX() == getX() - 1 && b.getY() == getY() );
+        if (getDirection() == DirectionEnum.RIGHT)
+            list = getGame().getBlocks((Block b) -> b.getX() == getX() + 1 && b.getY() == getY());
+        else list = getGame().getBlocks((Block b) -> b.getX() == getX() - 1 && b.getY() == getY());
 
         return list.size() >= 1 ? list.get(0) : null;
     }
-    
+
     // pour diff�rencier les murs et les marches je retroune la taille de la liste
-    public boolean findFrontStep()
+    public boolean findFrontStep ()
     {
         ArrayList<Block> list;
-        if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() == getY()) || getX() + 1 == LemmingsGame.MAP_DIMENSION);
+        if (getDirection() == DirectionEnum.RIGHT)
+            list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() == getY()) || getX() + 1 == LemmingsGame.MAP_DIMENSION);
         else list = getGame().getBlocks((Block b) -> ((b.getX() + 1 == getX() && b.getY() == getY()) || getX() == 0));
 
-        return list.size()==1; 
+        return list.size() == 1;
     }
-    
-    public boolean findFrontWall()
+
+    public boolean findFrontWall ()
     {
         ArrayList<Block> list;
         getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
-        if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
-        else list = getGame().getBlocks((Block b) -> (b.getX() == getX() - 1) && (b.getY() == getY() || b.getY() == getY() - 1));
+        if (getDirection() == DirectionEnum.RIGHT)
+            list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
+        else
+            list = getGame().getBlocks((Block b) -> (b.getX() == getX() - 1) && (b.getY() == getY() || b.getY() == getY() - 1));
 
-        return list.size()>1;
+        return list.size() > 1;
     }
 
     public ArrayList<Lemming> getSideLemmings ()
@@ -143,4 +152,42 @@ public class Lemming extends Entity
         return getGame().getLemmings((Lemming l) -> (l.getX() == getX() + 1 || l.getX() == getX() - 1) && l.getY() == getY());
     }
 
+    public void normalUpdateLocation (boolean wall, boolean step, boolean frontBlock)
+    {
+        boolean edgeDim = getX() == LemmingsGame.MAP_DIMENSION && getDirection() == DirectionEnum.RIGHT;
+        ;
+        boolean edgeZero = getX() == 0 && getDirection() == DirectionEnum.LEFT;
+        if (((wall && frontBlock) || (!step && frontBlock)) || edgeZero || edgeDim) manageFrontWall();
+        else if (step && !wall) manageStep();
+        else manageNormalPace();
+
+    }
+
+    public void manageFrontWall ()
+    {
+        if (getDirection() == DirectionEnum.RIGHT) changeDirectionTo(DirectionEnum.LEFT);
+        else if (getDirection() == DirectionEnum.LEFT) changeDirectionTo(DirectionEnum.RIGHT);
+
+
+    }
+
+    public void manageNormalPace ()
+    {
+        if (getDirection() == DirectionEnum.LEFT) setX(getX() - 1);
+        if (getDirection() == DirectionEnum.RIGHT) setX(getX() + 1);
+    }
+
+    public void manageStep ()
+    {
+        if (getDirection() == DirectionEnum.RIGHT)
+        {
+            setY(getY() - 1);
+            setX(getX() + 1);
+        }
+        else if (getDirection() == DirectionEnum.LEFT)
+        {
+            setY(getY() - 1);
+            setX(getX() - 1);
+        }
+    }
 }

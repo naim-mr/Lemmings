@@ -9,7 +9,7 @@ import Game.LemmingsGameView;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Bomber implements LemmingBehaviour,BehaviourRefactor
+public class Bomber implements LemmingBehaviour
 {	
 	public static final Color color = Color.magenta;
     private final Lemming lemming;
@@ -79,7 +79,7 @@ public class Bomber implements LemmingBehaviour,BehaviourRefactor
             lemming.incrementFallHeight();
         	lemming.setY(lemming.getY() + 1);
         }
-		else normalUpdateLocation(lemming,blockBelow,wall,step,frontBlock);
+		else lemming.normalUpdateLocation(wall,step,frontBlock);
         
     }
 

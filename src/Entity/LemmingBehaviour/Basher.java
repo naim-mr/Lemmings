@@ -7,7 +7,6 @@ import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Basher implements LemmingBehaviour
 {	

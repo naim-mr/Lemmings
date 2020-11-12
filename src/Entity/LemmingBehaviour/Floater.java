@@ -1,15 +1,13 @@
 package Entity.LemmingBehaviour;
 
-import Entity.Block;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Floater implements LemmingBehaviour,BehaviourRefactor
+public class Floater implements LemmingBehaviour
 {	
 	public static Color color = Color.gray;
     private final Lemming lemming;
@@ -60,7 +58,7 @@ public class Floater implements LemmingBehaviour,BehaviourRefactor
 			else incrementTick();
         	
         }
-        else normalUpdateLocation(lemming,blockBelow, wall,step,frontBlock);
+        else lemming.normalUpdateLocation(wall,step,frontBlock);
         
     }
 

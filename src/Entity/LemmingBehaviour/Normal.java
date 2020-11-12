@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import Game.*;
-import Entity.DirectionEnum;
 import Entity.Lemming;
 
-public class Normal implements LemmingBehaviour, BehaviourRefactor
+public class Normal implements LemmingBehaviour
 {
     private final Lemming lemming;
     public static Color color = Color.pink;
@@ -52,7 +51,7 @@ public class Normal implements LemmingBehaviour, BehaviourRefactor
 	        	lemming.setY(lemming.getY() + 1);
     	}
     	else {
-    		normalUpdateLocation(lemming,blockBelow, wall,step,frontBlock);
+    		lemming.normalUpdateLocation(wall,step,frontBlock);
     	}
     }
 	    
