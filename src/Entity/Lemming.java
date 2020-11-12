@@ -127,6 +127,7 @@ public class Lemming extends Entity
 
         return list.size()==1; 
     }
+    
     public boolean findFrontWall()
     {
         ArrayList<Block> list;

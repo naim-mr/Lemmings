@@ -54,10 +54,15 @@ public class Bomber implements LemmingBehaviour,BehaviourRefactor
     	{
 	        boolean blockBelow = lemming.findInferiorBlock();
 	        boolean frontBlock= lemming.findFrontStep();
-	        boolean step = frontBlock && !lemming.findSuperiorBlock();
-	        boolean wall =lemming.findFrontWall();
-	        updateLocation(blockBelow, wall,step,frontBlock);
+        	boolean step = frontBlock && !lemming.findSuperiorBlock();
+        	boolean wall =lemming.findFrontWall();
+	        if(blockBelow && lemming.getFallHeight()>=4) {
+	        	lemming.setToDelete();	
+	        }else {
+	        if(blockBelow) lemming.resetFallHeight(); 
+	       	updateLocation(blockBelow, wall,step,frontBlock);
 	        decrementCountDown();
+	        }
     	}
         return true;
 
