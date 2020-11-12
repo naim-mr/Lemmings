@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class DestructibleLandmine implements BlockType
 {
-    private Block block;
-    public static Color color = new Color (120, 0, 70);
+    private final Block block;
+    public static final Color color = new Color (120, 0, 70);
 
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(new Color (120, 0, 70));
+        graphics.setColor(color);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
@@ -24,9 +24,8 @@ public class DestructibleLandmine implements BlockType
     }
 
     @Override
-    public boolean setOptionalArgs (int[] args)
+    public void setOptionalArgs (int[] args)
     {
-        return false;
     }
 
     @Override

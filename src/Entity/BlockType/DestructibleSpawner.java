@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class DestructibleSpawner implements BlockType
 {
-    private Block block;
+    private final Block block;
     private ArrayList<Block> blocksToSpawn;
-    public static Color color = Color.GREEN;
+    public static final Color color = Color.GREEN;
 
     public DestructibleSpawner (Block block)
     {
@@ -19,17 +19,16 @@ public class DestructibleSpawner implements BlockType
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(color);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
         graphics.setColor(Color.BLACK);
         graphics.drawString("S", windowX + 8, windowY + 13);
     }
 
     @Override
-    public boolean setOptionalArgs (ArrayList<Block> blocks)
+    public void setOptionalArgs (ArrayList<Block> blocks)
     {
         blocksToSpawn = blocks;
-        return true;
     }
 
     @Override

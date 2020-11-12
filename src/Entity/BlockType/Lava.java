@@ -8,7 +8,7 @@ import Entity.Block;
 public class Lava implements BlockType
 {
 	private final Block block;
-	public static Color color = Color.RED;
+	public static final Color color = Color.RED;
 
 	public Lava(Block block)
 	{
@@ -18,7 +18,7 @@ public class Lava implements BlockType
 	@Override
 	public void draw(Graphics graphics, int windowX, int windowY)
 	{
-		graphics.setColor(Color.RED);
+		graphics.setColor(color);
 		graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
 	}
 

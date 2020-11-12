@@ -4,7 +4,7 @@ import static Entity.LemmingBehaviour.LemmingBehaviourEnum.*;
 
 public class LemmingsController
 {
-    private LemmingsGame game;
+    private final LemmingsGame game;
     private LemmingsGameView view;
 
     public LemmingsController (LemmingsGame game)

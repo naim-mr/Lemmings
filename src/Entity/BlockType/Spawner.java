@@ -3,18 +3,16 @@ package Entity.BlockType;
 import java.awt.Color;
 
 import Entity.Block;
-import Entity.Lemming;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 public class Spawner implements BlockType
 {
     private final Block block;
     private int lemmingsNb;
     private int cooldown = 0;
-    public static Color color = Color.YELLOW;
+    public static final Color color = Color.YELLOW;
 
     public Spawner(Block block)
     {
@@ -24,15 +22,14 @@ public class Spawner implements BlockType
     @Override
     public void draw(Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(Color.YELLOW);
+        graphics.setColor(color);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
     @Override
-    public boolean setOptionalArgs (int[] args)
+    public void setOptionalArgs (int[] args)
     {
         lemmingsNb = args[0];
-        return true;
     }
 
     @Override

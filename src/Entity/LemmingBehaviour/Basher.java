@@ -9,18 +9,19 @@ import Game.LemmingsGameView;
 import java.awt.*;
 
 public class Basher implements LemmingBehaviour
-{	
-	public static final Color color = Color.red;
+{
+    public static final Color color = Color.red;
     private final Lemming lemming;
     private int blockDrill;
-    public Basher(Lemming lemming)
+
+    public Basher (Lemming lemming)
     {
         this.blockDrill = 0;
         this.lemming = lemming;
     }
 
     @Override
-    public void draw(Graphics g, int windowX, int windowY)
+    public void draw (Graphics g, int windowX, int windowY)
     {
         g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
@@ -32,38 +33,42 @@ public class Basher implements LemmingBehaviour
         boolean blockBelow = lemming.findInferiorBlock();
         Block blockForward = lemming.getFrontBlock();
         boolean blockUpdated = false;
-        if (blockBelow) { 
-        	blockUpdated = lemming.getGame().deleteBlock(blockForward);
-        	lemming.resetFallHeight();
+        if (blockBelow)
+        {
+            blockUpdated = lemming.getGame().deleteBlock(blockForward);
+            lemming.resetFallHeight();
         }
         updateLocation(blockUpdated, blockBelow, blockForward);
-        if(blockBelow && lemming.getFallHeight()>=4) {
-        	lemming.setToDelete();
+        if (blockBelow && lemming.getFallHeight() >= 4)
+        {
+            lemming.setToDelete();
         }
-        
+
         return true;
     }
 
-    private void updateLocation(boolean blockUpdated, boolean blockBelow, Block blockForward)
-    {	
-    	if (!blockBelow) {
-    		lemming.setY(lemming.getY() + 1);
-    		lemming.incrementFallHeight();
-    	}
+    private void updateLocation (boolean blockUpdated, boolean blockBelow, Block blockForward)
+    {
+        if (!blockBelow)
+        {
+            lemming.setY(lemming.getY() + 1);
+            lemming.incrementFallHeight();
+        }
         else if (blockUpdated)
-        {	
-        	
+        {
+
             blockDrill++;
             updateHorizontalLocation();
-            blockForward=null;;
+            blockForward = null;
         }
         else if (blockForward == null) updateHorizontalLocation();
-        if(!blockUpdated && blockForward!=null|| blockDrill==4) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
-        	
-                
+        if (!blockUpdated && blockForward != null || blockDrill == 4)
+            lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+
+
     }
 
-    private void updateHorizontalLocation()
+    private void updateHorizontalLocation ()
     {
         if (lemming.getDirection() == DirectionEnum.LEFT && lemming.getX() == 0)
         {

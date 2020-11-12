@@ -9,14 +9,9 @@ public interface BlockType
 {
     void draw(Graphics graphics, int windowX, int windowY);
 
-    default boolean setOptionalArgs (int[] args)
-    {
-        return false;
-    }
+    default void setOptionalArgs (int[] args){}
 
-    default boolean setOptionalArgs (ArrayList<Block> blocks)
-    {
-        return false;
+    default void setOptionalArgs (ArrayList<Block> blocks) {
     }
 
     default boolean update ()

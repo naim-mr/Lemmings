@@ -1,15 +1,13 @@
 package Entity.BlockType;
 
 import Entity.Block;
-import Entity.Lemming;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Destructible implements BlockType
 {
-    private Block block;
-    public static Color color = Color.GREEN;
+    private final Block block;
+    public static final Color color = Color.GREEN;
 
     public Destructible (Block block)
     {

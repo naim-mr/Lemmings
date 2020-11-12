@@ -9,52 +9,56 @@ import Entity.Lemming;
 public class Normal implements LemmingBehaviour
 {
     private final Lemming lemming;
-    public static Color color = Color.pink;
+    public static final Color color = Color.pink;
 
-    public Normal(Lemming lemming)
+    public Normal (Lemming lemming)
     {
         this.lemming = lemming;
     }
 
     @Override
-    public void draw(Graphics g, int windowX, int windowY)
+    public void draw (Graphics g, int windowX, int windowY)
     {
         g.setColor(color);
         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
     }
 
-    
+
     //En fait les leemings grimpe les mur de taille 1 mais pas deux donc j'ai modifi� �a  
     @Override
-    public boolean update()
+    public boolean update ()
     {
         boolean blockBelow = lemming.findInferiorBlock();
-        boolean frontBlock= lemming.findFrontStep();
+        boolean frontBlock = lemming.findFrontStep();
         boolean step = frontBlock && !lemming.findSuperiorBlock();
-        boolean wall =lemming.findFrontWall();
-        if(blockBelow && lemming.getFallHeight()>=4) {
-        	lemming.setToDelete();
-        }else {
-        	if(blockBelow)lemming.resetFallHeight();
-        	updateLocation(blockBelow, wall,step,frontBlock);
+        boolean wall = lemming.findFrontWall();
+        if (blockBelow && lemming.getFallHeight() >= 4)
+        {
+            lemming.setToDelete();
         }
-        
-        
+        else
+        {
+            if (blockBelow) lemming.resetFallHeight();
+            updateLocation(blockBelow, wall, step, frontBlock);
+        }
+
         return true;
 
     }
 
-    private void updateLocation(boolean blockBelow, boolean wall, boolean step, boolean frontBlock){
-    	lemming.getGame();
-    	if(!blockBelow ) {
-    		    lemming.incrementFallHeight();
-	        	lemming.setY(lemming.getY() + 1);
-    	}
-    	else {
-    		lemming.normalUpdateLocation(wall,step,frontBlock);
-    	}
+    private void updateLocation (boolean blockBelow, boolean wall, boolean step, boolean frontBlock)
+    {
+        if (!blockBelow)
+        {
+            lemming.incrementFallHeight();
+            lemming.setY(lemming.getY() + 1);
+        }
+        else
+        {
+            lemming.normalUpdateLocation(wall, step, frontBlock);
+        }
     }
-	    
+
 }
     
     

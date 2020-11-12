@@ -1,15 +1,13 @@
 package Entity.BlockType;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import Entity.Block;
-import Entity.Lemming;
 
 public class Exit implements BlockType
 {
     private final Block block;
-    public static Color color = new Color(128, 128, 0);
+    public static final Color color = new Color(128, 128, 0);
 
     public Exit(Block block)
     {
@@ -19,7 +17,7 @@ public class Exit implements BlockType
     @Override
     public void draw(Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(new Color(128, 128, 0));
+        graphics.setColor(color);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 

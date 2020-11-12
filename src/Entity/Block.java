@@ -41,9 +41,6 @@ public class Block extends Entity
             case DESTRUCTIBLE_BLOCK_LANDMINE:
                 blockType = new DestructibleLandmine(this);
                 break;
-            case EMPTY_BLOCK:
-                blockType = new Empty(this);
-                break;
             case EXIT_BLOCK:
                 blockType = new Exit(this);
                 break;
@@ -78,17 +75,17 @@ public class Block extends Entity
         return getGame().getLemmings((Lemming l) -> l.getX() == getX() && l.getY() == getY() - 1);
     }
 
-    public boolean setOptionalArgs (int ... args)
+    public void setOptionalArgs (int... args)
     {
-        return blockType.setOptionalArgs(args);
+        blockType.setOptionalArgs(args);
     }
 
-    public boolean setOptionalArgs (ArrayList<Block> blocks)
+    public void setOptionalArgs (ArrayList<Block> blocks)
     {
-        return blockType.setOptionalArgs(blocks);
+        blockType.setOptionalArgs(blocks);
     }
 
-    public boolean findSuperiorBlock()
+    public boolean findSuperiorBlock ()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
     }

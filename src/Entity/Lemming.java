@@ -1,10 +1,10 @@
 package Entity;
 
-import java.awt.Graphics;
-import java.util.ArrayList;
-
 import Entity.LemmingBehaviour.*;
-import Game.*;
+import Game.LemmingsGame;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class Lemming extends Entity
 {
@@ -155,7 +155,6 @@ public class Lemming extends Entity
     public void normalUpdateLocation (boolean wall, boolean step, boolean frontBlock)
     {
         boolean edgeDim = getX() == LemmingsGame.MAP_DIMENSION && getDirection() == DirectionEnum.RIGHT;
-        ;
         boolean edgeZero = getX() == 0 && getDirection() == DirectionEnum.LEFT;
         if (((wall && frontBlock) || (!step && frontBlock)) || edgeZero || edgeDim) manageFrontWall();
         else if (step && !wall) manageStep();

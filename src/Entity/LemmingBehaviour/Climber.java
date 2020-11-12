@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Climber implements LemmingBehaviour
 {
-    public static Color color = Color.lightGray;
+    public static final Color color = Color.lightGray;
     private final Lemming lemming;
     private boolean climbing;
 
@@ -51,9 +51,7 @@ public class Climber implements LemmingBehaviour
 
     private void updateLocation (boolean blockBelow, boolean wall, boolean step, boolean frontBlock, boolean superiorBlock)
     {
-        lemming.getGame();
         boolean edgeDim = lemming.getX() == LemmingsGame.MAP_DIMENSION && lemming.getDirection() == DirectionEnum.RIGHT;
-        ;
         boolean edgeZero = lemming.getX() == 0 && lemming.getDirection() == DirectionEnum.LEFT;
 
         if (!blockBelow && !climbing)

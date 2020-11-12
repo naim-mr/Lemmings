@@ -3,7 +3,6 @@ package Entity;
 import Game.LemmingsGame;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public abstract class Entity
 {

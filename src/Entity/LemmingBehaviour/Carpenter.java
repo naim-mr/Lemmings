@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class Carpenter implements LemmingBehaviour
 {
-    public static Color color = new Color(160, 82, 45);
-    private Lemming lemming;
+    public static final Color color = new Color(160, 82, 45);
+    private final Lemming lemming;
     private int leftStairs = 5;
     private CarpenterStatus status = CarpenterStatus.BUILDING;
 

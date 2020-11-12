@@ -27,13 +27,13 @@ public class LemmingsGame
     // NE PAS MODIFIER
     public ArrayList<Block> getBlocks ()
     {
-        return new ArrayList<Block>(blocks);
+        return new ArrayList<>(blocks);
     }
 
     // NE PAS MODIFIER
     public ArrayList<Lemming> getLemmings ()
     {
-        return new ArrayList<Lemming>(lemmings);
+        return new ArrayList<>(lemmings);
     }
 
     public ArrayList<Block> getBlocks (BlockCondition blockCondition)
@@ -137,7 +137,7 @@ public class LemmingsGame
         Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
         blocks.add(spawner10);
         spawner10.setOptionalArgs(30);
-        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 18, 18));;
+        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 18, 18));
 
         // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
         Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
@@ -169,7 +169,7 @@ public class LemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 11));
 
         Block bridgeSpawner = new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_SPAWNER, 8, 10);
-        ArrayList<Block> bridge = new ArrayList<Block>();
+        ArrayList<Block> bridge = new ArrayList<>();
         for (int i = 9; i < 18; i++)
         {
             bridge.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
@@ -225,11 +225,10 @@ public class LemmingsGame
 
     // Main loop
     /*FONCTION QUI VA GERER La boucle de jeu*/
+    @SuppressWarnings("InfiniteLoopStatement")
     public void gameLoop ()
     {
-        boolean gameOver = false;
-
-        while (!gameOver)
+        while (true)
         {
             try
             {

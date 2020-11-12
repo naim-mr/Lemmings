@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class LemmingsGameView extends JComponent
 {
     private final LemmingsGame game;
-    private final LemmingsController controller;
     private static final long serialVersionUID = 1L;
     public static final int WINDOW_DIMENSION = 600;
     public static final int GAME_DIMENSION = 500;
@@ -23,7 +22,6 @@ public class LemmingsGameView extends JComponent
     {
         super();
         this.game = game;
-        this.controller = controller;
 
         setOpaque(true);
         setSize(GAME_DIMENSION, WINDOW_DIMENSION);
@@ -140,8 +138,8 @@ public class LemmingsGameView extends JComponent
 
         // Blocs
         g.setColor(Basher.color);
-        g.drawString("Basher", (TILE_SIZE * 1) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
-        g.fillRect(TILE_SIZE * 1, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        g.drawString("Basher", (TILE_SIZE) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
+        g.fillRect(TILE_SIZE, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         g.setColor(Blocker.color);
         g.drawString("Blocker", (TILE_SIZE * 3) - 5, GAME_DIMENSION + (TILE_SIZE - 5));

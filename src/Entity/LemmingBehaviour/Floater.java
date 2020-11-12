@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Floater implements LemmingBehaviour
 {	
-	public static Color color = Color.gray;
+	public static final Color color = Color.gray;
     private final Lemming lemming;
     private int tick; 
     public Floater(Lemming lemming)
@@ -49,9 +49,8 @@ public class Floater implements LemmingBehaviour
     
     private void updateLocation(boolean blockBelow, boolean wall,boolean step,boolean frontBlock)
     {
-    	lemming.getGame();
-		boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
-		boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
+		boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;
+        boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
         if (!blockBelow)
         {
 			if(tick==1) fall();

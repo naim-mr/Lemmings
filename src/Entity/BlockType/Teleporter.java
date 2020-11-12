@@ -1,17 +1,15 @@
 package Entity.BlockType;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import Entity.Block;
-import Entity.Lemming;
 
 public class Teleporter implements BlockType
 {
     private final Block block;
     private int teleportToX = 0;
     private int teleportToY = 0;
-    public static Color color = new Color(128, 0, 255);
+    public static final Color color = new Color(128, 0, 255);
 
     public Teleporter (Block block)
     {
@@ -21,20 +19,18 @@ public class Teleporter implements BlockType
     @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(new Color(128, 0, 255));
+        graphics.setColor(color);
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
 
     @Override
-    public boolean setOptionalArgs (int[] args)
+    public void setOptionalArgs (int[] args)
     {
         if (args.length == 2)
         {
             teleportToX = args[0];
             teleportToY = args[1];
-            return true;
         }
-        return false;
     }
 
     @Override

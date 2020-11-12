@@ -1,14 +1,13 @@
 package Entity.LemmingBehaviour;
 
 import Entity.*;
-import Entity.Lemming;
 import Game.LemmingsGameView;
 
 import java.awt.*;
 
 public class Digger implements LemmingBehaviour
 {	
-	public static Color color = Color.yellow;
+	public static final Color color = Color.yellow;
     private final Lemming lemming;
     private int blockDigged;
 
