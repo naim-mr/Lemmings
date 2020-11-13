@@ -40,7 +40,7 @@ public class Digger implements LemmingBehaviour
 
     private void updateBehaviour(boolean blockUpdated, Block blockBelow)
     {
-        if (blockDigged == 4 || !blockUpdated) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
+        if (blockDigged == 5 || !blockUpdated) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         if (blockBelow == null && blockDigged > 0) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
     
     }
