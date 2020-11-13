@@ -38,10 +38,8 @@ public class Bomber implements LemmingBehaviour
     private void blast ()
     {
 
-        ArrayList<Block> blocksToDelete = lemming.getGame().getBlocks((Block b) -> (b.getX() == lemming.getX() + 1 && b.getY() == lemming.getY()) || (b.getX() == lemming.getX() - 1 && b.getY() == lemming.getY()));
-        blocksToDelete.addAll(lemming.getGame().getBlocks((Block b) -> (b.getY() == lemming.getY() + 1 && b.getX() == lemming.getX()) || (b.getY() == lemming.getY() - 1 && b.getX() == lemming.getX())));
-        ArrayList<Lemming> lemmingsToDelete = lemming.getGame().getLemmings((Lemming l) -> (l.getX() == lemming.getX() + 1 && l.getY() == lemming.getY()) || (l.getX() == lemming.getX() - 1 && l.getY() == lemming.getY()));
-        lemmingsToDelete.addAll(lemming.getGame().getLemmings((Lemming l) -> (l.getY() == lemming.getY() + 1 && l.getX() == lemming.getX()) || (l.getY() == lemming.getY() - 1 && l.getY() == lemming.getX())));
+        ArrayList<Block> blocksToDelete = lemming.getGame().getBlocks((Block b) ->( (b.getX() >= lemming.getX()-2  && b.getX()<=lemming.getX()  && (b.getY() >= lemming.getY()-2 && b.getY() <= lemming.getY()+2))  || ((b.getX() < lemming.getX()+2 && b.getX()>=lemming.getX() && (b.getY() >= lemming.getY()-2 && b.getY() <= lemming.getY()+2)) )));
+        ArrayList<Lemming> lemmingsToDelete =  lemming.getGame().getLemmings((Lemming l)->( (l.getX() >= lemming.getX()-2  && l.getX()<=lemming.getX()  && (l.getY() >= lemming.getY()-2 && l.getY() <= lemming.getY()+2))  || ((l.getX() < lemming.getX()+2 && l.getX()>=lemming.getX() && (l.getY() >= lemming.getY()-2 && l.getY() <= lemming.getY()+2)) )));
         lemmingsToDelete.add(this.lemming);
         lemming.getGame().deleteLemming(lemmingsToDelete);
         lemming.getGame().deleteBlock(blocksToDelete);

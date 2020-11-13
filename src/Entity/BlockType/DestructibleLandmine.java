@@ -24,11 +24,6 @@ public class DestructibleLandmine implements BlockType
     }
 
     @Override
-    public void setOptionalArgs (int[] args)
-    {
-    }
-
-    @Override
     public boolean destroy ()
     {
         block.setToDelete();
@@ -39,11 +34,8 @@ public class DestructibleLandmine implements BlockType
     private void blast()
     {
         // Explosion en croix des blocks en lemmings ( y'a pas d'explosion encore lol juste une disparition
-        ArrayList<Block> blocksToDelete = block.getGame().getBlocks((Block b) -> (b.getX() == block.getX() + 1 && b.getY() == block.getY()) || (b.getX() == block.getX() - 1 && b.getY() == block.getY()));
-        blocksToDelete.addAll(block.getGame().getBlocks((Block b) -> (b.getY() == block.getY() + 1 && b.getX() == block.getX()) || (b.getY() == block.getY() - 1 && b.getX() == block.getX())));
-
-        ArrayList<Lemming> lemmingsToDelete = block.getGame().getLemmings((Lemming l) -> (l.getX() == block.getX() + 1 && l.getY() == block.getY()) || (l.getX() == block.getX() - 1 && l.getY() == block.getY()));
-        lemmingsToDelete.addAll(block.getGame().getLemmings((Lemming l) -> (l.getY() == block.getY() + 1 && l.getX() == block.getX()) || (l.getY() == block.getY() - 1 && l.getY() == block.getX())));
+        ArrayList<Block> blocksToDelete = block.getGame().getBlocks((Block b) ->( (b.getX() >= block.getX()-2  && b.getX()<=block.getX()  && (b.getY() >= block.getY()-2 && b.getY() <= block.getY()+2))  || ((b.getX() < block.getX()+2 && b.getX()>=block.getX() && (b.getY() >= block.getY()-2 && b.getY() <= block.getY()+2)) )));
+        ArrayList<Lemming> lemmingsToDelete =  block.getGame().getLemmings((Lemming l)->( (l.getX() >= block.getX()-2  && l.getX()<=block.getX()  && (l.getY() >= block.getY()-2 && l.getY() <= block.getY()+2))  || ((l.getX() < block.getX()+2 && l.getX()>=block.getX() && (l.getY() >= block.getY()-2 && l.getY() <= block.getY()+2)) )));
 
         block.getGame().deleteLemming(lemmingsToDelete);
         block.getGame().deleteBlock(blocksToDelete);
