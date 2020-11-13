@@ -8,7 +8,7 @@ public interface BehaviourRefactor {
 
 	 default void normalUpdateLocation(Lemming lemming ,boolean blockBelow, boolean wall,boolean step,boolean frontBlock)
 	    {
-		 System.out.println("step "+step+" frontBlock: "+frontBlock+ " wall: "+wall + " blockBelow:"+ blockBelow+" pos("+lemming.getX()+","+lemming.getY()+")");
+		 
 		 boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
 		 boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
 		 if (((wall && frontBlock ) || (!step && frontBlock))|| edgeZero || edgeDim) manageFrontWall(lemming);

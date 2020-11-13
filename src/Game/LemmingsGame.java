@@ -132,9 +132,9 @@ public class LemmingsGame
         }
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 6));
-        //
         
-        /*blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8,17));
+        
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8,17));
         blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,16));
         blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,15));
         blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,14));
@@ -156,7 +156,7 @@ public class LemmingsGame
         blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-6,17-6));
         blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-1,17-1));
         blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-3,17-3));
-        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-5,17-5));*/
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-5,17-5));
         // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave
         Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
         spawner3.setOptionalArgs(3);
