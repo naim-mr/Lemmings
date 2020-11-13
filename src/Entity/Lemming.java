@@ -133,7 +133,7 @@ public class Lemming extends Entity
         ArrayList<Block> list;
         getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
         if (getDirection() == DirectionEnum.RIGHT) list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
-        else list = getGame().getBlocks((Block b) -> (b.getX() == getX() - 1) && (b.getY() == getY() || b.getY() == getY() - 1));
+        else list = getGame().getBlocks((Block b) -> (b.getX() == getX() - 1) && ( b.getY() == getY() - 1));
 
         return list.size()>1;
     }

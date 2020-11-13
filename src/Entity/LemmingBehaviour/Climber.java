@@ -50,17 +50,21 @@ public class Climber implements LemmingBehaviour,BehaviourRefactor
     {
     	lemming.getGame();
 		boolean edgeDim= lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;;
-		boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
-    
+		boolean edgeZero= lemming.getX()==1 && lemming.getDirection()==DirectionEnum.LEFT;
+		
         if (!blockBelow && !climbing)
-        {
+        {	 
+        	
             lemming.setY(lemming.getY() + 1);
             lemming.incrementFallHeight();
 
         }else if(step && !wall ) {
         	manageStep(lemming);
         }
-        else if(((!step && frontBlock))|| edgeZero || edgeDim) {  manageFrontWall(lemming); }
+        else if(((!step && frontBlock))|| edgeZero || edgeDim) {
+        	
+        	manageFrontWall(lemming); 
+        	}
         else if (wall && !climbing && frontBlock)
         {
         	climbing = true;
