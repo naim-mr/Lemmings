@@ -3,7 +3,7 @@ Projet de conception objet, niveau L3.
 
 ## Compilation
 
-`javac -d bin src/*/*.java src/*/*/*.java`
+`javac -d bin src/Entity/*.java src/Game/*.java src/Entity/BlockType/*.java src/Entity/LemmingBehaviour/*.java`
 
 ## Execution
 
