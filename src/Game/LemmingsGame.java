@@ -87,8 +87,12 @@ public class LemmingsGame
         {
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 19));
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 0));
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 19, i));
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, i));
+        }
+
+        for (int i = 0; i < 19; i++)
+        {
+            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 19, i));
         }
 
         // FONCTION 3 & 11 & 13 & 14: en haut à gauche
@@ -137,7 +141,7 @@ public class LemmingsGame
         Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
         blocks.add(spawner10);
         spawner10.setOptionalArgs(30);
-        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 18, 18));
+        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 18, 19));
 
         // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
         Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
@@ -191,17 +195,26 @@ public class LemmingsGame
         blocks.add(spawner16);
 
         // Fonction 9 : en dessous d'en haut à gauche.
-        for (int i = 1; i < 6; i++)
+        for (int i = 1; i < 5; i++)
         {
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
+        }
+
+        for (int i = 1; i < 6; i++)
+        {
+
             blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, i, 9));
             blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, i, 8));
         }
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 10));
-        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 5, 10));
+        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 5, 11));
         Block spawner9 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 10);
         spawner9.setOptionalArgs(1);
         blocks.add(spawner9);
+
+        Block spawner9bis = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 8);
+        spawner9bis.setOptionalArgs(1);
+        blocks.add(spawner9bis);
 
 
     }
