@@ -135,8 +135,31 @@ public class LemmingsGame
         //
         Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
         blocks.add(spawner10);
-        spawner10.setOptionalArgs(3);
-        // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
+        spawner10.setOptionalArgs(2);
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8,17));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,16));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,15));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,14));
+        blocks.add(new Block(this,BlockTypeEnum.INDESTRUCTIBLE_BLOCK,9,13));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,9,12));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,10,16));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,10,15));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,10,14));
+        
+        
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8+2,17-2));
+        blocks.add(new Block(this,BlockTypeEnum.INDESTRUCTIBLE_BLOCK,8+4,17-4));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8+6,17-6));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8+1,17-1));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8+3,17-3));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8+5,17-5));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-2,17-2));
+        blocks.add(new Block(this,BlockTypeEnum.INDESTRUCTIBLE_BLOCK,8-4,17-4));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-6,17-6));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-1,17-1));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-3,17-3));
+        blocks.add(new Block(this,BlockTypeEnum.DESTRUCTIBLE_BLOCK,8-5,17-5));
+        // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave
         Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
         spawner3.setOptionalArgs(3);
         blocks.add(spawner3);
@@ -256,20 +279,24 @@ public class LemmingsGame
         if (l != null) l.setToDelete();
     }
 
-    public void deleteBlock (ArrayList<Block> blockArrayList)
-    {
+    public boolean deleteBlock (ArrayList<Block> blockArrayList)
+    {	
+    	boolean everyBlockDeleted =true;
         for (Block b : blockArrayList)
         {
-            deleteBlock(b);
+        	everyBlockDeleted= deleteBlock(b);
         }
+        return everyBlockDeleted;
     }
 
     public void deleteLemming (ArrayList<Lemming> lemmingsToDelete)
     {
+    	
         for (Lemming l : lemmingsToDelete)
         {
-            deleteLemming(l);
+        	deleteLemming(l);
         }
+        
     }
 
     public void setLemmingLocation (Lemming l, int x, int y)
