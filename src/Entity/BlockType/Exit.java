@@ -4,9 +4,8 @@ import java.awt.*;
 
 import Entity.Block;
 
-public class Exit implements BlockType
+public class Exit extends BlockType
 {
-    private final Block block;
     public static final Color color = new Color(128, 128, 0);
 
     public Exit(Block block)
@@ -15,10 +14,9 @@ public class Exit implements BlockType
     }
 
     @Override
-    public void draw(Graphics graphics, int windowX, int windowY)
+    public Color getColor ()
     {
-        graphics.setColor(color);
-        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+        return color;
     }
 
     @Override

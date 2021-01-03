@@ -6,16 +6,14 @@ import Entity.Lemming;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class DestructibleLandmine implements BlockType
+public class DestructibleLandmine extends BlockType
 {
-    private final Block block;
     public static final Color color = new Color (120, 0, 70);
 
     @Override
-    public void draw (Graphics graphics, int windowX, int windowY)
+    public Color getColor ()
     {
-        graphics.setColor(color);
-        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+        return color;
     }
 
     public DestructibleLandmine (Block block)
@@ -33,10 +31,20 @@ public class DestructibleLandmine implements BlockType
 
     private void blast()
     {
-        ArrayList<Block> blocksToDelete = block.getGame().getBlocks((Block b) -> (b.getX() >= block.getX() - 2 && b.getX() <= block.getX() + 2) && (b.getY() >= block.getY() - 2 && b.getY() <= block.getY() + 2));
-        ArrayList<Lemming> lemmingsToDelete = block.getGame().getLemmings((Lemming l) -> (l.getX() >= block.getX() - 2 && l.getX() <= block.getX() + 2) && (l.getY() >= block.getY() - 2 && l.getY() <= block.getY() + 2));
+        ArrayList<Block> blocksToDelete = block.getGame().getBlocks(this::nearbyEntities);
+        ArrayList<Lemming> lemmingsToDelete = block.getGame().getLemmings(this::test);
         blocksToDelete.remove(block);
         block.getGame().deleteLemming(lemmingsToDelete);
         block.getGame().deleteBlock(blocksToDelete);
+    }
+ // todo
+    private boolean nearbyEntities (Block b)
+    {
+        return (b.getX() >= block.getX() - 2 && b.getX() <= block.getX() + 2) && (b.getY() >= block.getY() - 2 && b.getY() <= block.getY() + 2);
+    }
+
+    private boolean test (Lemming l)
+    {
+        return l.getX() >= block.getX() - 2 && l.getX() <= block.getX() + 2 && l.getY() >= block.getY() - 2 && l.getY() <= block.getY() + 2;
     }
 }

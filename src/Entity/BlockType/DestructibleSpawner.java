@@ -5,9 +5,8 @@ import Entity.Block;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class DestructibleSpawner implements BlockType
+public class DestructibleSpawner extends BlockType
 {
-    private final Block block;
     private ArrayList<Block> blocksToSpawn;
     public static final Color color = Color.GREEN;
 
@@ -17,10 +16,15 @@ public class DestructibleSpawner implements BlockType
     }
 
     @Override
+    public Color getColor ()
+    {
+        return color;
+    }
+
+    @Override
     public void draw (Graphics graphics, int windowX, int windowY)
     {
-        graphics.setColor(color);
-        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+        super.draw(graphics, windowX, windowY);
         graphics.setColor(Color.BLACK);
         graphics.drawString("S", windowX + 8, windowY + 13);
     }
@@ -38,5 +42,4 @@ public class DestructibleSpawner implements BlockType
         block.getGame().createBlock(blocksToSpawn);
         return true;
     }
-
 }

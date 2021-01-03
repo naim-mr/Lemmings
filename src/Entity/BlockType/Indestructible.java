@@ -4,9 +4,8 @@ import java.awt.*;
 
 import Entity.Block;
 
-public class Indestructible implements BlockType
+public class Indestructible extends BlockType
 {
-	private final Block block;
 	public static final Color color = Color.BLACK;
 
 	public Indestructible(Block block)
@@ -15,9 +14,8 @@ public class Indestructible implements BlockType
 	}
 
 	@Override
-	public void draw(Graphics graphics, int windowX, int windowY)
+	public Color getColor ()
 	{
-		graphics.setColor(color);
-		graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+		return color;
 	}
 }

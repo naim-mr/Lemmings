@@ -4,9 +4,8 @@ import Entity.Block;
 
 import java.awt.*;
 
-public class Destructible implements BlockType
+public class Destructible extends BlockType
 {
-    private final Block block;
     public static final Color color = Color.GREEN;
 
     public Destructible (Block block)
@@ -15,10 +14,9 @@ public class Destructible implements BlockType
     }
 
     @Override
-    public void draw (Graphics graphics, int windowX, int windowY)
+    public Color getColor ()
     {
-        graphics.setColor(color);
-        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+        return color;
     }
 
     @Override

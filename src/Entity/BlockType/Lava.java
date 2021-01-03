@@ -1,13 +1,11 @@
 package Entity.BlockType;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 import Entity.Block;
 
-public class Lava implements BlockType
+public class Lava extends BlockType
 {
-	private final Block block;
 	public static final Color color = Color.RED;
 
 	public Lava(Block block)
@@ -16,10 +14,9 @@ public class Lava implements BlockType
 	}
 
 	@Override
-	public void draw(Graphics graphics, int windowX, int windowY)
+	public Color getColor ()
 	{
-		graphics.setColor(color);
-		graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+		return color;
 	}
 
 	@Override

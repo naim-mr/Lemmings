@@ -5,21 +5,25 @@ import java.util.ArrayList;
 
 import Entity.*;
 
-public interface BlockType
+public abstract class BlockType
 {
-    void draw(Graphics graphics, int windowX, int windowY);
+    protected Block block;
 
-    default void setOptionalArgs (int[] args){}
+    public abstract Color getColor();
 
-    default void setOptionalArgs (ArrayList<Block> blocks) {
+    public void draw (Graphics graphics, int windowX, int windowY)
+    {
+        graphics.setColor(getColor());
+        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
-
-    default boolean update ()
+    public void setOptionalArgs (int[] args){}
+    public void setOptionalArgs (ArrayList<Block> blocks) {
+    }
+    public boolean update ()
     {
         return false;
     }
-
-    default boolean destroy ()
+    public boolean destroy ()
     {
         return false;
     }

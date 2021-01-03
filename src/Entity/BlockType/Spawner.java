@@ -7,9 +7,8 @@ import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.awt.Graphics;
 
-public class Spawner implements BlockType
+public class Spawner extends BlockType
 {
-    private final Block block;
     private int lemmingsNb;
     private int cooldown = 0;
     public static final Color color = Color.YELLOW;
@@ -20,10 +19,9 @@ public class Spawner implements BlockType
     }
 
     @Override
-    public void draw(Graphics graphics, int windowX, int windowY)
+    public Color getColor ()
     {
-        graphics.setColor(color);
-        graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
+        return color;
     }
 
     @Override
