@@ -2,16 +2,14 @@ package Entity.LemmingBehaviour;
 
 import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGameView;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 
-public class Blocker implements LemmingBehaviour
+public class Blocker extends LemmingBehaviour
 {
     public static final Color color = Color.CYAN;
-    private final Lemming lemming;
 
     public Blocker (Lemming lemming)
     {
@@ -19,11 +17,9 @@ public class Blocker implements LemmingBehaviour
     }
 
     @Override
-    public void draw (Graphics graphics, int windowX, int windowY)
+    Color getColor ()
     {
-        graphics.setColor(Color.CYAN);
-        graphics.setColor(color);
-        graphics.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
+        return color;
     }
 
     @Override

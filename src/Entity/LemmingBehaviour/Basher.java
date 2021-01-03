@@ -4,14 +4,12 @@ import Entity.Block;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
-import Game.LemmingsGameView;
 
 import java.awt.*;
 
-public class Basher implements LemmingBehaviour
+public class Basher extends LemmingBehaviour
 {
     public static final Color color = Color.red;
-    private final Lemming lemming;
     private int blockDrill;
 
     public Basher (Lemming lemming)
@@ -21,10 +19,9 @@ public class Basher implements LemmingBehaviour
     }
 
     @Override
-    public void draw (Graphics g, int windowX, int windowY)
+    Color getColor ()
     {
-        g.setColor(color);
-        g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
+        return color;
     }
 
     @Override

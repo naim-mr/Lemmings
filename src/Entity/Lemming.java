@@ -96,12 +96,6 @@ public class Lemming extends Entity
         return this.direction;
     }
 
-    public boolean findSuperiorBlock ()
-    {
-        return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
-    }
-
-    // TODO
     public boolean findInferiorBlock ()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() + 1 && b.getX() == getX()).size() >= 1;
@@ -138,7 +132,6 @@ public class Lemming extends Entity
     public boolean findFrontWall ()
     {
         ArrayList<Block> list;
-        getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
         if (getDirection() == DirectionEnum.RIGHT)
             list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1) && (b.getY() == getY() || b.getY() == getY() - 1));
         else

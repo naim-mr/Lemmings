@@ -6,9 +6,8 @@ import java.awt.Graphics;
 import Game.*;
 import Entity.Lemming;
 
-public class Normal implements LemmingBehaviour
+public class Normal extends LemmingBehaviour
 {
-    private final Lemming lemming;
     public static final Color color = Color.pink;
 
     public Normal (Lemming lemming)
@@ -17,10 +16,9 @@ public class Normal implements LemmingBehaviour
     }
 
     @Override
-    public void draw (Graphics g, int windowX, int windowY)
+    Color getColor ()
     {
-        g.setColor(color);
-        g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
+        return color;
     }
 
 

@@ -3,14 +3,12 @@ package Entity.LemmingBehaviour;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
-import Game.LemmingsGameView;
 
 import java.awt.*;
 
-public class Climber implements LemmingBehaviour
+public class Climber extends LemmingBehaviour
 {
     public static final Color color = Color.lightGray;
-    private final Lemming lemming;
     private boolean climbing;
 
     public Climber (Lemming lemming)
@@ -20,10 +18,9 @@ public class Climber implements LemmingBehaviour
     }
 
     @Override
-    public void draw (Graphics g, int windowX, int windowY)
+    Color getColor ()
     {
-        g.setColor(color);
-        g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
+        return color;
     }
 
 

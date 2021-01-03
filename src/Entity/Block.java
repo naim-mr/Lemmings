@@ -18,8 +18,6 @@ public class Block extends Entity
         this.x = x;
         this.toDelete = false;
         this.y = y;
-        this.width = LemmingsGameView.TILE_SIZE;
-        this.height = LemmingsGameView.TILE_SIZE;
     }
 
     @Override
@@ -85,8 +83,5 @@ public class Block extends Entity
         blockType.setOptionalArgs(blocks);
     }
 
-    public boolean findSuperiorBlock ()
-    {
-        return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
-    }
+
 }

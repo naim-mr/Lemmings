@@ -3,15 +3,14 @@ package Entity.LemmingBehaviour;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
-import Game.LemmingsGameView;
+
 
 import java.awt.*;
 
-public class Floater implements LemmingBehaviour
+public class Floater extends LemmingBehaviour
 {	
 	public static final Color color = Color.gray;
-    private final Lemming lemming;
-    private int tick; 
+    private int tick;
     public Floater(Lemming lemming)
     {
         this.lemming = lemming;
@@ -19,11 +18,10 @@ public class Floater implements LemmingBehaviour
     }
 
     @Override
-    public void draw(Graphics g, int windowX, int windowY)
+    Color getColor ()
     {
-         g.setColor(color);
-         g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
-     }
+        return color;
+    }
 
 
     @Override
@@ -49,8 +47,6 @@ public class Floater implements LemmingBehaviour
     
     private void updateLocation(boolean blockBelow, boolean wall,boolean step,boolean frontBlock)
     {
-		boolean edgeDim = lemming.getX()== LemmingsGame.MAP_DIMENSION && lemming.getDirection()==DirectionEnum.RIGHT;
-        boolean edgeZero= lemming.getX()==0 && lemming.getDirection()==DirectionEnum.LEFT;
         if (!blockBelow)
         {
 			if(tick==1) fall();

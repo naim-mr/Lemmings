@@ -9,10 +9,9 @@ import Game.LemmingsGameView;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Bomber implements LemmingBehaviour
+public class Bomber extends LemmingBehaviour
 {
     public static final Color color = Color.magenta;
-    private final Lemming lemming;
     private int countDown;
 
     public Bomber (Lemming lemming)
@@ -21,19 +20,16 @@ public class Bomber implements LemmingBehaviour
         countDown = 3;
     }
 
+    @Override
+    Color getColor ()
+    {
+        return color;
+    }
+
     private void decrementCountDown ()
     {
         this.countDown--;
     }
-
-    @Override
-    public void draw (Graphics g, int windowX, int windowY)
-    {
-        g.setColor(color);
-        g.fillRect(windowX, windowY, LemmingsGameView.TILE_SIZE, LemmingsGameView.TILE_SIZE);
-
-    }
-
 
     private void blast ()
     {
@@ -76,19 +72,13 @@ public class Bomber implements LemmingBehaviour
 
     private void updateLocation (boolean blockBelow, boolean wall, boolean step, boolean frontBlock)
     {
-        boolean edgeDim = lemming.getX() == LemmingsGame.MAP_DIMENSION && lemming.getDirection() == DirectionEnum.RIGHT;
-        boolean edgeZero = lemming.getX() == 0 && lemming.getDirection() == DirectionEnum.LEFT;
-
         if (!blockBelow)
         {
             lemming.incrementFallHeight();
             lemming.setY(lemming.getY() + 1);
         }
         else lemming.normalUpdateLocation(wall, step, frontBlock);
-
     }
-
-
 }
     
 

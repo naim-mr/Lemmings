@@ -1,6 +1,7 @@
 package Entity;
 
 import Game.LemmingsGame;
+import Game.LemmingsGameView;
 
 import java.awt.*;
 
@@ -11,8 +12,9 @@ public abstract class Entity
     protected boolean toDelete;
     protected int x;
     protected int y;
-    protected int width; // normalement inutile
-    protected int height; // normalement inutile
+    public static final int width = LemmingsGameView.TILE_SIZE; // normalement inutile
+    public static final int height = LemmingsGameView.TILE_SIZE; // normalement inutile
+
 
     public int getWidth()
     {
@@ -61,6 +63,11 @@ public abstract class Entity
     public LemmingsGame getGame()
     {
         return game;
+    }
+
+    public boolean findSuperiorBlock ()
+    {
+        return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
     }
 
 }
