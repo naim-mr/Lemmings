@@ -213,7 +213,7 @@ public class LemmingsGame implements ILemmingsGame
         blocks.add(spawner9bis);
     }
 
-    private void update ()
+    public void step ()
     {
         for (Lemming l : getLemmings())
         {
@@ -232,26 +232,6 @@ public class LemmingsGame implements ILemmingsGame
 
         lemmings.removeIf(Entity::getToDelete);
         blocks.removeIf(Entity::getToDelete);
-    }
-
-    // Main loop
-    /*FONCTION QUI VA GERER La boucle de jeu*/
-    @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
-    public void gameLoop ()
-    {
-        while (true)
-        {
-            try
-            {
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException e1)
-            {
-                e1.printStackTrace();
-            }
-            update();
-            if (lemmingsGameObservable != null) lemmingsGameObservable.notifyObservers();
-        }
     }
 
     public void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)

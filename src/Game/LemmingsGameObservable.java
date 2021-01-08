@@ -49,9 +49,9 @@ public class LemmingsGameObservable implements ILemmingsGame
     }
 
     @Override
-    public void gameLoop ()
+    public void step ()
     {
-        lemmingsGame.gameLoop();
+        lemmingsGame.step();
     }
 
     @Override

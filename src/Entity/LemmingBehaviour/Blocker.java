@@ -5,7 +5,6 @@ import Entity.Lemming;
 
 import java.util.ArrayList;
 
-
 public class Blocker extends LemmingBehaviour
 {
     public Blocker (Lemming lemming)
