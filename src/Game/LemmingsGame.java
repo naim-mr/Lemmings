@@ -17,7 +17,7 @@ public class LemmingsGame implements ILemmingsGame
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
     private int escapedLemmings = 0;
 
-    public LemmingsGame (LemmingsGameObservable observable)
+    LemmingsGame (LemmingsGameObservable observable)
     {
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
@@ -250,7 +250,7 @@ public class LemmingsGame implements ILemmingsGame
                 e1.printStackTrace();
             }
             update();
-            lemmingsGameObservable.notifyObservers();
+            if (lemmingsGameObservable != null) lemmingsGameObservable.notifyObservers();
         }
     }
 

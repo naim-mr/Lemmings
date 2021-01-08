@@ -15,4 +15,10 @@ public class Exit extends BlockType
         block.getGame().onLemmingEscape(block.getLemmingsOnBlock());
     	return true;
     }
+
+    @Override
+    public boolean setToDelete ()
+    {
+        return false;
+    }
 }

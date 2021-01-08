@@ -26,7 +26,6 @@ public class LemmingsController
         view.repaint();
     }
 
-
     private void onGameClick (int mapX, int mapY)
     {
         game.changeLemming(mapX, mapY);
