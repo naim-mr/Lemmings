@@ -5,22 +5,13 @@ import Game.LemmingsGameView;
 
 import java.awt.*;
 
-public abstract class Entity
+public abstract class Entity implements IEntity
 {
     protected LemmingsGame game;
     protected Color color;
     protected boolean toDelete;
-    protected int x;
-    protected int y;
-    public static final int width = LemmingsGameView.TILE_SIZE; // normalement inutile
-    public static final int height = LemmingsGameView.TILE_SIZE; // normalement inutile
-
-
-    public int getWidth()
-    {
-        return width;
-    }
-
+    protected Coordinate coord ;
+  
     public void setToDelete()
     {
         toDelete = true;
@@ -31,29 +22,25 @@ public abstract class Entity
         return this.toDelete;
     }
 
-    public int getHeight()
-    {
-        return height;
-    }
-
+    
     public int getX()
     {
-        return x;
+        return coord.getX();
     }
 
     public int getY()
     {
-        return y;
+        return coord.getY();
     }
 
     public void setX(int x)
     {
-        this.x = x;
+    	coord.setX(x);
     }
 
     public void setY(int y)
     {
-        this.y = y;
+        coord.setY(y);
     }
 
     public abstract void draw(Graphics graphics, int windowX, int windowY);
@@ -67,7 +54,7 @@ public abstract class Entity
 
     public boolean findSuperiorBlock ()
     {
-        return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
+        return getGame().getBlocks((BlockObservable b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
     }
 
 }

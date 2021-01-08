@@ -1,13 +1,14 @@
 package Entity.BlockType;
 
 import Entity.Block;
+import Entity.BlockObservable;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class DestructibleSpawner extends BlockType
 {
-    private ArrayList<Block> blocksToSpawn;
+    private ArrayList<BlockObservable> blocksToSpawn;
     public static final Color color = Color.GREEN;
 
     public DestructibleSpawner (Block block)
@@ -30,7 +31,7 @@ public class DestructibleSpawner extends BlockType
     }
 
     @Override
-    public void setOptionalArgs (ArrayList<Block> blocks)
+    public void setOptionalArgs (ArrayList<BlockObservable> blocks)
     {
         blocksToSpawn = blocks;
     }

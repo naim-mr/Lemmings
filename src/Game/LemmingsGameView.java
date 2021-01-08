@@ -1,6 +1,10 @@
 package Game;
 
+import Entity.BlockObservable;
 import Entity.Entity;
+import Entity.EntityObservable;
+import Entity.EntityObserver;
+import Entity.LemmingObservable;
 import Entity.LemmingBehaviour.*;
 
 import javax.swing.*;
@@ -10,7 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
-public class LemmingsGameView extends JComponent
+public class LemmingsGameView extends JComponent implements EntityObserver
 {
     private final LemmingsGame game;
     private static final long serialVersionUID = 1L;
@@ -22,10 +26,10 @@ public class LemmingsGameView extends JComponent
     {
         super();
         this.game = game;
-
+      //  registerView();
         setOpaque(true);
         setSize(GAME_DIMENSION, WINDOW_DIMENSION);
-
+        registering(game);
         MouseAdapter clickListener = new MouseAdapter()
         {
             @Override
@@ -40,8 +44,15 @@ public class LemmingsGameView extends JComponent
         addMouseListener(clickListener);
 
     }
-
-    public static int[] mapToWindowCoords(int x, int y)
+   
+    
+    private void registering(LemmingsGame g) {
+    	for(BlockObservable b : g.getBlocks()) b.register(this);
+    	for(LemmingObservable l:g.getLemmings()) l.register(this);
+    }
+    
+    
+     public static int[] mapToWindowCoords(int x, int y)
     {
         return new int[]{x * TILE_SIZE, TILE_SIZE * y};
     }
@@ -109,7 +120,7 @@ public class LemmingsGameView extends JComponent
         }
     }
 
-    private void drawEntity(Graphics g, Entity e)
+    private void drawEntity(Graphics g, EntityObservable e)
     {
         int[] windowCoords = mapToWindowCoords(e.getX(), e.getY());
         e.draw(g, windowCoords[0], windowCoords[1]);
@@ -117,11 +128,11 @@ public class LemmingsGameView extends JComponent
 
     private void drawEntities(Graphics g)
     {
-        ArrayList<Entity> entities = new ArrayList<>();
+        ArrayList<EntityObservable> entities = new ArrayList<>();
         entities.addAll(game.getBlocks());
         entities.addAll(game.getLemmings());
 
-        for (Entity e : entities)
+        for (EntityObservable e : entities)
         {	
         	if(e!=null)         drawEntity(g, e); // TODO G
         }
@@ -200,6 +211,12 @@ public class LemmingsGameView extends JComponent
 
         g.fillRect(TILE_SIZE * 17, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
+
+	@Override
+	public void update() {
+		repaint();
+		
+	}
 
 }
 

@@ -2,5 +2,5 @@ package Entity;
 
 public interface LemmingCondition
 {
-    boolean test (Lemming l);
+    boolean test (LemmingObservable l);
 }

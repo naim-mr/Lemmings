@@ -1,8 +1,10 @@
 package Entity.LemmingBehaviour;
 
 import Entity.Block;
+import Entity.BlockObservable;
 import Entity.DirectionEnum;
 import Entity.Lemming;
+import Entity.LemmingObservable;
 import Game.LemmingsGame;
 import Game.LemmingsGameView;
 
@@ -33,10 +35,10 @@ public class Bomber extends LemmingBehaviour
 
     private void blast ()
     {
-        ArrayList<Block> blocksToDelete = lemming.getGame().getBlocks((Block b) -> (b.getX() >= lemming.getX() - 2 && b.getX() <= lemming.getX() + 2) && (b.getY() >= lemming.getY() - 2 && b.getY() <= lemming.getY() + 2));
-        ArrayList<Lemming> lemmingsToDelete = lemming.getGame().getLemmings((Lemming l) -> (l.getX() >= lemming.getX() - 2 && l.getX() <= lemming.getX() + 2) && (l.getY() >= lemming.getY() - 2 && l.getY() <= lemming.getY() + 2));
+        ArrayList<BlockObservable> blocksToDelete = lemming.getGame().getBlocks((BlockObservable b) -> (b.getX() >= lemming.getX() - 2 && b.getX() <= lemming.getX() + 2) && (b.getY() >= lemming.getY() - 2 && b.getY() <= lemming.getY() + 2));
+        ArrayList<LemmingObservable> lemmingsToDelete = lemming.getGame().getLemmings((LemmingObservable l) -> (l.getX() >= lemming.getX() - 2 && l.getX() <= lemming.getX() + 2) && (l.getY() >= lemming.getY() - 2 && l.getY() <= lemming.getY() + 2));
 
-        lemmingsToDelete.add(this.lemming);
+        lemmingsToDelete.add(new LemmingObservable(this.lemming));
         lemming.getGame().deleteLemming(lemmingsToDelete);
         lemming.getGame().deleteBlock(blocksToDelete);
     }

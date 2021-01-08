@@ -28,14 +28,14 @@ public class Digger extends LemmingBehaviour
     public boolean update ()
     {
         boolean blockUpdated = false;
-        Block blockBelow = lemming.getInferiorBlock();
+        BlockObservable blockBelow = lemming.getInferiorBlock();
         if (blockBelow != null) blockUpdated = destroyBlock(blockBelow);
         updateLocation(blockUpdated);
         updateBehaviour(blockUpdated, blockBelow);
         return true;
     }
 
-    private void updateBehaviour(boolean blockUpdated, Block blockBelow)
+    private void updateBehaviour(boolean blockUpdated, BlockObservable blockBelow)
     {
         if (blockDigged == 5 || !blockUpdated) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
         if (blockBelow == null && blockDigged > 0) lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
@@ -51,7 +51,7 @@ public class Digger extends LemmingBehaviour
         }
     }
 
-    public boolean destroyBlock (Block blockBelow)
+    public boolean destroyBlock (BlockObservable blockBelow)
     {
         if (blockBelow != null) return lemming.getGame().deleteBlock(blockBelow);
         else return false;

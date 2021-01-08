@@ -6,11 +6,13 @@ import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.util.ArrayList;
 
-public class LemmingsGame
+public class LemmingsGame 
 {
-    private final ArrayList<Block> blocks;
-    private final ArrayList<Lemming> lemmings;
-    private LemmingsGameView lemmingsGameView;
+    private final ArrayList<BlockObservable> blocks;
+    private final ArrayList<LemmingObservable> lemmings;
+    
+    
+
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
 
     public static final int MAP_DIMENSION = 20;
@@ -25,41 +27,37 @@ public class LemmingsGame
     }
 
     // NE PAS MODIFIER
-    public ArrayList<Block> getBlocks ()
+    public ArrayList<BlockObservable> getBlocks ()
     {
         return new ArrayList<>(blocks);
     }
 
     // NE PAS MODIFIER
-    public ArrayList<Lemming> getLemmings ()
+    public ArrayList<LemmingObservable> getLemmings ()
     {
         return new ArrayList<>(lemmings);
     }
 
-    public ArrayList<Block> getBlocks (BlockCondition blockCondition)
+    public ArrayList<BlockObservable> getBlocks (BlockCondition blockCondition)
     {
-        ArrayList<Block> outBlock = new ArrayList<>();
-        for (Block b : blocks)
+        ArrayList<BlockObservable> outBlock = new ArrayList<>();
+        for (BlockObservable b : blocks)
         {
             if (blockCondition.test(b)) outBlock.add(b);
         }
         return outBlock;
     }
 
-    public ArrayList<Lemming> getLemmings (LemmingCondition lemmingCondition)
+    public ArrayList<LemmingObservable> getLemmings (LemmingCondition lemmingCondition)
     {
-        ArrayList<Lemming> outLemming = new ArrayList<>();
-        for (Lemming l : lemmings)
+        ArrayList<LemmingObservable> outLemming = new ArrayList<>();
+        for (LemmingObservable l : lemmings)
         {
             if (lemmingCondition.test(l)) outLemming.add(l);
         }
         return outLemming;
     }
 
-    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
-    {
-        this.lemmingsGameView = lemmingsGameView;
-    }
 
 
     /* Liste des fonctions à mettre sur la map :
@@ -85,98 +83,98 @@ public class LemmingsGame
     {
         for (int i = 0; i < 20; ++i)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 19));
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 0));
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, i));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 19));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 0));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 0, i));
         }
 
         for (int i = 0; i < 19; i++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 19, i));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 19, i));
         }
 
         // FONCTION 3 & 11 & 13 & 14: en haut à gauche
-        Block spawner1 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 4);
+        BlockObservable spawner1 = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 4);
         spawner1.setOptionalArgs(1);
         blocks.add(spawner1);
 
         for (int j = 1; j < 6; j++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, j, 5));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, j, 5));
         }
 
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 4));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 3));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 2));
-        Block teleporter = new Block(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 2);
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 4, 4));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 4));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 3));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 2));
+        BlockObservable teleporter = new BlockObservable(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 2);
         teleporter.setOptionalArgs(9, 1);
         blocks.add(teleporter);
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 1));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 9, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 10, 2));
-        blocks.add(new Block(this, BlockTypeEnum.LAVA_BLOCK, 11, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 1));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 9, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 10, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.LAVA_BLOCK, 11, 2));
 
 
         // FONCTION 4 & 5 : en haut à droite
-        Block spawner2 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
+       BlockObservable spawner2 = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
 
         spawner2.setOptionalArgs(1);
         blocks.add(spawner2);
 
 
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 18, 13));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 15, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 16, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 18, 13));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 15, 2));
         for (int i = 2; i < 10; ++i)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 17, i));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 17, i));
         }
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 6));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 6));
 
         // Fonction 10 & 2 : tout en bas
-        Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
+       BlockObservable spawner10 = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
         blocks.add(spawner10);
         spawner10.setOptionalArgs(30);
-        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 18, 19));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.EXIT_BLOCK, 18, 19));
 
         // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
-        Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
+       BlockObservable spawner3 = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
         spawner3.setOptionalArgs(3);
         blocks.add(spawner3);
 
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 4));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 4));
         for (int j = 4; j < 10; j++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 7, j));
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, j));
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, j));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 7, j));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, j));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, j));
         }
         for (int i = 0; i < 9; i++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8 + i, 4));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8 + i, 4));
         }
         for (int i = 0; i < 4; i++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 12 + i, 3));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 12 + i, 3));
         }
 
         // FONCTION 15 : en dessous de 6, 7, 8
 
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 10));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 10));
 
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 11));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 11));
-        blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 11));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 11));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 7, 11));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 11));
 
-        Block bridgeSpawner = new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_SPAWNER, 8, 10);
-        ArrayList<Block> bridge = new ArrayList<>();
+        BlockObservable bridgeSpawner = new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_SPAWNER, 8, 10);
+        ArrayList<BlockObservable> bridge = new ArrayList<>();
         for (int i = 9; i < 18; i++)
         {
-            bridge.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
+            bridge.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
         }
         bridgeSpawner.setOptionalArgs(bridge);
 
@@ -187,83 +185,78 @@ public class LemmingsGame
 
         for (int i = 9; i < 17; i++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 9));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 9));
         }
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_LANDMINE, 14, 8));
-        Block spawner16 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 9, 8);
+        blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_LANDMINE, 14, 8));
+       BlockObservable spawner16 = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 9, 8);
         spawner16.setOptionalArgs(5);
         blocks.add(spawner16);
 
         // Fonction 9 : en dessous d'en haut à gauche.
         for (int i = 1; i < 5; i++)
         {
-            blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
         }
 
         for (int i = 1; i < 6; i++)
         {
 
-            blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, i, 9));
-            blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, i, 8));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, i, 9));
+            blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, i, 8));
         }
-        blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 10));
-        blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 5, 11));
-        Block spawner9 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 10);
+        blocks.add(new BlockObservable(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 10));
+        blocks.add(new BlockObservable(this, BlockTypeEnum.EXIT_BLOCK, 5, 11));
+       BlockObservable spawner9 = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 10);
         spawner9.setOptionalArgs(1);
         blocks.add(spawner9);
 
-        Block spawner9bis = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 8);
+       BlockObservable spawner9bis = new BlockObservable(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 8);
         spawner9bis.setOptionalArgs(1);
         blocks.add(spawner9bis);
 
 
     }
 
+    
     private void update ()
     {
      
 
-        for (Lemming l : getLemmings())
-        {
-            l.update();
-        }
-
-        for (Block b : blocks)
-        {
-            b.update();
-        }
-        lemmings.removeIf(Entity::getToDelete);
-        blocks.removeIf(Entity::getToDelete);
+        for(LemmingObservable l : lemmings) l.update();
+        for(BlockObservable b: blocks)b.update();
+        lemmings.removeIf(EntityObservable::getToDelete);
+        blocks.removeIf(EntityObservable::getToDelete);
     }
 
     // Main loop
     /*FONCTION QUI VA GERER La boucle de jeu*/
     @SuppressWarnings("InfiniteLoopStatement")
     public void gameLoop ()
-    {
+    {  
+    	int FRAME_PER_SECOND = 1 ;
         while (true)
         {
             try
             {
-                Thread.sleep(1000);
+                Thread.sleep(1000/FRAME_PER_SECOND);
             }
             catch (InterruptedException e1)
             {
                 e1.printStackTrace();
             }
             update();
-            lemmingsGameView.repaint();
+      
         }
     }
 
     public void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
-        lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
+        lemmings.add(new LemmingObservable(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
 
     public void changeLemming (int mapX, int mapY)
     {
-        for (Lemming l : getLemmings())
+        for (LemmingObservable l : getLemmings())
         {
             if (l.getX() == mapX && l.getY() == mapY)
             {
@@ -283,7 +276,7 @@ public class LemmingsGame
         return selectedBehaviour;
     }
 
-    public boolean deleteBlock (Block b)
+    public boolean deleteBlock (BlockObservable b)
     {
         if (b != null) {
         	      	return b.destroy();
@@ -291,28 +284,28 @@ public class LemmingsGame
         else return false;
     }
 
-    public void deleteLemming (Lemming l)
+    public void deleteLemming (LemmingObservable l)
     {
         if (l != null) l.setToDelete();
     }
 
-    public void deleteBlock (ArrayList<Block> blockArrayList)
+    public void deleteBlock (ArrayList<BlockObservable> blockArrayList)
     {
-        for (Block b : blockArrayList)
+        for (BlockObservable b : blockArrayList)
         {
             deleteBlock(b);
         }
     }
 
-    public void deleteLemming (ArrayList<Lemming> lemmingsToDelete)
+    public void deleteLemming (ArrayList<LemmingObservable> lemmingsToDelete)
     {
-        for (Lemming l : lemmingsToDelete)
+        for (LemmingObservable l : lemmingsToDelete)
         {
             deleteLemming(l);
         }
     }
 
-    public void setLemmingLocation (Lemming l, int x, int y)
+    public void setLemmingLocation (LemmingObservable l, int x, int y)
     {
         if (l != null)
         {
@@ -321,23 +314,23 @@ public class LemmingsGame
         }
     }
 
-    public void setLemmingLocation (ArrayList<Lemming> lemmings, int x, int y)
+    public void setLemmingLocation (ArrayList<LemmingObservable> lemmings, int x, int y)
     {
-        for (Lemming l : lemmings)
+        for (LemmingObservable l : lemmings)
         {
             setLemmingLocation(l, x, y);
         }
     }
 
-    public void onLemmingEscape (Lemming l)
+    public void onLemmingEscape (LemmingObservable l)
     {
         ++escapedLemmings;
         deleteLemming(l);
     }
 
-    public void onLemmingEscape (ArrayList<Lemming> lemmings)
+    public void onLemmingEscape (ArrayList<LemmingObservable> lemmings)
     {
-        for (Lemming l : lemmings)
+        for (LemmingObservable l : lemmings)
         {
             onLemmingEscape(l);
         }
@@ -345,10 +338,10 @@ public class LemmingsGame
 
     public void createBlock (BlockTypeEnum blockTypeEnum, int x, int y)
     {
-        blocks.add(new Block(this, blockTypeEnum, x, y));
+        blocks.add(new BlockObservable(this, blockTypeEnum, x, y));
     }
 
-    public void createBlock (ArrayList<Block> b)
+    public void createBlock (ArrayList<BlockObservable> b)
     {
         blocks.addAll(b);
     }

@@ -10,14 +10,25 @@ import java.util.ArrayList;
 public class Block extends Entity
 {
     private BlockType blockType;
-
+    public static final int width = LemmingsGameView.TILE_SIZE; // normalement inutile
+    public static final int height = LemmingsGameView.TILE_SIZE; // normalement inutile
     public Block (LemmingsGame game, BlockTypeEnum blockType, int x, int y)
     {
         changeTypeTo(blockType);
         this.game = game;
-        this.x = x;
+        this.coord=new Coordinate (x,y);
         this.toDelete = false;
-        this.y = y;
+       
+    }
+    
+    public int getWidth()
+    {
+        return width;
+    }
+    
+    public int getHeight()
+    {
+        return height;
     }
 
     @Override
@@ -68,9 +79,9 @@ public class Block extends Entity
         return blockType.destroy();
     }
 
-    public ArrayList<Lemming> getLemmingsOnBlock ()
+    public ArrayList<LemmingObservable> getLemmingsOnBlock ()
     {
-        return getGame().getLemmings((Lemming l) -> l.getX() == getX() && l.getY() == getY() - 1);
+        return getGame().getLemmings((LemmingObservable l) -> l.getX() == getX() && l.getY() == getY() - 1);
     }
 
     public void setOptionalArgs (int... args)
@@ -78,7 +89,7 @@ public class Block extends Entity
         blockType.setOptionalArgs(args);
     }
 
-    public void setOptionalArgs (ArrayList<Block> blocks)
+    public void setOptionalArgs (ArrayList<BlockObservable> blocks)
     {
         blockType.setOptionalArgs(blocks);
     }

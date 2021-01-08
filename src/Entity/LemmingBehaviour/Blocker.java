@@ -2,6 +2,7 @@ package Entity.LemmingBehaviour;
 
 import Entity.DirectionEnum;
 import Entity.Lemming;
+import Entity.LemmingObservable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ public class Blocker extends LemmingBehaviour
         }
     }
 
-    private void changeLemmingDirection (ArrayList<Lemming> lemmings)
+    private void changeLemmingDirection (ArrayList<LemmingObservable> arrayList)
     {
-        for (Lemming l : lemmings)
+        for (LemmingObservable l : arrayList)
         {
             l.changeDirectionTo((l.getX() == lemming.getX() + 1) ? DirectionEnum.RIGHT : DirectionEnum.LEFT);
         }

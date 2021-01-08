@@ -1,6 +1,7 @@
 package Entity.LemmingBehaviour;
 
 import Entity.Block;
+import Entity.BlockObservable;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
@@ -28,7 +29,7 @@ public class Basher extends LemmingBehaviour
     public boolean update ()
     {
         boolean blockBelow = lemming.findInferiorBlock();
-        Block blockForward = lemming.getFrontBlock();
+        BlockObservable blockForward = lemming.getFrontBlock();
         boolean blockUpdated = false;
         if (blockBelow)
         {
@@ -44,7 +45,7 @@ public class Basher extends LemmingBehaviour
         return true;
     }
 
-    private void updateLocation (boolean blockUpdated, boolean blockBelow, Block blockForward)
+    private void updateLocation (boolean blockUpdated, boolean blockBelow, BlockObservable blockForward)
     {
         if (!blockBelow)
         {
@@ -77,8 +78,8 @@ public class Basher extends LemmingBehaviour
             lemming.setX(lemming.getX() - 1);
             lemming.changeDirectionTo(DirectionEnum.LEFT);
         }
-        else if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
-        else if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
+        else  lemming.setX(lemming.getX() + lemming.getDirection().getX());
+      
     }
 
 }

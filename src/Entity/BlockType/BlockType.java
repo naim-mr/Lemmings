@@ -17,7 +17,7 @@ public abstract class BlockType
         graphics.fillRect(windowX, windowY, block.getWidth(), block.getHeight());
     }
     public void setOptionalArgs (int[] args){}
-    public void setOptionalArgs (ArrayList<Block> blocks) {
+    public void setOptionalArgs (ArrayList<BlockObservable> blocks) {
     }
     public boolean update ()
     {

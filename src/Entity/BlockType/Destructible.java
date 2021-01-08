@@ -1,4 +1,4 @@
-package Entity.BlockType;
+	package Entity.BlockType;
 
 import Entity.Block;
 

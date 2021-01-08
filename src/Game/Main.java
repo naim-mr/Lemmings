@@ -10,7 +10,7 @@ public class Main
         LemmingsGame game = new LemmingsGame();
         LemmingsController controller = new LemmingsController(game);
         LemmingsGameView view = new LemmingsGameView(game, controller);
-        game.setLemmingsGameView(view);
+
         controller.setLemmingsGameView(view);
         JFrame jframe = new JFrame("Lemmings");
         jframe.add(view);
