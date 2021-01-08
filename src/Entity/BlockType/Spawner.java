@@ -1,11 +1,7 @@
 package Entity.BlockType;
 
-import java.awt.Color;
-
 import Entity.Block;
 import Entity.LemmingBehaviour.LemmingBehaviourEnum;
-
-import java.awt.Graphics;
 
 public class Spawner extends BlockType
 {
@@ -15,12 +11,13 @@ public class Spawner extends BlockType
     public Spawner(Block block)
     {
         this.block = block;
+        lemmingsNb = 0;
     }
 
     @Override
-    public void setOptionalArgs (int[] args)
+    public void setNumberToSpawn (int nb)
     {
-        lemmingsNb = args[0];
+        lemmingsNb = nb;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package Entity.BlockType;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import Entity.*;
@@ -9,9 +8,6 @@ public abstract class BlockType
 {
     protected Block block;
 
-    public void setOptionalArgs (int[] args){}
-    public void setOptionalArgs (ArrayList<Block> blocks) {
-    }
     public boolean update ()
     {
         return false;
@@ -20,4 +16,7 @@ public abstract class BlockType
     {
         return false;
     }
+    public void setNumberToSpawn (int nb) {}
+    public void setBlocksToSpawn (ArrayList<Block> blocks) {}
+    public void setTeleportTo (int x, int y) {}
 }

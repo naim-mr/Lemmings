@@ -54,6 +54,12 @@ public class LemmingsGameObservable implements ILemmingsGame
         lemmingsGame.gameLoop();
     }
 
+    @Override
+    public int getMapDimension ()
+    {
+        return lemmingsGame.getMapDimension();
+    }
+
     public void registerObserver(ILemmingsGameObserver o) {
         observers.add(o);
     }

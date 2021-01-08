@@ -3,17 +3,14 @@ package Entity;
 import Entity.LemmingBehaviour.*;
 import Game.LemmingsGame;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Lemming extends Entity
 {
     private LemmingBehaviourEnum lemmingBehaviourEnum;
     private LemmingBehaviour behaviour;
-
-    private int fallHeight;
-
     private DirectionEnum direction;
+    private int fallHeight;
 
     public Lemming (LemmingsGame game, LemmingBehaviourEnum lemmingBehaviour, int x, int y)
     {
@@ -33,7 +30,6 @@ public class Lemming extends Entity
         return behaviour.update();
     }
 
-
     public int getFallHeight ()
     {
         return this.fallHeight;
@@ -48,7 +44,6 @@ public class Lemming extends Entity
     {
         this.fallHeight = 0;
     }
-
 
     public void changeBehaviourTo (LemmingBehaviourEnum lemmingBehaviour)
     {
@@ -119,7 +114,7 @@ public class Lemming extends Entity
     {
         ArrayList<Block> list;
         if (getDirection() == DirectionEnum.RIGHT)
-            list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() == getY()) || getX() + 1 == LemmingsGame.MAP_DIMENSION);
+            list = getGame().getBlocks((Block b) -> (b.getX() == getX() + 1 && b.getY() == getY()) || getX() + 1 == game.MAP_DIMENSION);
         else list = getGame().getBlocks((Block b) -> ((b.getX() + 1 == getX() && b.getY() == getY()) || getX() == 0));
 
         return list.size() == 1;
@@ -143,7 +138,7 @@ public class Lemming extends Entity
 
     public void normalUpdateLocation (boolean wall, boolean step, boolean frontBlock)
     {
-        boolean edgeDim = getX() == LemmingsGame.MAP_DIMENSION && getDirection() == DirectionEnum.RIGHT;
+        boolean edgeDim = getX() == game.MAP_DIMENSION && getDirection() == DirectionEnum.RIGHT;
         boolean edgeZero = getX() == 0 && getDirection() == DirectionEnum.LEFT;
         if (((wall && frontBlock) || (!step && frontBlock)) || edgeZero || edgeDim) manageFrontWall();
         else if (step && !wall) manageStep();

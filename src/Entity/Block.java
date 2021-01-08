@@ -66,18 +66,21 @@ public class Block extends Entity
         return getGame().getLemmings((Lemming l) -> l.getX() == getX() && l.getY() == getY() - 1);
     }
 
-    public void setOptionalArgs (int... args)
-    {
-        blockType.setOptionalArgs(args);
-    }
-
-    public void setOptionalArgs (ArrayList<Block> blocks)
-    {
-        blockType.setOptionalArgs(blocks);
-    }
-
     public BlockTypeEnum getType()
     {
         return blockTypeEnum;
+    }
+
+    public void setNumberToSpawn (int nb)
+    {
+        blockType.setNumberToSpawn(nb);
+    }
+    public void setBlocksToSpawn (ArrayList<Block> blocks)
+    {
+        blockType.setBlocksToSpawn(blocks);
+    }
+    public void setTeleportTo (int x, int y)
+    {
+        blockType.setTeleportTo(x, y);
     }
 }

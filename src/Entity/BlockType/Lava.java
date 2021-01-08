@@ -1,7 +1,5 @@
 package Entity.BlockType;
 
-import java.awt.Color;
-
 import Entity.Block;
 
 public class Lava extends BlockType

@@ -3,9 +3,6 @@ package Entity.LemmingBehaviour;
 import Entity.BlockType.BlockTypeEnum;
 import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGameView;
-
-import java.awt.*;
 
 public class Carpenter extends LemmingBehaviour
 {

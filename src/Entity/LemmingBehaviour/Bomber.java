@@ -1,12 +1,8 @@
 package Entity.LemmingBehaviour;
 
 import Entity.Block;
-import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGame;
-import Game.LemmingsGameView;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Bomber extends LemmingBehaviour

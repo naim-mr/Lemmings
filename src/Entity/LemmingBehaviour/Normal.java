@@ -1,9 +1,5 @@
 package Entity.LemmingBehaviour;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-import Game.*;
 import Entity.Lemming;
 
 public class Normal extends LemmingBehaviour

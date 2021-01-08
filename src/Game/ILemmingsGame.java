@@ -14,4 +14,5 @@ public interface ILemmingsGame
     LemmingBehaviourEnum getSelectedBehaviour ();
     void changeLemming (int mapX, int mapY);
     void gameLoop ();
+    int getMapDimension();
 }

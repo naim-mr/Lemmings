@@ -8,12 +8,11 @@ import java.util.ArrayList;
 
 public class LemmingsGame implements ILemmingsGame
 {
+    public final int MAP_DIMENSION = 20;
     private final ArrayList<Block> blocks;
     private final ArrayList<Lemming> lemmings;
+    private final LemmingsGameObservable lemmingsGameObservable;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
-    private LemmingsGameObservable lemmingsGameObservable;
-
-    public static final int MAP_DIMENSION = 20;
     private int escapedLemmings = 0;
 
     public LemmingsGame (LemmingsGameObservable observable)
@@ -25,13 +24,11 @@ public class LemmingsGame implements ILemmingsGame
         CreateTestMap(); // TEMP
     }
 
-    // NE PAS MODIFIER
     public ArrayList<Block> getBlocks ()
     {
         return new ArrayList<>(blocks);
     }
 
-    // NE PAS MODIFIER
     public ArrayList<Lemming> getLemmings ()
     {
         return new ArrayList<>(lemmings);
@@ -92,7 +89,7 @@ public class LemmingsGame implements ILemmingsGame
 
         // FONCTION 3 & 11 & 13 & 14: en haut à gauche
         Block spawner1 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 4);
-        spawner1.setOptionalArgs(1);
+        spawner1.setNumberToSpawn(1);
         blocks.add(spawner1);
 
         for (int j = 1; j < 6; j++)
@@ -106,7 +103,7 @@ public class LemmingsGame implements ILemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 5, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 2));
         Block teleporter = new Block(this, BlockTypeEnum.TELEPORTER_BLOCK, 7, 2);
-        teleporter.setOptionalArgs(9, 1);
+        teleporter.setTeleportTo(9, 1);
         blocks.add(teleporter);
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 2));
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 8, 1));
@@ -118,7 +115,7 @@ public class LemmingsGame implements ILemmingsGame
         // FONCTION 4 & 5 : en haut à droite
         Block spawner2 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 15, 1);
 
-        spawner2.setOptionalArgs(1);
+        spawner2.setNumberToSpawn(1);
         blocks.add(spawner2);
 
 
@@ -135,12 +132,12 @@ public class LemmingsGame implements ILemmingsGame
         // Fonction 10 & 2 : tout en bas
         Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
         blocks.add(spawner10);
-        spawner10.setOptionalArgs(30);
+        spawner10.setNumberToSpawn(30);
         blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 18, 19));
 
         // FONCTION 6, 7, 8 ; en haut, en dessous teleporter à lave.
         Block spawner3 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 6, 3);
-        spawner3.setOptionalArgs(3);
+        spawner3.setNumberToSpawn(3);
         blocks.add(spawner3);
 
         blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, 6, 4));
@@ -173,7 +170,7 @@ public class LemmingsGame implements ILemmingsGame
         {
             bridge.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
         }
-        bridgeSpawner.setOptionalArgs(bridge);
+        bridgeSpawner.setBlocksToSpawn(bridge);
 
         blocks.add(bridgeSpawner);
 
@@ -186,7 +183,7 @@ public class LemmingsGame implements ILemmingsGame
         }
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK_LANDMINE, 14, 8));
         Block spawner16 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 9, 8);
-        spawner16.setOptionalArgs(5);
+        spawner16.setNumberToSpawn(5);
         blocks.add(spawner16);
 
         // Fonction 9 : en dessous d'en haut à gauche.
@@ -204,14 +201,12 @@ public class LemmingsGame implements ILemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 4, 10));
         blocks.add(new Block(this, BlockTypeEnum.EXIT_BLOCK, 5, 11));
         Block spawner9 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 10);
-        spawner9.setOptionalArgs(1);
+        spawner9.setNumberToSpawn(1);
         blocks.add(spawner9);
 
         Block spawner9bis = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 8);
-        spawner9bis.setOptionalArgs(1);
+        spawner9bis.setNumberToSpawn(1);
         blocks.add(spawner9bis);
-
-
     }
 
     private void update ()
@@ -220,7 +215,6 @@ public class LemmingsGame implements ILemmingsGame
         {
             l.update();
         }
-
         for (Block b : blocks)
         {
             b.update();
@@ -231,7 +225,7 @@ public class LemmingsGame implements ILemmingsGame
 
     // Main loop
     /*FONCTION QUI VA GERER La boucle de jeu*/
-    @SuppressWarnings("InfiniteLoopStatement")
+    @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
     public void gameLoop ()
     {
         while (true)
@@ -245,7 +239,7 @@ public class LemmingsGame implements ILemmingsGame
                 e1.printStackTrace();
             }
             update();
-            lemmingsGameObservable.notifyObservers(); // todo notify observers instead
+            lemmingsGameObservable.notifyObservers();
         }
     }
 
@@ -278,8 +272,9 @@ public class LemmingsGame implements ILemmingsGame
 
     public boolean deleteBlock (Block b)
     {
-        if (b != null) {
-        	      	return b.destroy();
+        if (b != null)
+        {
+            return b.destroy();
         }
         else return false;
     }
@@ -344,5 +339,10 @@ public class LemmingsGame implements ILemmingsGame
     public void createBlock (ArrayList<Block> b)
     {
         blocks.addAll(b);
+    }
+
+    public int getMapDimension ()
+    {
+        return MAP_DIMENSION;
     }
 }

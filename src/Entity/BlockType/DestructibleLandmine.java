@@ -3,7 +3,6 @@ package Entity.BlockType;
 import Entity.Block;
 import Entity.Lemming;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class DestructibleLandmine extends BlockType

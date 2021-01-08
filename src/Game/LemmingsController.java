@@ -18,7 +18,7 @@ public class LemmingsController
     }
     public void onClick (int mapX, int mapY)
     {
-        if (mapY < LemmingsGame.MAP_DIMENSION)
+        if (mapY < game.getMapDimension())
         {
             onGameClick(mapX, mapY);
         }
@@ -32,10 +32,9 @@ public class LemmingsController
         game.changeLemming(mapX, mapY);
     }
 
-    // TODO : trouver une meilleure implémentation que cette implémentation hard coded
     private void onMenuClick (int mapX, int mapY)
     {
-        if (mapY == LemmingsGame.MAP_DIMENSION + 1)
+        if (mapY == game.getMapDimension() + 1)
         {
             switch (mapX)
             {

@@ -3,7 +3,6 @@ package Entity.LemmingBehaviour;
 import Entity.DirectionEnum;
 import Entity.Lemming;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 

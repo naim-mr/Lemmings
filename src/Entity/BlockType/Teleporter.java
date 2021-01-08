@@ -1,7 +1,5 @@
 package Entity.BlockType;
 
-import java.awt.*;
-
 import Entity.Block;
 
 public class Teleporter extends BlockType
@@ -15,13 +13,10 @@ public class Teleporter extends BlockType
     }
 
     @Override
-    public void setOptionalArgs (int[] args)
+    public void setTeleportTo (int x, int y)
     {
-        if (args.length == 2)
-        {
-            teleportToX = args[0];
-            teleportToY = args[1];
-        }
+        teleportToX = x;
+        teleportToY = y;
     }
 
     @Override

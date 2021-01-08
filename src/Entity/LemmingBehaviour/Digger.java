@@ -1,9 +1,6 @@
 package Entity.LemmingBehaviour;
 
 import Entity.*;
-import Game.LemmingsGameView;
-
-import java.awt.*;
 
 public class Digger extends LemmingBehaviour
 {	

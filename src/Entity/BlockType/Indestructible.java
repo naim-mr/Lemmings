@@ -1,7 +1,5 @@
 package Entity.BlockType;
 
-import java.awt.*;
-
 import Entity.Block;
 
 public class Indestructible extends BlockType

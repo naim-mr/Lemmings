@@ -1,11 +1,6 @@
 package Entity.LemmingBehaviour;
 
-import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGame;
-
-
-import java.awt.*;
 
 public class Floater extends LemmingBehaviour
 {	

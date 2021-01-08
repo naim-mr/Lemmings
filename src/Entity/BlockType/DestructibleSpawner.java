@@ -2,7 +2,6 @@ package Entity.BlockType;
 
 import Entity.Block;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class DestructibleSpawner extends BlockType
@@ -14,7 +13,7 @@ public class DestructibleSpawner extends BlockType
     }
 
     @Override
-    public void setOptionalArgs (ArrayList<Block> blocks)
+    public void setBlocksToSpawn (ArrayList<Block> blocks)
     {
         blocksToSpawn = blocks;
     }

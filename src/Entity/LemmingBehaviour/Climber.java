@@ -2,7 +2,6 @@ package Entity.LemmingBehaviour;
 
 import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGame;
 
 public class Climber extends LemmingBehaviour
 {
@@ -38,7 +37,7 @@ public class Climber extends LemmingBehaviour
 
     private void updateLocation (boolean blockBelow, boolean wall, boolean step, boolean frontBlock, boolean superiorBlock)
     {
-        boolean edgeDim = lemming.getX() == LemmingsGame.MAP_DIMENSION && lemming.getDirection() == DirectionEnum.RIGHT;
+        boolean edgeDim = lemming.getX() == lemming.getGame().MAP_DIMENSION && lemming.getDirection() == DirectionEnum.RIGHT;
         boolean edgeZero = lemming.getX() == 0 && lemming.getDirection() == DirectionEnum.LEFT;
 
         if (!blockBelow && !climbing)

@@ -12,6 +12,7 @@ public class Main
         LemmingsGameView view = new LemmingsGameView(game, controller);
         game.registerObserver(view);
         controller.setLemmingsGameView(view);
+
         JFrame jframe = new JFrame("Lemmings");
         jframe.add(view);
         jframe.setBackground(Color.WHITE);
@@ -19,6 +20,8 @@ public class Main
         jframe.setResizable(false);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setVisible(true);
+        jframe.pack();
+
         game.gameLoop();
     }
 }

@@ -3,7 +3,6 @@ package Entity.LemmingBehaviour;
 import Entity.Block;
 import Entity.DirectionEnum;
 import Entity.Lemming;
-import Game.LemmingsGame;
 
 public class Basher extends LemmingBehaviour
 {
@@ -61,7 +60,7 @@ public class Basher extends LemmingBehaviour
             lemming.setX(lemming.getX() + 1);
             lemming.changeDirectionTo(DirectionEnum.RIGHT);
         }
-        else if (lemming.getDirection() == DirectionEnum.RIGHT && lemming.getX() == LemmingsGame.MAP_DIMENSION)
+        else if (lemming.getDirection() == DirectionEnum.RIGHT && lemming.getX() == lemming.getGame().MAP_DIMENSION)
         {
             lemming.setX(lemming.getX() - 1);
             lemming.changeDirectionTo(DirectionEnum.LEFT);

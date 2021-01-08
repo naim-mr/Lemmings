@@ -14,24 +14,25 @@ import java.util.Map;
 
 import static Entity.BlockType.BlockTypeEnum.*;
 
-
 public class LemmingsGameView extends JComponent implements ILemmingsGameObserver
 {
-    public static final int WINDOW_DIMENSION = 600;
-    public static final int GAME_DIMENSION = 500;
-    public static final int TILE_SIZE = GAME_DIMENSION / LemmingsGame.MAP_DIMENSION;
-    private static final long serialVersionUID = 1L;
-    private static final Map<BlockTypeEnum, Color> blockColor = new HashMap<>();
-    private static final Map<LemmingBehaviourEnum, Color> lemmingColor = new HashMap<>();
+    public final int GAME_DIMENSION = 500;
+    public final int TILE_SIZE;
+    public final int WINDOW_DIMENSION;
+    private final long serialVersionUID = 1L;
+    private final Map<BlockTypeEnum, Color> blockColor = new HashMap<>();
+    private final Map<LemmingBehaviourEnum, Color> lemmingColor = new HashMap<>();
     private final LemmingsGameObservable game;
 
     public LemmingsGameView (LemmingsGameObservable game, LemmingsController controller)
     {
         super();
         this.game = game;
+        TILE_SIZE = GAME_DIMENSION / game.getMapDimension();
+        WINDOW_DIMENSION = GAME_DIMENSION + TILE_SIZE * 3;
 
         setOpaque(true);
-        setSize(GAME_DIMENSION, WINDOW_DIMENSION);
+        setPreferredSize(new Dimension(GAME_DIMENSION, WINDOW_DIMENSION));
 
         MouseAdapter clickListener = new MouseAdapter()
         {
@@ -48,7 +49,7 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         initializeEntityColors();
     }
 
-    public static void initializeEntityColors ()
+    private void initializeEntityColors ()
     {
         blockColor.put(DESTRUCTIBLE_BLOCK, Color.GREEN);
         blockColor.put(DESTRUCTIBLE_BLOCK_LANDMINE, new Color(120, 0, 70));
@@ -69,12 +70,12 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         lemmingColor.put(LemmingBehaviourEnum.NORMAL, Color.PINK);
     }
 
-    public static int[] mapToWindowCoords (int x, int y)
+    private int[] mapToWindowCoords (int x, int y)
     {
         return new int[]{x * TILE_SIZE, TILE_SIZE * y};
     }
 
-    protected static int[] windowToMapCoords (int winX, int winY)
+    private int[] windowToMapCoords (int winX, int winY)
     {
         int mapX = 0;
         int mapY = 0;
@@ -82,7 +83,7 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         boolean condX = true;
         int k = 0;
         int j = 0;
-        int DIM = LemmingsGame.MAP_DIMENSION + (WINDOW_DIMENSION - GAME_DIMENSION) / TILE_SIZE;
+        int DIM = game.getMapDimension() + (WINDOW_DIMENSION - GAME_DIMENSION) / TILE_SIZE;
         int quotient = WINDOW_DIMENSION / DIM;
 
         while ((condX || condY) && (k < DIM && j < DIM))
@@ -120,10 +121,9 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         drawEntities(g);
     }
 
-    // Fonciton utilis� pour FACTORISABLE
     private void whiteBackground (Graphics g)
     {
-        int entityDimension = WINDOW_DIMENSION / LemmingsGame.MAP_DIMENSION;
+        int entityDimension = WINDOW_DIMENSION / game.getMapDimension();
         g.setColor(Color.WHITE);
         int[] windowCoords;
         for (int i = 0; i <= GAME_DIMENSION; i++)
@@ -164,7 +164,6 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         }
     }
 
-    // TODO
     private void drawFooterMenu (Graphics g)
     {
         g.setColor(Color.BLACK);
@@ -172,7 +171,6 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         g.setColor(Color.RED);
         g.drawRect(0, GAME_DIMENSION, WINDOW_DIMENSION - 18, WINDOW_DIMENSION - GAME_DIMENSION - 1);
 
-        // Blocs
         g.setColor(lemmingColor.get(LemmingBehaviourEnum.BASHER));
         g.drawString("Basher", (TILE_SIZE) - 5, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
@@ -201,11 +199,8 @@ public class LemmingsGameView extends JComponent implements ILemmingsGameObserve
         g.drawString("Carpenter", (TILE_SIZE * 13) - 8, GAME_DIMENSION + (TILE_SIZE - 5));
         g.fillRect(TILE_SIZE * 13, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        // Selection actuelle
-
         g.setColor(Color.WHITE);
         g.drawString("Selection actuelle", (TILE_SIZE * 15), GAME_DIMENSION + (TILE_SIZE - 5));
-
 
         g.setColor(lemmingColor.get(game.getSelectedBehaviour()));
         g.fillRect(TILE_SIZE * 17, GAME_DIMENSION + TILE_SIZE, TILE_SIZE, TILE_SIZE);
