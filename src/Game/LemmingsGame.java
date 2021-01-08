@@ -12,6 +12,7 @@ public class LemmingsGame implements ILemmingsGame
     private final ArrayList<Block> blocks;
     private final ArrayList<Block> blocksToAdd;
     private final ArrayList<Lemming> lemmings;
+    private final ArrayList<Lemming> lemmingsToAdd;
     private final LemmingsGameObservable lemmingsGameObservable;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
     private int escapedLemmings = 0;
@@ -21,6 +22,7 @@ public class LemmingsGame implements ILemmingsGame
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
         blocksToAdd = new ArrayList<>();
+        lemmingsToAdd = new ArrayList<>();
         lemmingsGameObservable = observable;
 
         CreateTestMap(); // TEMP
@@ -225,6 +227,9 @@ public class LemmingsGame implements ILemmingsGame
         blocks.addAll(blocksToAdd);
         blocksToAdd.clear();
 
+        lemmings.addAll(lemmingsToAdd);
+        lemmingsToAdd.clear();
+
         lemmings.removeIf(Entity::getToDelete);
         blocks.removeIf(Entity::getToDelete);
     }
@@ -251,7 +256,7 @@ public class LemmingsGame implements ILemmingsGame
 
     public void spawnLemming (Block atBlock, LemmingBehaviourEnum lemmingBehaviour)
     {
-        lemmings.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
+        lemmingsToAdd.add(new Lemming(this, lemmingBehaviour, atBlock.getX(), atBlock.getY()));
     }
 
     public void changeLemming (int mapX, int mapY)
