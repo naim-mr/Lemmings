@@ -13,19 +13,16 @@ public class LemmingsGame implements ILemmingsGame
     private final ArrayList<Block> blocksToAdd;
     private final ArrayList<Lemming> lemmings;
     private final ArrayList<Lemming> lemmingsToAdd;
-    private final LemmingsGameObservable lemmingsGameObservable;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
-    private int escapedLemmings = 0;
 
-    LemmingsGame (LemmingsGameObservable observable)
+    LemmingsGame ()
     {
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
         blocksToAdd = new ArrayList<>();
         lemmingsToAdd = new ArrayList<>();
-        lemmingsGameObservable = observable;
 
-        CreateTestMap(); // TEMP
+        CreateTestMap();
     }
 
     public ArrayList<Block> getBlocks ()
@@ -59,22 +56,22 @@ public class LemmingsGame implements ILemmingsGame
     }
 
     /* Liste des fonctions à mettre sur la map :
-    1 : plusieurs entrées générants des lemmings.   done
+    1 : plusieurs entrées générants des lemmings.
     2 : plusieurs sorties retirant des lemmings.
-    3 : des lemmings marcheurs qui avancent, montent une case, et font demi-tour fasse à un obstacle de hauteur  2. DONE
-    4 : des lemmings marcheurs qui tombent de faible hauteur et survivent. DONE
-    5 : des lemmings marcheurs qui tombent de forte hauteur et meurent. DONE
-    6 : un bloqueur face auquel les autres lemmings font demi-tour. DONE
-    7 : un tunnelier qui creuse devant lui jusqu'à l'air libre. DONE
-    8 : un foreur qui creuse sous ses pieds durant 5 pas. DONE
-    9 : un bombeur qui explose des obstacles sur un rayon de 2 cases. done
-    10 : un charpentier construisant un escalier de 5 marches. DONE
-    11 : un grimpeur escalant un obstacle de taille au moins 2. DONE
+    3 : des lemmings marcheurs qui avancent, montent une case, et font demi-tour fasse à un obstacle de hauteur  2.
+    4 : des lemmings marcheurs qui tombent de faible hauteur et survivent.
+    5 : des lemmings marcheurs qui tombent de forte hauteur et meurent.
+    6 : un bloqueur face auquel les autres lemmings font demi-tour.
+    7 : un tunnelier qui creuse devant lui jusqu'à l'air libre.
+    8 : un foreur qui creuse sous ses pieds durant 5 pas.
+    9 : un bombeur qui explose des obstacles sur un rayon de 2 cases.
+    10 : un charpentier construisant un escalier de 5 marches.
+    11 : un grimpeur escalant un obstacle de taille au moins 2.
     12 : un parachutiste qui tombent de hauteur au moins 5 à vitesse 1/2 et survie à sa chute.
-    13 : des lemmings arrivant sur un teleporteur qui sont téléportés à un endroit spécifique. DONE
-    14 : des lemmings arrivant sur de la lave qui meurent DONE
-    15 : un obstacle spécial faisant apparaitre d'autres obstacle à sa destruction. DONE
-    16 : un obstacle spécial explosant les lemmings autour de lui à sa destruction. DONE
+    13 : des lemmings arrivant sur un teleporteur qui sont téléportés à un endroit spécifique.
+    14 : des lemmings arrivant sur de la lave qui meurent
+    15 : un obstacle spécial faisant apparaitre d'autres obstacle à sa destruction.
+    16 : un obstacle spécial explosant les lemmings autour de lui à sa destruction.
 
      */
     public void CreateTestMap ()
@@ -133,7 +130,7 @@ public class LemmingsGame implements ILemmingsGame
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 2));
         blocks.add(new Block(this, BlockTypeEnum.DESTRUCTIBLE_BLOCK, 18, 6));
 
-        // Fonction 10 & 2 : tout en bas
+        // Fonction 10 & 2 : en bas
         Block spawner10 = new Block(this, BlockTypeEnum.SPAWNER_BLOCK, 1, 18);
         blocks.add(spawner10);
         spawner10.setNumberToSpawn(30);
@@ -179,7 +176,7 @@ public class LemmingsGame implements ILemmingsGame
         blocks.add(bridgeSpawner);
 
 
-        // FONCTION 16 : Juste au dessus du pont qui spawn
+        // FONCTION 16
 
         for (int i = 9; i < 17; i++)
         {
@@ -190,7 +187,7 @@ public class LemmingsGame implements ILemmingsGame
         spawner16.setNumberToSpawn(5);
         blocks.add(spawner16);
 
-        // Fonction 9 : en dessous d'en haut à gauche.
+        // Fonction 9
         for (int i = 1; i < 5; i++)
         {
             blocks.add(new Block(this, BlockTypeEnum.INDESTRUCTIBLE_BLOCK, i, 11));
@@ -310,7 +307,6 @@ public class LemmingsGame implements ILemmingsGame
 
     public void onLemmingEscape (Lemming l)
     {
-        ++escapedLemmings;
         deleteLemming(l);
     }
 

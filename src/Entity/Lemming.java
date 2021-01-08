@@ -109,7 +109,6 @@ public class Lemming extends Entity
         return list.size() >= 1 ? list.get(0) : null;
     }
 
-    // pour diff�rencier les murs et les marches je retroune la taille de la liste
     public boolean findFrontStep ()
     {
         ArrayList<Block> list;

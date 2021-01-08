@@ -9,7 +9,6 @@ public class Normal extends LemmingBehaviour
         this.lemming = lemming;
     }
 
-    //En fait les leemings grimpe les mur de taille 1 mais pas deux donc j'ai modifi� �a  
     @Override
     public boolean update ()
     {

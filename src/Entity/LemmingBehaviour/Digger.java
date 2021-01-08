@@ -1,6 +1,7 @@
 package Entity.LemmingBehaviour;
 
-import Entity.*;
+import Entity.Block;
+import Entity.Lemming;
 
 public class Digger extends LemmingBehaviour
 {	

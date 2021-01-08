@@ -15,7 +15,7 @@ public class LemmingsGameObservable implements ILemmingsGame
     public LemmingsGameObservable ()
     {
         observers = new ArrayList<>();
-        lemmingsGame = new LemmingsGame(this);
+        lemmingsGame = new LemmingsGame();
     }
 
     @Override
