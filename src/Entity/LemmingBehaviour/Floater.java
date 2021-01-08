@@ -9,20 +9,12 @@ import java.awt.*;
 
 public class Floater extends LemmingBehaviour
 {	
-	public static final Color color = Color.gray;
     private int tick;
     public Floater(Lemming lemming)
     {
         this.lemming = lemming;
         this.tick=0;
     }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
-    }
-
 
     @Override
     public boolean update()

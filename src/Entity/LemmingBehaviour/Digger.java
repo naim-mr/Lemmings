@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class Digger extends LemmingBehaviour
 {	
-	public static final Color color = Color.yellow;
     private int blockDigged;
 
     public Digger(Lemming lemming)
@@ -16,12 +15,6 @@ public class Digger extends LemmingBehaviour
 
 
         blockDigged = 0;
-    }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
     }
 
     @Override

@@ -9,17 +9,9 @@ import java.util.ArrayList;
 
 public class Blocker extends LemmingBehaviour
 {
-    public static final Color color = Color.CYAN;
-
     public Blocker (Lemming lemming)
     {
         this.lemming = lemming;
-    }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
     }
 
     @Override

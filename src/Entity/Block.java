@@ -2,13 +2,11 @@ package Entity;
 
 import Entity.BlockType.*;
 import Game.LemmingsGame;
-import Game.LemmingsGameView;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Block extends Entity
 {
+    private BlockTypeEnum blockTypeEnum;
     private BlockType blockType;
 
     public Block (LemmingsGame game, BlockTypeEnum blockType, int x, int y)
@@ -20,14 +18,9 @@ public class Block extends Entity
         this.y = y;
     }
 
-    @Override
-    public void draw (Graphics graphics, int windowX, int windowY)
-    {
-        blockType.draw(graphics, windowX, windowY);
-    }
-
     private void changeTypeTo (BlockTypeEnum blockTypeEnum)
     {
+        this.blockTypeEnum = blockTypeEnum;
         switch (blockTypeEnum)
         {
             case DESTRUCTIBLE_BLOCK:
@@ -83,5 +76,8 @@ public class Block extends Entity
         blockType.setOptionalArgs(blocks);
     }
 
-
+    public BlockTypeEnum getType()
+    {
+        return blockTypeEnum;
+    }
 }

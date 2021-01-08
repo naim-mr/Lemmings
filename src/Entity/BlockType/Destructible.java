@@ -6,17 +6,9 @@ import java.awt.*;
 
 public class Destructible extends BlockType
 {
-    public static final Color color = Color.GREEN;
-
     public Destructible (Block block)
     {
         this.block = block;
-    }
-
-    @Override
-    public Color getColor ()
-    {
-        return color;
     }
 
     @Override

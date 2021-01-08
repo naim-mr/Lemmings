@@ -4,11 +4,8 @@ import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
 
-import java.awt.*;
-
 public class Climber extends LemmingBehaviour
 {
-    public static final Color color = Color.lightGray;
     private boolean climbing;
 
     public Climber (Lemming lemming)
@@ -16,13 +13,6 @@ public class Climber extends LemmingBehaviour
         this.lemming = lemming;
         this.climbing = false;
     }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
-    }
-
 
     @Override
     public boolean update ()

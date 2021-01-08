@@ -9,19 +9,12 @@ import java.awt.*;
 
 public class Carpenter extends LemmingBehaviour
 {
-    public static final Color color = new Color(160, 82, 45);
     private int leftStairs = 5;
     private CarpenterStatus status = CarpenterStatus.BUILDING;
 
     public Carpenter (Lemming lemming)
     {
         this.lemming = lemming;
-    }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
     }
 
     @Override

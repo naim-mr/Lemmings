@@ -8,14 +8,6 @@ import java.util.ArrayList;
 
 public class DestructibleLandmine extends BlockType
 {
-    public static final Color color = new Color (120, 0, 70);
-
-    @Override
-    public Color getColor ()
-    {
-        return color;
-    }
-
     public DestructibleLandmine (Block block)
     {
         this.block = block;

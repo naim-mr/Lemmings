@@ -4,14 +4,13 @@ import static Entity.LemmingBehaviour.LemmingBehaviourEnum.*;
 
 public class LemmingsController
 {
-    private final LemmingsGame game;
+    private final LemmingsGameObservable game;
     private LemmingsGameView view;
 
-    public LemmingsController (LemmingsGame game)
+    public LemmingsController (LemmingsGameObservable game)
     {
         this.game = game;
     }
-
 
     public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
     {

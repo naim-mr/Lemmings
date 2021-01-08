@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Lemming extends Entity
 {
+    private LemmingBehaviourEnum lemmingBehaviourEnum;
     private LemmingBehaviour behaviour;
 
     private int fallHeight;
@@ -24,12 +25,6 @@ public class Lemming extends Entity
         int fallHeight = 0;
 
         this.toDelete = false;
-    }
-
-    @Override
-    public void draw (Graphics g, int x, int y)
-    {
-        behaviour.draw(g, x, y);
     }
 
     @Override
@@ -57,6 +52,7 @@ public class Lemming extends Entity
 
     public void changeBehaviourTo (LemmingBehaviourEnum lemmingBehaviour)
     {
+        lemmingBehaviourEnum = lemmingBehaviour;
         switch (lemmingBehaviour)
         {
             case BASHER:
@@ -181,5 +177,10 @@ public class Lemming extends Entity
             setY(getY() - 1);
             setX(getX() - 1);
         }
+    }
+
+    public LemmingBehaviourEnum getType()
+    {
+        return lemmingBehaviourEnum;
     }
 }

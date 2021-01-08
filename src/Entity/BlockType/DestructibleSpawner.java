@@ -8,25 +8,9 @@ import java.util.ArrayList;
 public class DestructibleSpawner extends BlockType
 {
     private ArrayList<Block> blocksToSpawn;
-    public static final Color color = Color.GREEN;
-
     public DestructibleSpawner (Block block)
     {
         this.block = block;
-    }
-
-    @Override
-    public Color getColor ()
-    {
-        return color;
-    }
-
-    @Override
-    public void draw (Graphics graphics, int windowX, int windowY)
-    {
-        super.draw(graphics, windowX, windowY);
-        graphics.setColor(Color.BLACK);
-        graphics.drawString("S", windowX + 8, windowY + 13);
     }
 
     @Override

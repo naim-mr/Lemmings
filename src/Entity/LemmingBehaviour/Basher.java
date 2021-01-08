@@ -5,23 +5,14 @@ import Entity.DirectionEnum;
 import Entity.Lemming;
 import Game.LemmingsGame;
 
-import java.awt.*;
-
 public class Basher extends LemmingBehaviour
 {
-    public static final Color color = Color.red;
     private int blockDrill;
 
     public Basher (Lemming lemming)
     {
         this.blockDrill = 0;
         this.lemming = lemming;
-    }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
     }
 
     @Override
@@ -61,8 +52,6 @@ public class Basher extends LemmingBehaviour
         else if (blockForward == null) updateHorizontalLocation();
         if (!blockUpdated && blockForward != null || blockDrill == 4)
             lemming.changeBehaviourTo(LemmingBehaviourEnum.NORMAL);
-
-
     }
 
     private void updateHorizontalLocation ()
@@ -80,5 +69,4 @@ public class Basher extends LemmingBehaviour
         else if (lemming.getDirection() == DirectionEnum.LEFT) lemming.setX(lemming.getX() - 1);
         else if (lemming.getDirection() == DirectionEnum.RIGHT) lemming.setX(lemming.getX() + 1);
     }
-
 }

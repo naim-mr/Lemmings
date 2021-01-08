@@ -11,17 +11,10 @@ public class Spawner extends BlockType
 {
     private int lemmingsNb;
     private int cooldown = 0;
-    public static final Color color = Color.YELLOW;
 
     public Spawner(Block block)
     {
         this.block = block;
-    }
-
-    @Override
-    public Color getColor ()
-    {
-        return color;
     }
 
     @Override

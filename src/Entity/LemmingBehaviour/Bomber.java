@@ -11,19 +11,12 @@ import java.util.ArrayList;
 
 public class Bomber extends LemmingBehaviour
 {
-    public static final Color color = Color.magenta;
     private int countDown;
 
     public Bomber (Lemming lemming)
     {
         this.lemming = lemming;
         countDown = 3;
-    }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
     }
 
     private void decrementCountDown ()

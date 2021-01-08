@@ -7,10 +7,10 @@ public class Main
 {
     public static void main(String[] args)
     {
-        LemmingsGame game = new LemmingsGame();
+        LemmingsGameObservable game = new LemmingsGameObservable();
         LemmingsController controller = new LemmingsController(game);
         LemmingsGameView view = new LemmingsGameView(game, controller);
-        game.setLemmingsGameView(view);
+        game.registerObserver(view);
         controller.setLemmingsGameView(view);
         JFrame jframe = new JFrame("Lemmings");
         jframe.add(view);

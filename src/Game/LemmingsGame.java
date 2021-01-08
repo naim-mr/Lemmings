@@ -6,20 +6,21 @@ import Entity.LemmingBehaviour.LemmingBehaviourEnum;
 
 import java.util.ArrayList;
 
-public class LemmingsGame
+public class LemmingsGame implements ILemmingsGame
 {
     private final ArrayList<Block> blocks;
     private final ArrayList<Lemming> lemmings;
-    private LemmingsGameView lemmingsGameView;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
+    private LemmingsGameObservable lemmingsGameObservable;
 
     public static final int MAP_DIMENSION = 20;
     private int escapedLemmings = 0;
 
-    public LemmingsGame ()
+    public LemmingsGame (LemmingsGameObservable observable)
     {
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
+        lemmingsGameObservable = observable;
 
         CreateTestMap(); // TEMP
     }
@@ -55,12 +56,6 @@ public class LemmingsGame
         }
         return outLemming;
     }
-
-    public void setLemmingsGameView (LemmingsGameView lemmingsGameView)
-    {
-        this.lemmingsGameView = lemmingsGameView;
-    }
-
 
     /* Liste des fonctions à mettre sur la map :
     1 : plusieurs entrées générants des lemmings.   done
@@ -221,8 +216,6 @@ public class LemmingsGame
 
     private void update ()
     {
-     
-
         for (Lemming l : getLemmings())
         {
             l.update();
@@ -252,7 +245,7 @@ public class LemmingsGame
                 e1.printStackTrace();
             }
             update();
-            lemmingsGameView.repaint();
+            lemmingsGameObservable.notifyObservers(); // todo notify observers instead
         }
     }
 

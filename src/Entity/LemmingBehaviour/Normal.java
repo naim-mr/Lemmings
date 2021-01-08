@@ -8,19 +8,10 @@ import Entity.Lemming;
 
 public class Normal extends LemmingBehaviour
 {
-    public static final Color color = Color.pink;
-
     public Normal (Lemming lemming)
     {
         this.lemming = lemming;
     }
-
-    @Override
-    Color getColor ()
-    {
-        return color;
-    }
-
 
     //En fait les leemings grimpe les mur de taille 1 mais pas deux donc j'ai modifi� �a  
     @Override
