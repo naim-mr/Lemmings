@@ -174,6 +174,11 @@ public class Lemming extends Entity
         }
     }
 
+    public boolean setToDelete ()
+    {
+        return behaviour.setToDelete();
+    }
+
     public LemmingBehaviourEnum getType()
     {
         return lemmingBehaviourEnum;

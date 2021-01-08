@@ -13,29 +13,14 @@ public class DestructibleLandmine extends BlockType
     }
 
     @Override
-    public boolean destroy ()
+    public boolean update ()
     {
-        block.setToDelete();
-        blast();
+        if (block.toDelete) blast();
         return true;
     }
 
     private void blast()
     {
-        ArrayList<Block> blocksToDelete = block.getGame().getBlocks(this::nearbyEntities);
-        ArrayList<Lemming> lemmingsToDelete = block.getGame().getLemmings(this::test);
-        blocksToDelete.remove(block);
-        block.getGame().deleteLemming(lemmingsToDelete);
-        block.getGame().deleteBlock(blocksToDelete);
-    }
- // todo
-    private boolean nearbyEntities (Block b)
-    {
-        return (b.getX() >= block.getX() - 2 && b.getX() <= block.getX() + 2) && (b.getY() >= block.getY() - 2 && b.getY() <= block.getY() + 2);
-    }
-
-    private boolean test (Lemming l)
-    {
-        return l.getX() >= block.getX() - 2 && l.getX() <= block.getX() + 2 && l.getY() >= block.getY() - 2 && l.getY() <= block.getY() + 2;
+        block.destroyNearbyEntities();
     }
 }

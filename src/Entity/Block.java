@@ -56,11 +56,6 @@ public class Block extends Entity
         return blockType.update();
     }
 
-    public boolean destroy ()
-    {
-        return blockType.destroy();
-    }
-
     public ArrayList<Lemming> getLemmingsOnBlock ()
     {
         return getGame().getLemmings((Lemming l) -> l.getX() == getX() && l.getY() == getY() - 1);
@@ -82,5 +77,9 @@ public class Block extends Entity
     public void setTeleportTo (int x, int y)
     {
         blockType.setTeleportTo(x, y);
+    }
+    public boolean setToDelete ()
+    {
+        return blockType.setToDelete();
     }
 }

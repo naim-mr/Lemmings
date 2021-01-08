@@ -19,10 +19,9 @@ public class DestructibleSpawner extends BlockType
     }
 
     @Override
-    public boolean destroy ()
+    public boolean update ()
     {
-        block.setToDelete();
-        block.getGame().createBlock(blocksToSpawn);
+        if (block.toDelete) block.getGame().createBlock(blocksToSpawn);
         return true;
     }
 }

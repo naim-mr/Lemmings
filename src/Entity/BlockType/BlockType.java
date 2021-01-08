@@ -8,11 +8,12 @@ public abstract class BlockType
 {
     protected Block block;
 
-    public boolean update ()
+    public boolean setToDelete ()
     {
-        return false;
+        block.toDelete = true;
+        return true;
     }
-    public boolean destroy ()
+    public boolean update ()
     {
         return false;
     }

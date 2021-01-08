@@ -40,4 +40,10 @@ public class Spawner extends BlockType
             --lemmingsNb;
         }
     }
+
+    @Override
+    public boolean setToDelete ()
+    {
+        return false;
+    }
 }

@@ -2,17 +2,14 @@ package Entity;
 
 import Game.LemmingsGame;
 
+import java.util.ArrayList;
+
 public abstract class Entity
 {
     protected LemmingsGame game;
-    protected boolean toDelete;
+    public boolean toDelete;
     protected int x;
     protected int y;
-
-    public void setToDelete()
-    {
-        toDelete = true;
-    }
 
     public boolean getToDelete()
     {
@@ -49,5 +46,14 @@ public abstract class Entity
     public boolean findSuperiorBlock ()
     {
         return getGame().getBlocks((Block b) -> b.getY() == getY() - 1 && b.getX() == getX()).size() >= 1;
+    }
+
+    public void destroyNearbyEntities ()
+    {
+        ArrayList<Block> blocksToDelete = getGame().getBlocks((Block b) -> (b.getX() >= getX() - 2 && b.getX() <= getX() + 2) && (b.getY() >= getY() - 2 && b.getY() <= getY() + 2));
+        ArrayList<Lemming> lemmingsToDelete = getGame().getLemmings((Lemming l) -> (l.getX() >= getX() - 2 && l.getX() <= getX() + 2) && (l.getY() >= getY() - 2 && l.getY() <= getY() + 2));
+
+        getGame().deleteLemming(lemmingsToDelete);
+        getGame().deleteBlock(blocksToDelete);
     }
 }

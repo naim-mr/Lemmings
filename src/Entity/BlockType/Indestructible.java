@@ -8,4 +8,10 @@ public class Indestructible extends BlockType
 	{
 		this.block = block;
 	}
+
+	@Override
+	public boolean setToDelete ()
+	{
+		return false;
+	}
 }

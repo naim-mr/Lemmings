@@ -10,6 +10,7 @@ public class LemmingsGame implements ILemmingsGame
 {
     public final int MAP_DIMENSION = 20;
     private final ArrayList<Block> blocks;
+    private final ArrayList<Block> blocksToAdd;
     private final ArrayList<Lemming> lemmings;
     private final LemmingsGameObservable lemmingsGameObservable;
     private LemmingBehaviourEnum selectedBehaviour = LemmingBehaviourEnum.NORMAL;
@@ -19,6 +20,7 @@ public class LemmingsGame implements ILemmingsGame
     {
         blocks = new ArrayList<>();
         lemmings = new ArrayList<>();
+        blocksToAdd = new ArrayList<>();
         lemmingsGameObservable = observable;
 
         CreateTestMap(); // TEMP
@@ -219,6 +221,10 @@ public class LemmingsGame implements ILemmingsGame
         {
             b.update();
         }
+
+        blocks.addAll(blocksToAdd);
+        blocksToAdd.clear();
+
         lemmings.removeIf(Entity::getToDelete);
         blocks.removeIf(Entity::getToDelete);
     }
@@ -274,7 +280,7 @@ public class LemmingsGame implements ILemmingsGame
     {
         if (b != null)
         {
-            return b.destroy();
+            return b.setToDelete();
         }
         else return false;
     }
@@ -333,12 +339,12 @@ public class LemmingsGame implements ILemmingsGame
 
     public void createBlock (BlockTypeEnum blockTypeEnum, int x, int y)
     {
-        blocks.add(new Block(this, blockTypeEnum, x, y));
+        blocksToAdd.add(new Block(this, blockTypeEnum, x, y));
     }
 
     public void createBlock (ArrayList<Block> b)
     {
-        blocks.addAll(b);
+        blocksToAdd.addAll(b);
     }
 
     public int getMapDimension ()

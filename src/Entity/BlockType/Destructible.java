@@ -8,11 +8,4 @@ public class Destructible extends BlockType
     {
         this.block = block;
     }
-
-    @Override
-    public boolean destroy ()
-    {
-        block.setToDelete();
-        return true;
-    }
 }

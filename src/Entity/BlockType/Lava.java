@@ -15,4 +15,10 @@ public class Lava extends BlockType
 		block.getGame().deleteLemming(block.getLemmingsOnBlock());
 		return true;
 	}
+
+	@Override
+	public boolean setToDelete ()
+	{
+		return false;
+	}
 }
