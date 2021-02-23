@@ -1,5 +1,10 @@
 # Lemmings
-Projet de conception objet, niveau L3.
+Projet de conception objet.
+L'objectif était de  manipuler des principes de conception comme les design patterns states et observer. 
+
+
+Le jeu est basé sur le jeu original Lemming: https://www.youtube.com/watch?v=xIuxB1oR2WQ
+(l'interface graphique est donc minimanliste) .
 
 ## Compilation
 
