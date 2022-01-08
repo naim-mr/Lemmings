@@ -1,6 +1,6 @@
 # Lemmings
 Projet de conception objet.
-L'objectif était de  manipuler des principes de conception comme les design patterns states et observer. (l'interface graphique est donc minimaliste) .
+L'objectif était de  manipuler des principes de conception objet(l'interface graphique est donc minimaliste) .
 
 
 
