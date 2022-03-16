@@ -1,10 +1,7 @@
 # Lemmings
-Projet de conception objet.
-L'objectif était de  manipuler des principes de conception objet(l'interface graphique est donc minimaliste) .
+Implementation of Lemming Game (with minimal graphical interface).
 
-
-
-Le jeu est basé sur le jeu original Lemming: https://www.youtube.com/watch?v=xIuxB1oR2WQ
+Based  on the original Lemming game: https://www.youtube.com/watch?v=xIuxB1oR2WQ
 
 ## Compilation
 
